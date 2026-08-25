@@ -1,8 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+  transpilePackages: [
+    "@pascal-app/core",
+    "@pascal-app/editor",
+    "@pascal-app/viewer",
+    "@pascal-app/nodes",
+    "@pascal-app/lingo",
+  ],
 };
 
 export default nextConfig;
