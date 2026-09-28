@@ -1,7 +1,15 @@
+"use client"
+
 import Image from "next/image";
+import { useEffect } from "react";
+import { redirect } from "next/navigation";
+
 
 export default function Home() {
 
+  useEffect(() => {
+    redirect("/editor");
+  })
   return (
     <div className="">
       <h1>esta es una prueba de planos en 2d</h1>

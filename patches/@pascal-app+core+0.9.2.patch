@@ -1,0 +1,622 @@
+diff --git a/node_modules/@pascal-app/core/dist/lib/level-name.js b/node_modules/@pascal-app/core/dist/lib/level-name.js
+index 7983c24..05365df 100644
+--- a/node_modules/@pascal-app/core/dist/lib/level-name.js
++++ b/node_modules/@pascal-app/core/dist/lib/level-name.js
+@@ -1,9 +1,10 @@
++import { ts } from '@/i18n';
+ export function getDefaultLevelName(level) {
+     if (level === 0)
+-        return 'Ground Floor';
++        return ts('Ground Floor');
+     if (level > 0)
+-        return `Floor ${level}`;
+-    return `Basement ${-level}`;
++        return `${ts('Floor')} ${level}`;
++    return `${ts('Basement')} ${-level}`;
+ }
+ export function getLevelDisplayName(level) {
+     return level.name || getDefaultLevelName(level.level);
+diff --git a/node_modules/@pascal-app/core/dist/material-library.js b/node_modules/@pascal-app/core/dist/material-library.js
+index 615e80f..9733743 100644
+--- a/node_modules/@pascal-app/core/dist/material-library.js
++++ b/node_modules/@pascal-app/core/dist/material-library.js
+@@ -1,4 +1,5 @@
+ import { MaterialTarget as MaterialTargetSchema, } from './schema/material';
++import { ts } from '@/i18n'
+ const WALL_TARGETS = [
+     MaterialTargetSchema.enum.wall,
+     MaterialTargetSchema.enum.chimney,
+@@ -1873,7 +1874,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-white',
+-        label: 'White',
++        label: ts('White'),
+         category: 'colors',
+         description: 'Clean painted finish',
+         // Real white paint reflects ~80%; a literal #ffffff albedo kills GI/shadow
+@@ -1907,7 +1908,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-softwhite',
+-        label: 'Soft White',
++        label: ts('Soft White'),
+         category: 'colors',
+         description: 'Warm off-white painted finish',
+         previewColor: '#ebe7df',
+@@ -1939,7 +1940,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-cream',
+-        label: 'Cream',
++        label: ts('Cream'),
+         category: 'colors',
+         description: 'Soft cream painted finish',
+         previewColor: '#efe3cc',
+@@ -1971,7 +1972,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-beige',
+-        label: 'Beige',
++        label: ts('Beige'),
+         category: 'colors',
+         description: 'Balanced beige painted finish',
+         previewColor: '#d9c7ad',
+@@ -2003,7 +2004,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-lightgrey',
+-        label: 'Light grey',
++        label: ts('Light grey'),
+         category: 'colors',
+         description: 'Cool light grey painted finish',
+         previewColor: '#d8d6d1',
+@@ -2035,7 +2036,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-greige',
+-        label: 'Greige',
++        label: ts('Greige'),
+         category: 'colors',
+         description: 'Neutral greige painted finish',
+         previewColor: '#c8c1b8',
+@@ -2067,7 +2068,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-midgrey',
+-        label: 'Mid grey',
++        label: ts('Mid grey'),
+         category: 'colors',
+         description: 'Neutral mid grey painted finish',
+         previewColor: '#8b8a86',
+@@ -2099,7 +2100,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-charcoal',
+-        label: 'Charcoal',
++        label: ts('Charcoal'),
+         category: 'colors',
+         description: 'Dark charcoal painted finish',
+         previewColor: '#4e5257',
+@@ -2131,7 +2132,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-nearblack',
+-        label: 'Near-black',
++        label: ts('Near-black'),
+         category: 'colors',
+         description: 'Soft near-black painted finish',
+         previewColor: '#232322',
+@@ -2163,7 +2164,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-blush',
+-        label: 'Blush',
++        label: ts('Blush'),
+         category: 'colors',
+         description: 'Pale blush painted finish',
+         previewColor: '#e8c6c0',
+@@ -2195,7 +2196,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-tomato',
+-        label: 'Tomato',
++        label: ts('Tomato'),
+         category: 'colors',
+         description: 'Warm tomato red painted finish',
+         previewColor: '#c0594f',
+@@ -2227,7 +2228,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-brickred',
+-        label: 'Brick red',
++        label: ts('Brick red'),
+         category: 'colors',
+         description: 'Deep brick red painted finish',
+         previewColor: '#9e3b34',
+@@ -2259,7 +2260,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-oxblood',
+-        label: 'Oxblood',
++        label: ts('Oxblood'),
+         category: 'colors',
+         description: 'Dark oxblood painted finish',
+         previewColor: '#6f2c2a',
+@@ -2291,7 +2292,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-peach',
+-        label: 'Peach',
++        label: ts('Peach'),
+         category: 'colors',
+         description: 'Soft peach painted finish',
+         previewColor: '#f0c3a0',
+@@ -2323,7 +2324,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-terracotta',
+-        label: 'Terracotta',
++        label: ts('Terracotta'),
+         category: 'colors',
+         description: 'Warm terracotta painted finish',
+         previewColor: '#c86f4c',
+@@ -2355,7 +2356,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-burntorange',
+-        label: 'Burnt orange',
++        label: ts('Burnt orange'),
+         category: 'colors',
+         description: 'Burnt orange painted finish',
+         previewColor: '#b25a2c',
+@@ -2387,7 +2388,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-clay',
+-        label: 'Clay',
++        label: ts('Clay'),
+         category: 'colors',
+         description: 'Deep clay painted finish',
+         previewColor: '#8f4a2e',
+@@ -2419,7 +2420,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-paleyellow',
+-        label: 'Pale yellow',
++        label: ts('Pale yellow'),
+         category: 'colors',
+         description: 'Pale yellow painted finish',
+         previewColor: '#f2e3b3',
+@@ -2451,7 +2452,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-mustard',
+-        label: 'Mustard',
++        label: ts('Mustard'),
+         category: 'colors',
+         description: 'Warm mustard painted finish',
+         previewColor: '#c8a449',
+@@ -2483,7 +2484,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-ochre',
+-        label: 'Ochre',
++        label: ts('Ochre'),
+         category: 'colors',
+         description: 'Warm ochre painted finish',
+         previewColor: '#b8852f',
+@@ -2515,7 +2516,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-gold',
+-        label: 'Gold',
++        label: ts('Gold'),
+         category: 'colors',
+         description: 'Deep gold painted finish',
+         previewColor: '#9c7320',
+@@ -2547,7 +2548,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-mint',
+-        label: 'Mint',
++        label: ts('Mint'),
+         category: 'colors',
+         description: 'Soft mint painted finish',
+         previewColor: '#cfe0cf',
+@@ -2579,7 +2580,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-sage',
+-        label: 'Sage',
++        label: ts('Sage'),
+         category: 'colors',
+         description: 'Muted sage painted finish',
+         previewColor: '#bcc5b2',
+@@ -2611,7 +2612,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-olive',
+-        label: 'Olive',
++        label: ts('Olive'),
+         category: 'colors',
+         description: 'Natural olive painted finish',
+         previewColor: '#8d9368',
+@@ -2643,7 +2644,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-forest',
+-        label: 'Forest',
++        label: ts('Forest'),
+         category: 'colors',
+         description: 'Deep forest green painted finish',
+         previewColor: '#4f6b57',
+@@ -2675,7 +2676,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-paleteal',
+-        label: 'Pale teal',
++        label: ts('Pale teal'),
+         category: 'colors',
+         description: 'Pale teal painted finish',
+         previewColor: '#b9d2cf',
+@@ -2707,7 +2708,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-teal',
+-        label: 'Teal',
++        label: ts('Teal'),
+         category: 'colors',
+         description: 'Balanced teal painted finish',
+         previewColor: '#4f8a86',
+@@ -2739,7 +2740,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-deepteal',
+-        label: 'Deep teal',
++        label: ts('Deep teal'),
+         category: 'colors',
+         description: 'Deep teal painted finish',
+         previewColor: '#2f5f5c',
+@@ -2771,7 +2772,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-powderblue',
+-        label: 'Powder blue',
++        label: ts('Powder blue'),
+         category: 'colors',
+         description: 'Powder blue painted finish',
+         previewColor: '#cddce8',
+@@ -2803,7 +2804,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-softblue',
+-        label: 'Soft Blue',
++        label: ts('Soft Blue'),
+         category: 'colors',
+         description: 'Muted blue painted finish',
+         previewColor: '#c7d6e3',
+@@ -2835,7 +2836,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-sky',
+-        label: 'Sky',
++        label: ts('Sky'),
+         category: 'colors',
+         description: 'Sky blue painted finish',
+         previewColor: '#8fb4d4',
+@@ -2867,7 +2868,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-slateblue',
+-        label: 'Slate Blue',
++        label: ts('Slate Blue'),
+         category: 'colors',
+         description: 'Muted slate blue painted finish',
+         previewColor: '#6f87a4',
+@@ -2899,7 +2900,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-royalblue',
+-        label: 'Royal blue',
++        label: ts('Royal blue'),
+         category: 'colors',
+         description: 'Royal blue painted finish',
+         previewColor: '#3a5a9c',
+@@ -2931,7 +2932,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-navy',
+-        label: 'Navy',
++        label: ts('Navy'),
+         category: 'colors',
+         description: 'Classic navy painted finish',
+         previewColor: '#2f4865',
+@@ -2963,7 +2964,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-lavender',
+-        label: 'Lavender',
++        label: ts('Lavender'),
+         category: 'colors',
+         description: 'Soft lavender painted finish',
+         previewColor: '#c9c2da',
+@@ -2995,7 +2996,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-plum',
+-        label: 'Plum',
++        label: ts('Plum'),
+         category: 'colors',
+         description: 'Muted plum painted finish',
+         previewColor: '#6d4a63',
+@@ -3027,7 +3028,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-aubergine',
+-        label: 'Aubergine',
++        label: ts('Aubergine'),
+         category: 'colors',
+         description: 'Deep aubergine painted finish',
+         previewColor: '#594354',
+@@ -3059,7 +3060,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-petal',
+-        label: 'Petal',
++        label: ts('Petal'),
+         category: 'colors',
+         description: 'Pale petal pink painted finish',
+         previewColor: '#f0d3da',
+@@ -3091,7 +3092,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-rose',
+-        label: 'Rose',
++        label: ts('Rose'),
+         category: 'colors',
+         description: 'Muted rose painted finish',
+         previewColor: '#cf8fa6',
+@@ -3123,7 +3124,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-dustyrose',
+-        label: 'Dusty Rose',
++        label: ts('Dusty Rose'),
+         category: 'colors',
+         description: 'Muted rose painted finish',
+         previewColor: '#c48a8d',
+@@ -3155,7 +3156,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-berry',
+-        label: 'Berry',
++        label: ts('Berry'),
+         category: 'colors',
+         description: 'Deep berry painted finish',
+         previewColor: '#8f4a5a',
+@@ -3187,7 +3188,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-sand',
+-        label: 'Sand',
++        label: ts('Sand'),
+         category: 'colors',
+         description: 'Warm sand painted finish',
+         previewColor: '#ddccae',
+@@ -3219,7 +3220,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-tan',
+-        label: 'Tan',
++        label: ts('Tan'),
+         category: 'colors',
+         description: 'Natural tan painted finish',
+         previewColor: '#c4a87f',
+@@ -3251,7 +3252,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-taupe',
+-        label: 'Taupe',
++        label: ts('Taupe'),
+         category: 'colors',
+         description: 'Earthy taupe painted finish',
+         previewColor: '#8f7a64',
+@@ -3283,7 +3284,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-espresso',
+-        label: 'Espresso',
++        label: ts('Espresso'),
+         category: 'colors',
+         description: 'Dark espresso painted finish',
+         previewColor: '#4a382c',
+@@ -3315,7 +3316,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-metal',
+-        label: 'Metal',
++        label: ts('Metal'),
+         category: 'metal',
+         surfaces: ['furniture', 'wall'],
+         description: 'Brushed metal finish',
+@@ -3348,7 +3349,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'preset-glass',
+-        label: 'Glass',
++        label: ts('Glass'),
+         category: 'glass',
+         description: 'Light glass finish',
+         previewColor: '#87ceeb',
+@@ -3382,7 +3383,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'fabric-linen',
+-        label: 'Linen',
++        label: ts('Linen'),
+         category: 'fabric',
+         surfaces: ['furniture', 'wall'],
+         description: 'Natural linen weave',
+@@ -3418,7 +3419,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'fabric-cotton',
+-        label: 'Cotton',
++        label: ts('Cotton'),
+         category: 'fabric',
+         surfaces: ['furniture', 'wall'],
+         description: 'Plain cotton weave',
+@@ -3456,7 +3457,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'fabric-velvet',
+-        label: 'Velvet',
++        label: ts('Velvet'),
+         category: 'fabric',
+         surfaces: ['furniture'],
+         description: 'Velvet with a soft sheen',
+@@ -3494,7 +3495,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'fabric-wool',
+-        label: 'Wool',
++        label: ts('Wool'),
+         category: 'fabric',
+         surfaces: ['furniture'],
+         description: 'Matte wool felt',
+@@ -3532,7 +3533,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'fabric-suede',
+-        label: 'Suede',
++        label: ts('Suede'),
+         category: 'fabric',
+         surfaces: ['furniture'],
+         description: 'Matte suede nap',
+@@ -3570,7 +3571,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'fabric-boucle',
+-        label: 'Bouclé',
++        label: ts('Bouclé'),
+         category: 'fabric',
+         surfaces: ['furniture'],
+         description: 'Looped bouclé upholstery',
+@@ -3606,7 +3607,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'leather-black',
+-        label: 'Black Leather',
++        label: ts('Black Leather'),
+         category: 'leather',
+         surfaces: ['furniture'],
+         description: 'Smooth black leather',
+@@ -3643,7 +3644,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'leather-calf',
+-        label: 'Calf Leather',
++        label: ts('Calf Leather'),
+         category: 'leather',
+         surfaces: ['furniture'],
+         description: 'Pebbled calf leather',
+@@ -3681,7 +3682,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'concrete-plaster',
+-        label: 'Painted Plaster',
++        label: ts('Painted Plaster'),
+         category: 'concrete',
+         surfaces: ['wall', 'ceiling'],
+         description: 'Smooth painted plaster wall',
+@@ -3719,7 +3720,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'concrete-polished',
+-        label: 'Polished Concrete',
++        label: ts('Polished Concrete'),
+         category: 'concrete',
+         surfaces: ['floor', 'wall'],
+         description: 'Polished concrete floor',
+@@ -3756,7 +3757,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'concrete-raw',
+-        label: 'Raw Concrete',
++        label: ts('Raw Concrete'),
+         category: 'concrete',
+         surfaces: ['wall', 'floor', 'outdoor'],
+         description: 'Board-formed raw concrete',
+@@ -3794,7 +3795,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'concrete-plate',
+-        label: 'Concrete Plate',
++        label: ts('Concrete Plate'),
+         category: 'concrete',
+         surfaces: ['wall', 'floor'],
+         description: 'Smooth cast concrete plate',
+@@ -3832,7 +3833,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'concrete-stucco',
+-        label: 'White Stucco',
++        label: ts('White Stucco'),
+         category: 'concrete',
+         surfaces: ['wall', 'outdoor'],
+         description: 'Exterior stucco render',
+@@ -3870,7 +3871,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'concrete-drywall',
+-        label: 'Prepared Drywall',
++        label: ts('Prepared Drywall'),
+         category: 'concrete',
+         surfaces: ['wall', 'ceiling'],
+         description: 'Smooth prepared drywall ready for paint',
+@@ -3908,7 +3909,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'metal-copper',
+-        label: 'Copper',
++        label: ts('Copper'),
+         category: 'metal',
+         surfaces: ['furniture', 'wall'],
+         description: 'Warm copper',
+@@ -3946,7 +3947,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'metal-polished',
+-        label: 'Polished Metal',
++        label: ts('Polished Metal'),
+         category: 'metal',
+         surfaces: ['furniture', 'wall'],
+         description: 'Polished stainless steel',
+@@ -3985,7 +3986,7 @@ export const MATERIAL_CATALOG = [
+     },
+     {
+         id: 'metal-steel',
+-        label: 'Brushed Steel',
++        label: ts('Brushed Steel'),
+         category: 'metal',
+         surfaces: ['furniture', 'wall'],
+         description: 'Brushed stainless steel',
+@@ -4024,7 +4025,7 @@ export const MATERIAL_CATALOG = [
+         // Parameter-only metal (no texture maps) — a worked example of a non-PBR
+         // catalog finish driven purely by three.js material settings.
+         id: 'metal-brass',
+-        label: 'Brass',
++        label: ts('Brass'),
+         category: 'metal',
+         surfaces: ['furniture', 'wall'],
+         description: 'Polished brass (flat metal, no maps)',
+@@ -4059,7 +4060,7 @@ export const MATERIAL_CATALOG = [
+         // Parameter-only chrome (no texture maps) — moderate metalness so it reads
+         // as bright metal under direct/ambient light without needing an env map.
+         id: 'metal-chrome',
+-        label: 'Chrome',
++        label: ts('Chrome'),
+         category: 'metal',
+         surfaces: ['furniture', 'wall'],
+         description: 'Polished chrome (flat metal, no maps)',

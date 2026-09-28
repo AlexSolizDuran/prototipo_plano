@@ -5,6 +5,8 @@ import { builtinPlugin } from "@pascal-app/nodes"
 import { Editor, type SceneGraph, useEditor } from "@pascal-app/editor"
 import { useCallback, useEffect, useState } from "react"
 import { BuildTab } from "@/components/build-tab"
+import { MaterialsPane } from "@/components/materials-pane"
+import { SceneInspector } from "@/components/scene-inspector"
 
 const registryReady = loadPlugin(builtinPlugin)
 
@@ -103,6 +105,18 @@ export default function EditorPage() {
               label: "Construir",
               icon: <span className="text-lg">🔨</span>,
               component: BuildTab,
+            },
+            {
+              id: "materials",
+              label: "Materiales",
+              icon: <span className="text-lg">🎨</span>,
+              component: MaterialsPane,
+            },
+            {
+              id: "structure",
+              label: "Estructura",
+              icon: <span className="text-lg">📊</span>,
+              component: SceneInspector,
             },
           ]}
         />

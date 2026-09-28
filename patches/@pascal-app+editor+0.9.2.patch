@@ -1,0 +1,4104 @@
+diff --git a/node_modules/@pascal-app/editor/src/components/editor-2d/floorplan-measurement-tool-layer.tsx b/node_modules/@pascal-app/editor/src/components/editor-2d/floorplan-measurement-tool-layer.tsx
+index 7e690b8..b37f4ca 100644
+--- a/node_modules/@pascal-app/editor/src/components/editor-2d/floorplan-measurement-tool-layer.tsx
++++ b/node_modules/@pascal-app/editor/src/components/editor-2d/floorplan-measurement-tool-layer.tsx
+@@ -18,6 +18,7 @@ import {
+   nodeRegistry,
+   useScene,
+ } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import { useEffect, useMemo, useRef, useState } from 'react'
+ import { measurementPolygonLabelAnchor } from '../../lib/measurement-label'
+@@ -695,15 +696,13 @@ function FloorplanExtrusionControl({
+             event.nativeEvent.stopImmediatePropagation()
+           }}
+         >
+-          <label className="sr-only" htmlFor="measurement-extrusion-height">
+-            Extrusion height
+-          </label>
++          <label className="sr-only" htmlFor="measurement-extrusion-height">{ts("Extrusion height")}</label>
+           <div className="relative min-w-0 flex-1">
+             <span className="pointer-events-none absolute inset-y-0 left-2 flex items-center font-medium text-muted-foreground text-xs">
+               H
+             </span>
+             <input
+-              aria-label="Extrusion height"
++              aria-label={ts("Extrusion height")}
+               className="h-8 w-full rounded-md border border-border bg-background pr-7 pl-6 text-sm outline-none focus:border-cyan-400"
+               id="measurement-extrusion-height"
+               inputMode="decimal"
+@@ -743,9 +742,7 @@ function FloorplanExtrusionControl({
+             disabled={Math.abs(extrusionHeight) < 0.001}
+             onClick={commit}
+             type="button"
+-          >
+-            Create
+-          </button>
++          >{ts("Create")}</button>
+         </div>
+       </foreignObject>
+     </g>
+diff --git a/node_modules/@pascal-app/editor/src/components/editor/first-person-controls.tsx b/node_modules/@pascal-app/editor/src/components/editor/first-person-controls.tsx
+index 88820d3..bd0dbb3 100644
+--- a/node_modules/@pascal-app/editor/src/components/editor/first-person-controls.tsx
++++ b/node_modules/@pascal-app/editor/src/components/editor/first-person-controls.tsx
+@@ -25,6 +25,7 @@ import {
+   useInteractive,
+   useScene,
+ } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import { KeyboardControls } from '@react-three/drei'
+ import { useFrame, useThree } from '@react-three/fiber'
+@@ -1449,11 +1450,7 @@ export const FirstPersonOverlay = ({ onExit }: { onExit: () => void }) => {
+           onClick={handleExit}
+           type="button"
+         >
+-          <kbd className="rounded border border-border/50 bg-accent/50 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
+-            ESC
+-          </kbd>
+-          Exit Street View
+-        </button>
++          <kbd className="rounded border border-border/50 bg-accent/50 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">{ts("ESC")}</kbd>{ts("Exit Street View")}</button>
+       </div>
+ 
+       {!hasPlacedSpawn && (
+@@ -1467,16 +1464,14 @@ export const FirstPersonOverlay = ({ onExit }: { onExit: () => void }) => {
+       {isLocked && (
+         <div className="pointer-events-none absolute top-1/2 right-6 z-40 -translate-y-1/2">
+           <div className="flex min-w-[148px] flex-col gap-3 rounded-2xl border border-border/35 bg-background/80 px-4 py-4 shadow-lg backdrop-blur-xl">
+-            <ControlHint keys={['W', 'A', 'S', 'D']} label="Move" />
++            <ControlHint keys={['W', 'A', 'S', 'D']} label={ts("Move")} />
+             <div className="h-px w-full bg-border/30" />
+-            <InlineControlHint keyLabel="Space" label="Jump" />
+-            <InlineControlHint keyLabel="Shift" label="Sprint" />
+-            <InlineControlHint keyLabel="E / R" label="Interact" />
+-            <InlineControlHint keyLabel="T" label="Close" />
++            <InlineControlHint keyLabel="Space" label={ts("Jump")} />
++            <InlineControlHint keyLabel="Shift" label={ts("Sprint")} />
++            <InlineControlHint keyLabel="E / R" label={ts("Interact")} />
++            <InlineControlHint keyLabel="T" label={ts("Close")} />
+             <div className="h-px w-full bg-border/30" />
+-            <span className="text-center text-muted-foreground/60 text-xs">
+-              Click to look around
+-            </span>
++            <span className="text-center text-muted-foreground/60 text-xs">{ts("Click to look around")}</span>
+           </div>
+         </div>
+       )}
+diff --git a/node_modules/@pascal-app/editor/src/components/editor/floating-action-menu.tsx b/node_modules/@pascal-app/editor/src/components/editor/floating-action-menu.tsx
+index 987fda6..9838f0b 100644
+--- a/node_modules/@pascal-app/editor/src/components/editor/floating-action-menu.tsx
++++ b/node_modules/@pascal-app/editor/src/components/editor/floating-action-menu.tsx
+@@ -36,6 +36,7 @@ import {
+   WallNode,
+   WindowNode,
+ } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import { Html } from '@react-three/drei'
+ import { useFrame } from '@react-three/fiber'
+@@ -899,7 +900,7 @@ export function FloatingActionMenu() {
+                     <span aria-hidden className="text-muted-foreground">
+                       ·
+                     </span>
+-                    <span className="text-muted-foreground">R/T rotate</span>
++                    <span className="text-muted-foreground">{ts("R/T rotate")}</span>
+                     <span aria-hidden className="text-muted-foreground">
+                       ·
+                     </span>
+diff --git a/node_modules/@pascal-app/editor/src/components/editor/floorplan-panel.tsx b/node_modules/@pascal-app/editor/src/components/editor/floorplan-panel.tsx
+index f786de5..f4c2f85 100644
+--- a/node_modules/@pascal-app/editor/src/components/editor/floorplan-panel.tsx
++++ b/node_modules/@pascal-app/editor/src/components/editor/floorplan-panel.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { Icon } from '@iconify/react'
++import { ts } from '@/i18n'
+ import {
+   type AnyNode,
+   type AnyNodeId,
+@@ -480,7 +481,7 @@ function FloorplanCompassButton({
+     <Tooltip>
+       <TooltipTrigger asChild>
+         <button
+-          aria-label="Align view to north"
++          aria-label={ts("Align view to north")}
+           className="group absolute bottom-3 left-3 z-30 flex h-8 w-8 items-center justify-center rounded-full border border-black/10 bg-white/85 shadow-sm backdrop-blur-md transition hover:bg-white hover:shadow-md dark:border-white/10 dark:bg-neutral-900/85 dark:hover:bg-neutral-900"
+           onClick={(event) => {
+             event.preventDefault()
+@@ -506,7 +507,7 @@ function FloorplanCompassButton({
+           </span>
+         </button>
+       </TooltipTrigger>
+-      <TooltipContent side="right">Align view to north</TooltipContent>
++      <TooltipContent side="right">{ts("Align view to north")}</TooltipContent>
+     </Tooltip>
+   )
+ }
+@@ -3785,7 +3786,7 @@ function FloorplanGuideHandleHint({
+             rotationModifierPressed ? 'opacity-40' : 'opacity-100',
+           )}
+         >
+-          <span className="font-medium text-[11px] lowercase leading-none">resize</span>
++          <span className="font-medium text-[11px] lowercase leading-none">{ts("resize")}</span>
+           <Icon
+             aria-hidden="true"
+             className="h-3.5 w-3.5 shrink-0"
+@@ -3800,11 +3801,11 @@ function FloorplanGuideHandleHint({
+             rotationModifierPressed ? 'opacity-100' : 'opacity-40',
+           )}
+         >
+-          <span className="font-medium text-[11px] lowercase leading-none">rotate</span>
++          <span className="font-medium text-[11px] lowercase leading-none">{ts("rotate")}</span>
+           {isMacPlatform ? (
+             <Command aria-hidden="true" className="h-3.5 w-3.5 shrink-0" strokeWidth={2.2} />
+           ) : (
+-            <span className="font-mono text-[10px] uppercase leading-none">ctrl</span>
++            <span className="font-mono text-[10px] uppercase leading-none">{ts("ctrl")}</span>
+           )}
+           <Icon
+             aria-hidden="true"
+@@ -3816,9 +3817,9 @@ function FloorplanGuideHandleHint({
+ 
+         {showScaleHint && (
+           <div className="flex items-center gap-1.5 opacity-40">
+-            <span className="font-medium text-[11px] lowercase leading-none">set scale</span>
++            <span className="font-medium text-[11px] lowercase leading-none">{ts("set scale")}</span>
+             <Ruler aria-hidden="true" className="h-3.5 w-3.5 shrink-0" strokeWidth={2.2} />
+-            <span className="font-medium text-[11px] lowercase leading-none">panel</span>
++            <span className="font-medium text-[11px] lowercase leading-none">{ts("panel")}</span>
+           </div>
+         )}
+       </div>
+@@ -11121,7 +11122,7 @@ export function FloorplanPanel({
+                 <Ruler className="h-4 w-4 text-foreground/80" />
+               </div>
+               <div className="min-w-0">
+-                <div className="font-medium text-sm">Set overlay scale</div>
++                <div className="font-medium text-sm">{ts("Set overlay scale")}</div>
+                 <div className="mt-0.5 text-muted-foreground text-xs leading-4">
+                   Enter the real-world length of the line you just drew. The image will resize to
+                   match it.
+@@ -11130,18 +11131,14 @@ export function FloorplanPanel({
+             </div>
+ 
+             <div className="mb-3 rounded-xl border border-border/70 bg-white/5 px-3 py-2">
+-              <div className="text-[11px] text-muted-foreground uppercase tracking-wide">
+-                Drawn line
+-              </div>
++              <div className="text-[11px] text-muted-foreground uppercase tracking-wide">{ts("Drawn line")}</div>
+               <div className="mt-1 font-medium text-sm">
+                 {formatMeasurement(pendingReferenceScale.measuredLengthUnits, unit)}
+               </div>
+             </div>
+ 
+             <label className="block">
+-              <span className="mb-1.5 block font-medium text-muted-foreground text-xs">
+-                Real length
+-              </span>
++              <span className="mb-1.5 block font-medium text-muted-foreground text-xs">{ts("Real length")}</span>
+               <div className="grid grid-cols-[1fr_8.25rem] gap-2">
+                 <input
+                   aria-invalid={Boolean(referenceScaleInputError)}
+@@ -11161,10 +11158,10 @@ export function FloorplanPanel({
+                   }
+                   value={referenceScaleUnit}
+                 >
+-                  <option value="meters">Meters</option>
+-                  <option value="centimeters">Centimeters</option>
+-                  <option value="feet">Feet</option>
+-                  <option value="inches">Inches</option>
++                  <option value="meters">{ts("Meters")}</option>
++                  <option value="centimeters">{ts("Centimeters")}</option>
++                  <option value="feet">{ts("Feet")}</option>
++                  <option value="inches">{ts("Inches")}</option>
+                 </select>
+               </div>
+               <span
+@@ -11190,24 +11187,18 @@ export function FloorplanPanel({
+                 className="h-8 rounded-lg border border-border px-3 font-medium text-muted-foreground text-xs transition hover:bg-white/8 hover:text-foreground"
+                 onClick={() => setPendingReferenceScale(null)}
+                 type="button"
+-              >
+-                Cancel
+-              </button>
++              >{ts("Cancel")}</button>
+               <button
+                 className="h-8 rounded-lg bg-foreground px-3 font-medium text-background text-xs transition hover:bg-foreground/90 disabled:cursor-not-allowed disabled:opacity-50"
+                 disabled={!pendingReferenceMetersPerUnit}
+                 type="submit"
+-              >
+-                Save Scale
+-              </button>
++              >{ts("Save Scale")}</button>
+             </div>
+           </form>
+         )}
+ 
+         {levelNode?.type !== 'level' && !hasAmbientBuildingLevel ? (
+-          <div className="flex h-full items-center justify-center px-6 text-center text-muted-foreground text-sm">
+-            Switch to a building level to view and edit the floorplan.
+-          </div>
++          <div className="flex h-full items-center justify-center px-6 text-center text-muted-foreground text-sm">{ts("Switch to a building level to view and edit the floorplan.")}</div>
+         ) : isFloorplanOpen ? (
+           // The panel stays mounted in 3D mode (display:none) to keep the
+           // portalled compass + viewport state warm, but the heavy 2D scene
+diff --git a/node_modules/@pascal-app/editor/src/components/editor/index.tsx b/node_modules/@pascal-app/editor/src/components/editor/index.tsx
+index d10e6c5..d5f749c 100644
+--- a/node_modules/@pascal-app/editor/src/components/editor/index.tsx
++++ b/node_modules/@pascal-app/editor/src/components/editor/index.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { Icon } from '@iconify/react'
++import { ts } from '@/i18n'
+ import {
+   getCatalogMaterialById,
+   getLibraryMaterialIdFromRef,
+@@ -192,7 +193,7 @@ function EditorSceneCrashFallback() {
+   return (
+     <div className="fixed inset-0 z-80 flex items-center justify-center bg-background/95 p-4 text-foreground">
+       <div className="w-full max-w-md rounded-2xl border border-border/60 bg-background p-6 shadow-xl">
+-        <h2 className="font-semibold text-lg">The editor scene failed to render</h2>
++        <h2 className="font-semibold text-lg">{ts("The editor scene failed to render")}</h2>
+         <p className="mt-2 text-muted-foreground text-sm">
+           You can retry the scene or return home without reloading the whole app shell.
+         </p>
+@@ -201,15 +202,11 @@ function EditorSceneCrashFallback() {
+             className="rounded-md border border-border bg-accent px-3 py-2 font-medium text-sm hover:bg-accent/80"
+             onClick={() => window.location.reload()}
+             type="button"
+-          >
+-            Reload editor
+-          </button>
++          >{ts("Reload editor")}</button>
+           <a
+             className="rounded-md border border-border bg-background px-3 py-2 font-medium text-sm hover:bg-accent/40"
+             href="/"
+-          >
+-            Back to home
+-          </a>
++          >{ts("Back to home")}</a>
+         </div>
+       </div>
+     </div>
+@@ -290,7 +287,7 @@ function SidebarSlot({ children }: { children: ReactNode }) {
+           <div
+             className="absolute inset-0 z-10 cursor-col-resize transition-colors hover:bg-primary/20"
+             onPointerDown={handleGrabDown}
+-            title="Expand sidebar"
++            title={ts("Expand sidebar")}
+           />
+         ) : (
+           children
+@@ -377,23 +374,23 @@ const PREVIEW_CAMERA_CONTROL_HINTS: CameraControlHint[] = [
+ const CAMERA_SHORTCUT_KEY_META: Record<string, { icon?: string; label: string; text?: string }> = {
+   'Left click': {
+     icon: 'ph:mouse-left-click-fill',
+-    label: 'Left click',
++    label: ts('Left click'),
+   },
+   'Middle click': {
+     icon: 'qlementine-icons:mouse-middle-button-16',
+-    label: 'Middle click',
++    label: ts('Middle click'),
+   },
+   'Right click': {
+     icon: 'ph:mouse-right-click-fill',
+-    label: 'Right click',
++    label: ts('Right click'),
+   },
+   Scroll: {
+     icon: 'qlementine-icons:mouse-middle-button-16',
+-    label: 'Scroll wheel',
++    label: ts('Scroll wheel'),
+   },
+   Space: {
+     icon: 'lucide:space',
+-    label: 'Space',
++    label: ts('Space'),
+   },
+ }
+ 
+@@ -492,7 +489,7 @@ function ViewerCanvasControlsHint({
+   return (
+     <div className="pointer-events-none absolute top-14 left-1/2 z-40 max-w-[calc(100%-2rem)] -translate-x-1/2">
+       <section
+-        aria-label="Camera controls hint"
++        aria-label={ts("Camera controls hint")}
+         className="pointer-events-auto flex items-start gap-3 rounded-2xl border border-border/35 bg-background/90 px-3.5 py-2.5 shadow-elevation-4 backdrop-blur-xl"
+       >
+         <div className="grid min-w-0 flex-1 grid-cols-3 items-start divide-x divide-border/18">
+@@ -503,7 +500,7 @@ function ViewerCanvasControlsHint({
+         <Tooltip>
+           <TooltipTrigger asChild>
+             <button
+-              aria-label="Dismiss camera controls hint"
++              aria-label={ts("Dismiss camera controls hint")}
+               className="flex h-5 shrink-0 items-center justify-center self-center border-border/18 border-l pl-3 text-muted-foreground/70 transition-colors hover:text-foreground"
+               onClick={onDismiss}
+               type="button"
+@@ -517,9 +514,7 @@ function ViewerCanvasControlsHint({
+               />
+             </button>
+           </TooltipTrigger>
+-          <TooltipContent side="bottom" sideOffset={8}>
+-            Dismiss
+-          </TooltipContent>
++          <TooltipContent side="bottom" sideOffset={8}>{ts("Dismiss")}</TooltipContent>
+         </Tooltip>
+       </section>
+     </div>
+diff --git a/node_modules/@pascal-app/editor/src/components/editor/node-action-menu.tsx b/node_modules/@pascal-app/editor/src/components/editor/node-action-menu.tsx
+index 39f2248..525d0ee 100644
+--- a/node_modules/@pascal-app/editor/src/components/editor/node-action-menu.tsx
++++ b/node_modules/@pascal-app/editor/src/components/editor/node-action-menu.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { Icon } from '@iconify/react'
++import { ts } from '@/i18n'
+ import { Copy, Move, Search, Spline, Trash2 } from 'lucide-react'
+ import type { MouseEventHandler, PointerEventHandler } from 'react'
+ 
+@@ -39,10 +40,10 @@ export function NodeActionMenu({
+     >
+       {onFind && (
+         <button
+-          aria-label="Find in catalog"
++          aria-label={ts("Find in catalog")}
+           className="tooltip-trigger rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+           onClick={onFind}
+-          title="Find in catalog"
++          title={ts("Find in catalog")}
+           type="button"
+         >
+           <Search className="h-4 w-4" />
+@@ -50,10 +51,10 @@ export function NodeActionMenu({
+       )}
+       {onMove && (
+         <button
+-          aria-label="Move"
++          aria-label={ts("Move")}
+           className="tooltip-trigger rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+           onClick={onMove}
+-          title="Move"
++          title={ts("Move")}
+           type="button"
+         >
+           <Move className="h-4 w-4" />
+@@ -61,10 +62,10 @@ export function NodeActionMenu({
+       )}
+       {onCurve && (
+         <button
+-          aria-label="Curve"
++          aria-label={ts("Curve")}
+           className="tooltip-trigger rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+           onClick={onCurve}
+-          title="Curve"
++          title={ts("Curve")}
+           type="button"
+         >
+           <Spline className="h-4 w-4" />
+@@ -72,10 +73,10 @@ export function NodeActionMenu({
+       )}
+       {onDuplicate && (
+         <button
+-          aria-label="Duplicate"
++          aria-label={ts("Duplicate")}
+           className="tooltip-trigger rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+           onClick={onDuplicate}
+-          title="Duplicate"
++          title={ts("Duplicate")}
+           type="button"
+         >
+           <Copy className="h-4 w-4" />
+@@ -83,10 +84,10 @@ export function NodeActionMenu({
+       )}
+       {onAddHole && (
+         <button
+-          aria-label="Cut Out"
++          aria-label={ts("Cut Out")}
+           className="tooltip-trigger rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+           onClick={onAddHole}
+-          title="Cut Out"
++          title={ts("Cut Out")}
+           type="button"
+         >
+           <Icon height={16} icon="carbon:cut-out" width={16} />
+@@ -94,10 +95,10 @@ export function NodeActionMenu({
+       )}
+       {onDelete && (
+         <button
+-          aria-label="Delete"
++          aria-label={ts("Delete")}
+           className="tooltip-trigger rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+           onClick={onDelete}
+-          title="Delete"
++          title={ts("Delete")}
+           type="button"
+         >
+           <Trash2 className="h-4 w-4" />
+diff --git a/node_modules/@pascal-app/editor/src/components/editor/riser-diagram-panel.tsx b/node_modules/@pascal-app/editor/src/components/editor/riser-diagram-panel.tsx
+index e89122e..6c0e14e 100644
+--- a/node_modules/@pascal-app/editor/src/components/editor/riser-diagram-panel.tsx
++++ b/node_modules/@pascal-app/editor/src/components/editor/riser-diagram-panel.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { type AnyNodeId, buildRiserDiagram, useScene } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import { X } from 'lucide-react'
+ import { useMemo } from 'react'
+@@ -48,8 +49,8 @@ function RiserDiagramContent() {
+     <div className="dark pointer-events-auto absolute top-4 right-4 z-30 flex max-h-[80vh] w-[26rem] flex-col overflow-hidden rounded-2xl border border-border/40 bg-background/95 text-foreground shadow-lg backdrop-blur-xl">
+       <div className="flex items-center justify-between border-border/40 border-b px-4 py-2.5">
+         <div className="flex flex-col">
+-          <span className="font-medium text-sm">Riser Diagram</span>
+-          <span className="text-muted-foreground text-xs">DWV plumbing isometric</span>
++          <span className="font-medium text-sm">{ts("Riser Diagram")}</span>
++          <span className="text-muted-foreground text-xs">{ts("DWV plumbing isometric")}</span>
+         </div>
+         <button
+           className="flex h-7 w-7 items-center justify-center rounded-md transition-colors hover:bg-white/10"
+@@ -61,8 +62,7 @@ function RiserDiagramContent() {
+ 
+       <div className="flex items-center gap-3 border-border/40 border-b px-4 py-2 text-xs">
+         <span className="flex items-center gap-1.5">
+-          <span className="h-0.5 w-4" style={{ background: WASTE_COLOR }} /> Waste
+-        </span>
++          <span className="h-0.5 w-4" style={{ background: WASTE_COLOR }} />{ts("Waste")}</span>
+         <span className="flex items-center gap-1.5">
+           <span className="h-0 w-4 border-t-2 border-dashed" style={{ borderColor: VENT_COLOR }} />{' '}
+           Vent
+@@ -74,7 +74,7 @@ function RiserDiagramContent() {
+           <svg
+             height={Math.max(height, 120)}
+             role="img"
+-            aria-label="DWV riser diagram"
++            aria-label={ts("DWV riser diagram")}
+             viewBox={`0 0 ${Math.max(width, 200)} ${Math.max(height, 120)}`}
+             width="100%"
+           >
+diff --git a/node_modules/@pascal-app/editor/src/components/editor/snapshot-capture-overlay.tsx b/node_modules/@pascal-app/editor/src/components/editor/snapshot-capture-overlay.tsx
+index 9b6d006..ba42137 100644
+--- a/node_modules/@pascal-app/editor/src/components/editor/snapshot-capture-overlay.tsx
++++ b/node_modules/@pascal-app/editor/src/components/editor/snapshot-capture-overlay.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { emitter } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { Check, Crop, Loader2, Maximize2, Monitor, X } from 'lucide-react'
+ import { useCallback, useEffect, useRef, useState } from 'react'
+ import { useIsMobile } from '../../hooks/use-mobile'
+@@ -441,9 +442,7 @@ export function SnapshotCaptureOverlay({ projectId }: { projectId: string }) {
+               has a pre-staged square, so we never show it there. */}
+           {!selectionStyle && !isPreset && (
+             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+-              <span className="rounded-full border border-white/10 bg-neutral-950/80 px-4 py-2 text-sm text-white backdrop-blur-md">
+-                Drag the area you want to capture
+-              </span>
++              <span className="rounded-full border border-white/10 bg-neutral-950/80 px-4 py-2 text-sm text-white backdrop-blur-md">{ts("Drag the area you want to capture")}</span>
+             </div>
+           )}
+ 
+@@ -502,17 +501,13 @@ export function SnapshotCaptureOverlay({ projectId }: { projectId: string }) {
+       {!isMobile && !isPreset && (
+         <div className="pointer-events-none absolute top-4 left-1/2 flex -translate-x-1/2 gap-2">
+           <div className={HUD_CHIP_CLASS}>
+-            <span className="font-mono text-[8.5px] text-white/50 uppercase tracking-[0.14em]">
+-              Crop
+-            </span>
++            <span className="font-mono text-[8.5px] text-white/50 uppercase tracking-[0.14em]">{ts("Crop")}</span>
+             <span className="font-semibold text-white text-xs">
+               {isPreset ? 'Preset · square' : CROP_LABELS[mode]}
+             </span>
+           </div>
+           <div className={HUD_CHIP_CLASS}>
+-            <span className="font-mono text-[8.5px] text-white/50 uppercase tracking-[0.14em]">
+-              Format
+-            </span>
++            <span className="font-mono text-[8.5px] text-white/50 uppercase tracking-[0.14em]">{ts("Format")}</span>
+             <span className="font-semibold text-white text-xs tabular-nums">
+               {resolution ? `${resolution.w} × ${resolution.h}` : '—'}
+             </span>
+@@ -523,7 +518,7 @@ export function SnapshotCaptureOverlay({ projectId }: { projectId: string }) {
+       {/* Top-right dismiss button (icon-only on mobile) */}
+       <div className="pointer-events-auto absolute top-4 right-4">
+         <button
+-          aria-label="Close capture mode"
++          aria-label={ts("Close capture mode")}
+           className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-neutral-950/85 px-3 py-1.5 text-white/80 text-xs backdrop-blur-md transition-colors hover:bg-neutral-950 hover:text-white"
+           onClick={dismiss}
+           type="button"
+@@ -605,7 +600,7 @@ export function SnapshotCaptureOverlay({ projectId }: { projectId: string }) {
+             snapshot pitch only applies to the studio/reference flow. */}
+         {!isMobile && !isPreset && (
+           <span className="pointer-events-none max-w-90 rounded-lg border border-white/10 bg-neutral-950/85 px-3.5 py-1.5 text-center text-[11.5px] text-white/85 leading-relaxed backdrop-blur-md">
+-            A <b className="font-semibold text-white">snapshot</b>
++            A <b className="font-semibold text-white">{ts("snapshot")}</b>
+             {' freezes this exact camera angle as a reusable reference for renders & videos.'}
+           </span>
+         )}
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/action-menu/camera-actions.tsx b/node_modules/@pascal-app/editor/src/components/ui/action-menu/camera-actions.tsx
+index 5455095..3fa2dbc 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/action-menu/camera-actions.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/action-menu/camera-actions.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { emitter } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import Image from 'next/image'
+ import useEditor from '../../../store/use-editor'
+ import { ActionButton } from './action-button'
+@@ -29,13 +30,13 @@ export function CameraActions({ hideOrbit = false }: { hideOrbit?: boolean }) {
+           {/* Orbit CCW */}
+           <ActionButton
+             className="group hover:bg-white/5"
+-            label="Orbit Left"
++            label={ts("Orbit Left")}
+             onClick={orbitCCW}
+             size="icon"
+             variant="ghost"
+           >
+             <Image
+-              alt="Orbit Left"
++              alt={ts("Orbit Left")}
+               className="h-[28px] w-[28px] -scale-x-100 object-contain opacity-70 transition-opacity group-hover:opacity-100"
+               height={28}
+               src="/icons/rotate.webp"
+@@ -46,13 +47,13 @@ export function CameraActions({ hideOrbit = false }: { hideOrbit?: boolean }) {
+           {/* Orbit CW */}
+           <ActionButton
+             className="group hover:bg-white/5"
+-            label="Orbit Right"
++            label={ts("Orbit Right")}
+             onClick={orbitCW}
+             size="icon"
+             variant="ghost"
+           >
+             <Image
+-              alt="Orbit Right"
++              alt={ts("Orbit Right")}
+               className="h-[28px] w-[28px] object-contain opacity-70 transition-opacity group-hover:opacity-100"
+               height={28}
+               src="/icons/rotate.webp"
+@@ -66,13 +67,13 @@ export function CameraActions({ hideOrbit = false }: { hideOrbit?: boolean }) {
+       {!is2dOnly && (
+         <ActionButton
+           className="group hover:bg-white/5"
+-          label="Top View"
++          label={ts("Top View")}
+           onClick={goToTopView}
+           size="icon"
+           variant="ghost"
+         >
+           <Image
+-            alt="Top View"
++            alt={ts("Top View")}
+             className="h-[28px] w-[28px] object-contain opacity-70 transition-opacity group-hover:opacity-100"
+             height={28}
+             src="/icons/topview.webp"
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/action-menu/control-modes.tsx b/node_modules/@pascal-app/editor/src/components/ui/action-menu/control-modes.tsx
+index 746890e..8840705 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/action-menu/control-modes.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/action-menu/control-modes.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { Icon } from '@iconify/react'
++import { ts } from '@/i18n'
+ import { type LucideIcon, Trash2 } from 'lucide-react'
+ import Image from 'next/image'
+ import { Fragment } from 'react'
+@@ -27,7 +28,7 @@ const controls: ControlConfig[] = [
+   {
+     id: 'select',
+     imageSrc: '/icons/select.webp',
+-    label: 'Select',
++    label: ts('Select'),
+     shortcut: 'V',
+     color: 'hover:bg-blue-500/20 hover:text-blue-400',
+     activeColor: 'bg-blue-500/20 text-blue-400',
+@@ -35,7 +36,7 @@ const controls: ControlConfig[] = [
+   {
+     id: 'zone',
+     imageSrc: '/icons/zone.webp',
+-    label: 'Zone',
++    label: ts('Zone'),
+     shortcut: 'Z',
+     color: 'hover:bg-green-500/20 hover:text-green-400',
+     activeColor: 'bg-green-500/20 text-green-400',
+@@ -43,7 +44,7 @@ const controls: ControlConfig[] = [
+   {
+     id: 'delete',
+     icon: Trash2,
+-    label: 'Delete',
++    label: ts('Delete'),
+     shortcut: 'X',
+     color: 'hover:bg-red-500/20 hover:text-red-400',
+     activeColor: 'bg-red-500/20 text-red-400',
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/action-menu/furnish-tools.tsx b/node_modules/@pascal-app/editor/src/components/ui/action-menu/furnish-tools.tsx
+index a3c629b..b8b7c90 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/action-menu/furnish-tools.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/action-menu/furnish-tools.tsx
+@@ -1,4 +1,5 @@
+ import type { CatalogCategory } from './../../../store/use-editor'
++import { ts } from '@/i18n'
+ 
+ export type FurnishToolConfig = {
+   id: 'item'
+@@ -8,9 +9,9 @@ export type FurnishToolConfig = {
+ }
+ 
+ export const furnishTools: FurnishToolConfig[] = [
+-  { id: 'item', iconSrc: '/icons/couch.webp', label: 'Furniture', catalogCategory: 'furniture' },
+-  { id: 'item', iconSrc: '/icons/appliance.webp', label: 'Appliance', catalogCategory: 'appliance' },
+-  { id: 'item', iconSrc: '/icons/kitchen.webp', label: 'Kitchen', catalogCategory: 'kitchen' },
+-  { id: 'item', iconSrc: '/icons/bathroom.webp', label: 'Bathroom', catalogCategory: 'bathroom' },
+-  { id: 'item', iconSrc: '/icons/tree.webp', label: 'Outdoor', catalogCategory: 'outdoor' },
++  { id: 'item', iconSrc: '/icons/couch.webp', label: ts('Furniture'), catalogCategory: 'furniture' },
++  { id: 'item', iconSrc: '/icons/appliance.webp', label: ts('Appliance'), catalogCategory: 'appliance' },
++  { id: 'item', iconSrc: '/icons/kitchen.webp', label: ts('Kitchen'), catalogCategory: 'kitchen' },
++  { id: 'item', iconSrc: '/icons/bathroom.webp', label: ts('Bathroom'), catalogCategory: 'bathroom' },
++  { id: 'item', iconSrc: '/icons/tree.webp', label: ts('Outdoor'), catalogCategory: 'outdoor' },
+ ]
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/action-menu/measurement-control.tsx b/node_modules/@pascal-app/editor/src/components/ui/action-menu/measurement-control.tsx
+index 0a203d4..3b6f1a8 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/action-menu/measurement-control.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/action-menu/measurement-control.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { useViewer } from '@pascal-app/viewer'
++import { ts } from '@/i18n'
+ import {
+   Box,
+   Check,
+@@ -21,11 +22,11 @@ import { Popover, PopoverContent, PopoverTrigger } from '../primitives/popover'
+ import { ActionButton } from './action-button'
+ 
+ const measurementOptions = [
+-  { kind: 'distance', label: 'Distance', icon: Ruler },
+-  { kind: 'angle', label: 'Angle', icon: Triangle },
+-  { kind: 'area', label: 'Area', icon: Square },
+-  { kind: 'perimeter', label: 'Perimeter', icon: Waypoints },
+-  { kind: 'volume', label: 'Volume', icon: Box },
++  { kind: 'distance', label: ts('Distance'), icon: Ruler },
++  { kind: 'angle', label: ts('Angle'), icon: Triangle },
++  { kind: 'area', label: ts('Area'), icon: Square },
++  { kind: 'perimeter', label: ts('Perimeter'), icon: Waypoints },
++  { kind: 'volume', label: ts('Volume'), icon: Box },
+ ] as const satisfies readonly {
+   kind: CreatableMeasurementKind
+   label: string
+@@ -33,7 +34,7 @@ const measurementOptions = [
+ }[]
+ 
+ const measurementMenuOptions = [
+-  { kind: 'smart', label: 'Smart', icon: ScanSearch },
++  { kind: 'smart', label: ts('Smart'), icon: ScanSearch },
+   ...measurementOptions,
+ ] as const
+ 
+@@ -109,7 +110,7 @@ export function MeasurementControl() {
+           <button
+             aria-expanded={isOpen}
+             aria-haspopup="menu"
+-            aria-label="Measurement options"
++            aria-label={ts("Measurement options")}
+             className={cn(
+               'flex h-11 w-6 items-center justify-center rounded-r-lg text-muted-foreground transition-colors',
+               isOpen
+@@ -132,7 +133,7 @@ export function MeasurementControl() {
+         side="top"
+         sideOffset={14}
+       >
+-        <div aria-label="Measurement type" className="space-y-1" role="menu">
++        <div aria-label={ts("Measurement type")} className="space-y-1" role="menu">
+           {measurementMenuOptions.map((option) => {
+             const OptionIcon = option.icon
+             const isSmart = option.kind === 'smart'
+@@ -178,7 +179,7 @@ export function MeasurementControl() {
+             ) : (
+               <EyeOff aria-hidden="true" className="h-4 w-4" />
+             )}
+-            <span>Show measurements</span>
++            <span>{ts("Show measurements")}</span>
+             <span className="ml-auto text-xs">{showMeasurements ? 'On' : 'Off'}</span>
+           </button>
+         </div>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/action-menu/structure-tools.tsx b/node_modules/@pascal-app/editor/src/components/ui/action-menu/structure-tools.tsx
+index c399afb..08d8573 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/action-menu/structure-tools.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/action-menu/structure-tools.tsx
+@@ -1,4 +1,5 @@
+ import type { CatalogCategory, StructureTool } from '../../../store/use-editor'
++import { ts } from '@/i18n'
+ 
+ export type ToolConfig = {
+   id: StructureTool
+@@ -12,26 +13,26 @@ export type ToolConfig = {
+ // for cursor/floorplan indicators. Roof-mounted accessories are intentionally
+ // absent — they're placed from the roof inspector's "Add element" section.
+ export const tools: ToolConfig[] = [
+-  { id: 'wall', iconSrc: '/icons/wall.webp', label: 'Wall' },
+-  { id: 'door', iconSrc: '/icons/door.webp', label: 'Door' },
+-  { id: 'window', iconSrc: '/icons/window.webp', label: 'Window' },
+-  { id: 'stair', iconSrc: '/icons/stairs.webp', label: 'Stairs' },
+-  { id: 'roof', iconSrc: '/icons/roof.webp', label: 'Gable Roof' },
+-  { id: 'fence', iconSrc: '/icons/fence.webp', label: 'Fence' },
+-  { id: 'column', iconSrc: '/icons/column.webp', label: 'Column' },
+-  { id: 'elevator', iconSrc: '/icons/elevator.webp', label: 'Elevator' },
+-  { id: 'slab', iconSrc: '/icons/floor.webp', label: 'Slab' },
+-  { id: 'ceiling', iconSrc: '/icons/ceiling.webp', label: 'Ceiling' },
+-  { id: 'zone', iconSrc: '/icons/zone.webp', label: 'Zone' },
+-  { id: 'spawn', iconSrc: '/icons/spawn-point.webp', label: 'Spawn Point' },
+-  { id: 'shelf', iconSrc: '/icons/shelf.webp', label: 'Shelf' },
+-  { id: 'duct-segment', iconSrc: '/icons/duct.webp', label: 'Duct' },
+-  { id: 'duct-fitting', iconSrc: '/icons/duct-fitting.webp', label: 'Duct Fitting' },
+-  { id: 'duct-terminal', iconSrc: '/icons/registers.webp', label: 'Register' },
+-  { id: 'hvac-equipment', iconSrc: '/icons/HVAC.webp', label: 'HVAC Unit' },
+-  { id: 'pipe-segment', iconSrc: '/icons/dwv-pipes.webp', label: 'DWV Pipe' },
+-  { id: 'pipe-trap', iconSrc: '/icons/dwv-pipes.webp', label: 'Trap' },
+-  { id: 'pipe-fitting', iconSrc: '/icons/duct-fitting.webp', label: 'Pipe Fitting' },
+-  { id: 'lineset', iconSrc: '/icons/lineset.webp', label: 'Lineset' },
+-  { id: 'liquid-line', iconSrc: '/icons/lineset.webp', label: 'Liquid Line' },
++  { id: 'wall', iconSrc: '/icons/wall.webp', label: ts('Wall') },
++  { id: 'door', iconSrc: '/icons/door.webp', label: ts('Door') },
++  { id: 'window', iconSrc: '/icons/window.webp', label: ts('Window') },
++  { id: 'stair', iconSrc: '/icons/stairs.webp', label: ts('Stairs') },
++  { id: 'roof', iconSrc: '/icons/roof.webp', label: ts('Gable Roof') },
++  { id: 'fence', iconSrc: '/icons/fence.webp', label: ts('Fence') },
++  { id: 'column', iconSrc: '/icons/column.webp', label: ts('Column') },
++  { id: 'elevator', iconSrc: '/icons/elevator.webp', label: ts('Elevator') },
++  { id: 'slab', iconSrc: '/icons/floor.webp', label: ts('Slab') },
++  { id: 'ceiling', iconSrc: '/icons/ceiling.webp', label: ts('Ceiling') },
++  { id: 'zone', iconSrc: '/icons/zone.webp', label: ts('Zone') },
++  { id: 'spawn', iconSrc: '/icons/spawn-point.webp', label: ts('Spawn Point') },
++  { id: 'shelf', iconSrc: '/icons/shelf.webp', label: ts('Shelf') },
++  { id: 'duct-segment', iconSrc: '/icons/duct.webp', label: ts('Duct') },
++  { id: 'duct-fitting', iconSrc: '/icons/duct-fitting.webp', label: ts('Duct Fitting') },
++  { id: 'duct-terminal', iconSrc: '/icons/registers.webp', label: ts('Register') },
++  { id: 'hvac-equipment', iconSrc: '/icons/HVAC.webp', label: ts('HVAC Unit') },
++  { id: 'pipe-segment', iconSrc: '/icons/dwv-pipes.webp', label: ts('DWV Pipe') },
++  { id: 'pipe-trap', iconSrc: '/icons/dwv-pipes.webp', label: ts('Trap') },
++  { id: 'pipe-fitting', iconSrc: '/icons/duct-fitting.webp', label: ts('Pipe Fitting') },
++  { id: 'lineset', iconSrc: '/icons/lineset.webp', label: ts('Lineset') },
++  { id: 'liquid-line', iconSrc: '/icons/lineset.webp', label: ts('Liquid Line') },
+ ]
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/action-menu/view-toggles.tsx b/node_modules/@pascal-app/editor/src/components/ui/action-menu/view-toggles.tsx
+index e302332..af6c967 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/action-menu/view-toggles.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/action-menu/view-toggles.tsx
+@@ -8,6 +8,7 @@ import {
+   type ScanNode,
+   useScene,
+ } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import { Check, ChevronDown, Eye, EyeOff, Layers2, Plus, Trash2, Waypoints } from 'lucide-react'
+ import { useCallback, useRef, useState } from 'react'
+@@ -148,7 +149,7 @@ function UploadButton({ onError }: { onError: (message: string | null) => void }
+   return (
+     <>
+       <button
+-        aria-label="Upload scan or guide image"
++        aria-label={ts("Upload scan or guide image")}
+         className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border/40 text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground"
+         disabled={isAddingGuide}
+         onClick={() => fileInputRef.current?.click()}
+@@ -210,14 +211,14 @@ function GuidesControl() {
+               ? 'bg-white/15'
+               : 'opacity-60 grayscale hover:bg-white/5 hover:opacity-100 hover:grayscale-0',
+           )}
+-          label={`Guides: ${showGuides ? 'Visible' : 'Hidden'}`}
++          label={`${ts("Guides:")} ${showGuides ? ts("Visible") : ts("Hidden")}`}
+           onClick={() => setShowGuides(!showGuides)}
+           size="icon"
+           variant="ghost"
+         >
+           <div className="relative">
+             <img
+-              alt="Guides"
++              alt={ts("Guides")}
+               className="h-[28px] w-[28px] object-contain"
+               src="/icons/floorplan.webp"
+             />
+@@ -231,7 +232,7 @@ function GuidesControl() {
+         <PopoverTrigger asChild>
+           <button
+             aria-expanded={isOpen}
+-            aria-label="Guide image settings"
++            aria-label={ts("Guide image settings")}
+             className={cn(
+               'flex h-11 w-6 items-center justify-center rounded-r-lg transition-colors',
+               showGuides
+@@ -261,7 +262,7 @@ function GuidesControl() {
+               <img alt="" className="h-4 w-4 object-contain" src="/icons/floorplan.webp" />
+             </span>
+             <div className="min-w-0 flex-1">
+-              <p className="font-medium text-foreground text-sm">Guide images</p>
++              <p className="font-medium text-foreground text-sm">{ts("Guide images")}</p>
+               {hasGuides && (
+                 <p className="text-muted-foreground text-xs">
+                   {guides.length} guide image{guides.length !== 1 ? 's' : ''} on this level
+@@ -308,7 +309,7 @@ function GuidesControl() {
+                       )}
+                     </button>
+                     <button
+-                      aria-label="Delete guide image"
++                      aria-label={ts("Delete guide image")}
+                       className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-muted-foreground/50 opacity-0 transition-all hover:bg-destructive/10 hover:text-destructive group-hover/item:opacity-100"
+                       onClick={(event) => {
+                         event.stopPropagation()
+@@ -323,7 +324,7 @@ function GuidesControl() {
+                     </button>
+                   </div>
+                   <SliderControl
+-                    label="Opacity"
++                    label={ts("Opacity")}
+                     max={100}
+                     min={0}
+                     onChange={(value) => handleOpacityChange(guide.id, value)}
+@@ -389,13 +390,13 @@ function ScansControl() {
+               ? 'bg-white/15'
+               : 'opacity-60 grayscale hover:bg-white/5 hover:opacity-100 hover:grayscale-0',
+           )}
+-          label={`Scans: ${showScans ? 'Visible' : 'Hidden'}`}
++          label={`${ts("Scans:")} ${showScans ? ts("Visible") : ts("Hidden")}`}
+           onClick={() => setShowScans(!showScans)}
+           size="icon"
+           variant="ghost"
+         >
+           <div className="relative">
+-            <img alt="Scans" className="h-[28px] w-[28px] object-contain" src="/icons/mesh.webp" />
++            <img alt={ts("Scans")} className="h-[28px] w-[28px] object-contain" src="/icons/mesh.webp" />
+             <span className="absolute -right-1.5 -bottom-1 min-w-[14px] rounded-full bg-white/20 px-[3px] text-center font-medium text-[9px] text-white/70 leading-[14px]">
+               {scans.length}
+             </span>
+@@ -406,7 +407,7 @@ function ScansControl() {
+         <PopoverTrigger asChild>
+           <button
+             aria-expanded={isOpen}
+-            aria-label="Scan settings"
++            aria-label={ts("Scan settings")}
+             className={cn(
+               'flex h-11 w-6 items-center justify-center rounded-r-lg transition-colors',
+               showScans
+@@ -436,7 +437,7 @@ function ScansControl() {
+               <img alt="" className="h-4 w-4 object-contain" src="/icons/mesh.webp" />
+             </span>
+             <div className="min-w-0 flex-1">
+-              <p className="font-medium text-foreground text-sm">Scans</p>
++              <p className="font-medium text-foreground text-sm">{ts("Scans")}</p>
+               {hasScans && (
+                 <p className="text-muted-foreground text-xs">
+                   {scans.length} scan{scans.length !== 1 ? 's' : ''} on this level
+@@ -483,7 +484,7 @@ function ScansControl() {
+                       )}
+                     </button>
+                     <button
+-                      aria-label="Delete scan"
++                      aria-label={ts("Delete scan")}
+                       className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-muted-foreground/50 opacity-0 transition-all hover:bg-destructive/10 hover:text-destructive group-hover/item:opacity-100"
+                       onClick={(event) => {
+                         event.stopPropagation()
+@@ -498,7 +499,7 @@ function ScansControl() {
+                     </button>
+                   </div>
+                   <SliderControl
+-                    label="Opacity"
++                    label={ts("Opacity")}
+                     max={100}
+                     min={0}
+                     onChange={(value) => handleOpacityChange(scan.id, value)}
+@@ -633,7 +634,7 @@ function ReferenceListSection({
+                 </button>
+               </div>
+               <SliderControl
+-                label="Opacity"
++                label={ts("Opacity")}
+                 max={100}
+                 min={0}
+                 onChange={(value) =>
+@@ -692,7 +693,7 @@ function ReferencesControl() {
+         >
+           <div className="relative">
+             <img
+-              alt="References"
++              alt={ts("References")}
+               className="h-[28px] w-[28px] object-contain"
+               src="/icons/floorplan.webp"
+             />
+@@ -705,7 +706,7 @@ function ReferencesControl() {
+         <PopoverTrigger asChild>
+           <button
+             aria-expanded={isOpen}
+-            aria-label="Reference settings"
++            aria-label={ts("Reference settings")}
+             className={cn(
+               'flex h-11 w-6 items-center justify-center rounded-r-lg transition-colors',
+               anyVisible
+@@ -743,7 +744,7 @@ function ReferencesControl() {
+             onError={setUploadError}
+             setShow={setShowScans}
+             show={showScans}
+-            title="Scans"
++            title={ts("Scans")}
+           />
+           <div className="h-px bg-border/45" />
+           <ReferenceListSection
+@@ -754,7 +755,7 @@ function ReferencesControl() {
+             onError={setUploadError}
+             setShow={setShowGuides}
+             show={showGuides}
+-            title="Guide images"
++            title={ts("Guide images")}
+           />
+         </div>
+       </PopoverContent>
+@@ -810,7 +811,7 @@ function ReferenceFloorControl() {
+         <PopoverTrigger asChild>
+           <button
+             aria-expanded={isOpen}
+-            aria-label="Reference floor settings"
++            aria-label={ts("Reference floor settings")}
+             className={cn(
+               'flex h-11 w-6 items-center justify-center rounded-r-lg transition-colors',
+               showReferenceFloor && selectedLevel
+@@ -841,7 +842,7 @@ function ReferenceFloorControl() {
+               <Layers2 className="h-4 w-4" />
+             </span>
+             <div className="min-w-0 flex-1">
+-              <p className="font-medium text-foreground text-sm">Reference floor</p>
++              <p className="font-medium text-foreground text-sm">{ts("Reference floor")}</p>
+               {selectedLevelName && (
+                 <p className="truncate text-muted-foreground text-xs">{selectedLevelName}</p>
+               )}
+@@ -898,7 +899,7 @@ function ReferenceFloorControl() {
+               </div>
+ 
+               <SliderControl
+-                label="Opacity"
++                label={ts("Opacity")}
+                 max={0.8}
+                 min={0.1}
+                 onChange={setReferenceFloorOpacity}
+@@ -908,9 +909,7 @@ function ReferenceFloorControl() {
+               />
+             </>
+           ) : (
+-            <div className="rounded-xl border border-border/45 border-dashed bg-background/60 px-3 py-4 text-muted-foreground text-sm">
+-              No lower floor available.
+-            </div>
++            <div className="rounded-xl border border-border/45 border-dashed bg-background/60 px-3 py-4 text-muted-foreground text-sm">{ts("No lower floor available.")}</div>
+           )}
+         </div>
+       </PopoverContent>
+@@ -931,7 +930,7 @@ function RiserControl() {
+           ? 'bg-white/15'
+           : 'opacity-60 grayscale hover:bg-white/5 hover:opacity-100 hover:grayscale-0',
+       )}
+-      label="Riser diagram"
++      label={ts("Riser diagram")}
+       onClick={toggleRiserOpen}
+       size="icon"
+       variant="ghost"
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/command-palette/editor-commands.tsx b/node_modules/@pascal-app/editor/src/components/ui/command-palette/editor-commands.tsx
+index 967602b..846ef5a 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/command-palette/editor-commands.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/command-palette/editor-commands.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import type { AnyNodeId } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { LevelNode, useScene } from '@pascal-app/core'
+ import { useViewer } from '@pascal-app/viewer'
+ import {
+@@ -77,7 +78,7 @@ export function EditorCommands() {
+       // ── Scene ────────────────────────────────────────────────────────────
+       {
+         id: 'editor.tool.wall',
+-        label: 'Wall Tool',
++        label: ts('Wall Tool'),
+         group: 'Scene',
+         icon: <Square className="h-4 w-4" />,
+         keywords: ['draw', 'build', 'structure'],
+@@ -85,7 +86,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.tool.slab',
+-        label: 'Slab Tool',
++        label: ts('Slab Tool'),
+         group: 'Scene',
+         icon: <Layers className="h-4 w-4" />,
+         keywords: ['floor', 'build'],
+@@ -93,7 +94,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.tool.ceiling',
+-        label: 'Ceiling Tool',
++        label: ts('Ceiling Tool'),
+         group: 'Scene',
+         icon: <Grid3X3 className="h-4 w-4" />,
+         keywords: ['top', 'build'],
+@@ -101,7 +102,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.tool.door',
+-        label: 'Door Tool',
++        label: ts('Door Tool'),
+         group: 'Scene',
+         icon: <DoorOpen className="h-4 w-4" />,
+         keywords: ['opening', 'entrance'],
+@@ -109,7 +110,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.tool.window',
+-        label: 'Window Tool',
++        label: ts('Window Tool'),
+         group: 'Scene',
+         icon: <AppWindow className="h-4 w-4" />,
+         keywords: ['opening', 'glass'],
+@@ -117,7 +118,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.tool.item',
+-        label: 'Item Tool',
++        label: ts('Item Tool'),
+         group: 'Scene',
+         icon: <Package className="h-4 w-4" />,
+         keywords: ['furniture', 'object', 'asset', 'furnish'],
+@@ -125,7 +126,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.tool.stair',
+-        label: 'Stair Tool',
++        label: ts('Stair Tool'),
+         group: 'Scene',
+         icon: <ArrowRight className="h-4 w-4" />,
+         keywords: ['stairs', 'staircase', 'flight', 'landing', 'steps'],
+@@ -133,7 +134,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.tool.zone',
+-        label: 'Zone Tool',
++        label: ts('Zone Tool'),
+         group: 'Scene',
+         icon: <Hexagon className="h-4 w-4" />,
+         keywords: ['area', 'room', 'space'],
+@@ -141,7 +142,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.delete-selection',
+-        label: 'Delete Selection',
++        label: ts('Delete Selection'),
+         group: 'Scene',
+         icon: <Trash2 className="h-4 w-4" />,
+         keywords: ['remove', 'erase'],
+@@ -155,7 +156,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.mode.material-paint',
+-        label: 'Material Paint',
++        label: ts('Material Paint'),
+         group: 'Scene',
+         icon: <PaintBucket className="h-4 w-4" />,
+         keywords: ['paint', 'material', 'texture', 'bucket', 'surface'],
+@@ -172,7 +173,7 @@ export function EditorCommands() {
+       // ── Levels ───────────────────────────────────────────────────────────
+       {
+         id: 'editor.level.goto',
+-        label: 'Go to Level',
++        label: ts('Go to Level'),
+         group: 'Levels',
+         icon: <ArrowRight className="h-4 w-4" />,
+         keywords: ['level', 'floor', 'go', 'navigate', 'switch', 'select'],
+@@ -182,7 +183,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.level.add',
+-        label: 'Add Level',
++        label: ts('Add Level'),
+         group: 'Levels',
+         icon: <Plus className="h-4 w-4" />,
+         keywords: ['level', 'floor', 'add', 'create', 'new'],
+@@ -205,7 +206,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.level.rename',
+-        label: 'Rename Level',
++        label: ts('Rename Level'),
+         group: 'Levels',
+         icon: <PencilLine className="h-4 w-4" />,
+         keywords: ['level', 'floor', 'rename', 'name'],
+@@ -221,7 +222,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.level.delete',
+-        label: 'Delete Level',
++        label: ts('Delete Level'),
+         group: 'Levels',
+         icon: <Trash2 className="h-4 w-4" />,
+         keywords: ['level', 'floor', 'delete', 'remove'],
+@@ -242,7 +243,7 @@ export function EditorCommands() {
+       // ── Viewer Controls ──────────────────────────────────────────────────
+       {
+         id: 'editor.viewer.wall-mode',
+-        label: 'Wall Mode',
++        label: ts('Wall Mode'),
+         group: 'Viewer Controls',
+         icon: <Layers className="h-4 w-4" />,
+         keywords: ['wall', 'cutaway', 'up', 'down', 'translucent', 'view'],
+@@ -255,7 +256,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.viewer.level-mode',
+-        label: 'Level Mode',
++        label: ts('Level Mode'),
+         group: 'Viewer Controls',
+         icon: <SquareStack className="h-4 w-4" />,
+         keywords: ['level', 'floor', 'exploded', 'stacked', 'solo'],
+@@ -283,7 +284,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.viewer.shading-solid',
+-        label: 'Switch to Solid',
++        label: ts('Switch to Solid'),
+         group: 'Viewer Controls',
+         icon: <Box className="h-4 w-4" />,
+         keywords: ['solid', 'shading', 'render', 'mode', 'performance'],
+@@ -291,7 +292,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.viewer.shading-rendered',
+-        label: 'Switch to Rendered',
++        label: ts('Switch to Rendered'),
+         group: 'Viewer Controls',
+         icon: <Sparkles className="h-4 w-4" />,
+         keywords: ['rendered', 'shading', 'render', 'mode', 'quality'],
+@@ -299,7 +300,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.viewer.camera-snapshot',
+-        label: 'Take Snapshot',
++        label: ts('Take Snapshot'),
+         group: 'Viewer Controls',
+         icon: <Camera className="h-4 w-4" />,
+         keywords: ['camera', 'snapshot', 'capture', 'save', 'view', 'bookmark'],
+@@ -320,7 +321,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.view.fullscreen',
+-        label: 'Toggle Fullscreen',
++        label: ts('Toggle Fullscreen'),
+         group: 'View',
+         icon: <Maximize2 className="h-4 w-4" />,
+         keywords: ['fullscreen', 'maximize', 'expand', 'window'],
+@@ -334,7 +335,7 @@ export function EditorCommands() {
+       // ── History ──────────────────────────────────────────────────────────
+       {
+         id: 'editor.history.undo',
+-        label: 'Undo',
++        label: ts('Undo'),
+         group: 'History',
+         icon: <Undo2 className="h-4 w-4" />,
+         keywords: ['undo', 'revert', 'back'],
+@@ -342,7 +343,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.history.redo',
+-        label: 'Redo',
++        label: ts('Redo'),
+         group: 'History',
+         icon: <Redo2 className="h-4 w-4" />,
+         keywords: ['redo', 'forward', 'repeat'],
+@@ -352,7 +353,7 @@ export function EditorCommands() {
+       // ── Export & Share ───────────────────────────────────────────────────
+       {
+         id: 'editor.export.json',
+-        label: 'Export Scene (JSON)',
++        label: ts('Export Scene (JSON)'),
+         group: 'Export & Share',
+         icon: <FileJson className="h-4 w-4" />,
+         keywords: ['export', 'download', 'json', 'save', 'data'],
+@@ -374,7 +375,7 @@ export function EditorCommands() {
+         ? [
+             {
+               id: 'editor.export.glb',
+-              label: 'Export 3D Model (GLB)',
++              label: ts('Export 3D Model (GLB)'),
+               group: 'Export & Share',
+               icon: <Box className="h-4 w-4" />,
+               keywords: ['export', 'glb', 'gltf', '3d', 'model', 'download'],
+@@ -384,7 +385,7 @@ export function EditorCommands() {
+         : []),
+       {
+         id: 'editor.export.share-link',
+-        label: 'Copy Share Link',
++        label: ts('Copy Share Link'),
+         group: 'Export & Share',
+         icon: <Copy className="h-4 w-4" />,
+         keywords: ['share', 'copy', 'url', 'link'],
+@@ -392,7 +393,7 @@ export function EditorCommands() {
+       },
+       {
+         id: 'editor.export.screenshot',
+-        label: 'Take Screenshot',
++        label: ts('Take Screenshot'),
+         group: 'Export & Share',
+         icon: <Camera className="h-4 w-4" />,
+         keywords: ['screenshot', 'capture', 'image', 'photo', 'png'],
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/command-palette/index.tsx b/node_modules/@pascal-app/editor/src/components/ui/command-palette/index.tsx
+index 2979d80..4fa97c1 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/command-palette/index.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/command-palette/index.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import type { AnyNodeId, LevelNode } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useScene } from '@pascal-app/core'
+ import { useViewer } from '@pascal-app/viewer'
+ import { Command, useCommandState } from 'cmdk'
+@@ -293,7 +294,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
+   return (
+     <Dialog onOpenChange={setOpen} open={open}>
+       <DialogContent className="max-w-lg gap-0 overflow-hidden p-0" showCloseButton={false}>
+-        <DialogTitle className="sr-only">Command Palette</DialogTitle>
++        <DialogTitle className="sr-only">{ts("Command Palette")}</DialogTitle>
+ 
+         {modeView && <modeView.Component onBack={onBack} onClose={onClose} />}
+ 
+@@ -337,9 +338,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
+ 
+             <Command.List className="max-h-100 overflow-y-auto p-1.5">
+               {(!emptyAction || page) && (
+-                <Command.Empty className="py-8 text-center text-muted-foreground text-sm">
+-                  No commands found.
+-                </Command.Empty>
++                <Command.Empty className="py-8 text-center text-muted-foreground text-sm">{ts("No commands found.")}</Command.Empty>
+               )}
+               {emptyAction && !page && <EmptyActionItem action={emptyAction} />}
+ 
+@@ -442,8 +441,7 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
+                     </span>
+                     <span className="flex-1 truncate">
+                       {inputValue.trim() ? (
+-                        <>
+-                          Rename to <span className="font-medium">"{inputValue.trim()}"</span>
++                        <>{ts("Rename to")}<span className="font-medium">"{inputValue.trim()}"</span>
+                         </>
+                       ) : (
+                         <span className="text-muted-foreground">Type a new name above…</span>
+@@ -457,19 +455,15 @@ export function CommandPalette({ emptyAction }: { emptyAction?: CommandPaletteEm
+             {/* Footer hint */}
+             <div className="flex items-center justify-between border-border/50 border-t px-3 py-2">
+               <span className="text-[11px] text-muted-foreground">
+-                <Shortcut keys={['↑', '↓']} /> navigate
+-              </span>
++                <Shortcut keys={['↑', '↓']} />{ts("navigate")}</span>
+               <span className="text-[11px] text-muted-foreground">
+-                <Shortcut keys={['↵']} /> select
+-              </span>
++                <Shortcut keys={['↵']} />{ts("select")}</span>
+               {page ? (
+                 <span className="text-[11px] text-muted-foreground">
+-                  <Shortcut keys={['⌫']} /> back
+-                </span>
++                  <Shortcut keys={['⌫']} />{ts("back")}</span>
+               ) : (
+                 <span className="text-[11px] text-muted-foreground">
+-                  <Shortcut keys={['Esc']} /> close
+-                </span>
++                  <Shortcut keys={['Esc']} />{ts("close")}</span>
+               )}
+             </div>
+           </Command>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/controls/material-paint-panel.tsx b/node_modules/@pascal-app/editor/src/components/ui/controls/material-paint-panel.tsx
+index 4abae9b..a642cdb 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/controls/material-paint-panel.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/controls/material-paint-panel.tsx
+@@ -7,6 +7,7 @@ import {
+   toSceneMaterialRef,
+   useScene,
+ } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import { Eraser, Plus, RotateCcw } from 'lucide-react'
+ import { useEffect, useState } from 'react'
+@@ -91,9 +92,7 @@ export function MaterialPaintPanel() {
+           size="sm"
+           variant={paintEraser ? 'default' : 'outline'}
+         >
+-          <Eraser />
+-          Erase
+-        </Button>
++          <Eraser />{ts("Erase")}</Button>
+         <Button
+           className="flex-1"
+           disabled={!canResetSelection}
+@@ -101,9 +100,7 @@ export function MaterialPaintPanel() {
+           size="sm"
+           variant="outline"
+         >
+-          <RotateCcw />
+-          Reset all
+-        </Button>
++          <RotateCcw />{ts("Reset all")}</Button>
+       </div>
+ 
+       {/* Scrolls: category tabs (fixed inside) + catalog grid (the scroll). */}
+@@ -119,13 +116,11 @@ export function MaterialPaintPanel() {
+       {/* Fixed footer: scene materials, always visible, with a `+` to add one. */}
+       <div className="mt-2 shrink-0 space-y-1.5 border-border/60 border-t pt-2">
+         <div className="flex items-center justify-between">
+-          <span className="font-medium text-muted-foreground text-xs uppercase tracking-[0.12em]">
+-            Scene materials
+-          </span>
++          <span className="font-medium text-muted-foreground text-xs uppercase tracking-[0.12em]">{ts("Scene materials")}</span>
+           <Tooltip>
+             <TooltipTrigger asChild>
+               <Button
+-                aria-label="Add material"
++                aria-label={ts("Add material")}
+                 onClick={createCustomMaterial}
+                 size="icon-sm"
+                 type="button"
+@@ -134,7 +129,7 @@ export function MaterialPaintPanel() {
+                 <Plus />
+               </Button>
+             </TooltipTrigger>
+-            <TooltipContent>Add material</TooltipContent>
++            <TooltipContent>{ts("Add material")}</TooltipContent>
+           </Tooltip>
+         </div>
+         <div className="subtle-scrollbar max-h-56 overflow-y-auto">
+@@ -142,7 +137,7 @@ export function MaterialPaintPanel() {
+             <SceneMaterialList autoEditId={autoEditMaterialId} />
+           ) : (
+             <p className="px-0.5 py-1 text-muted-foreground text-xs">
+-              No custom materials yet — add one with +.
++              {ts("No custom materials yet — add one with +.")}
+             </p>
+           )}
+         </div>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/controls/material-picker.tsx b/node_modules/@pascal-app/editor/src/components/ui/controls/material-picker.tsx
+index e0284a1..9f709ff 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/controls/material-picker.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/controls/material-picker.tsx
+@@ -9,6 +9,7 @@ import {
+   toLibraryMaterialRef,
+ } from '@pascal-app/core'
+ import { useEffect, useState } from 'react'
++import { ts } from '@/i18n'
+ import { triggerSFX } from '../../../lib/sfx-bus'
+ 
+ type MaterialPickerProps = {
+@@ -20,7 +21,39 @@ type MaterialPickerProps = {
+ }
+ 
+ function getCategoryLabel(category: (typeof MATERIAL_CATEGORIES)[number]) {
+-  return category.charAt(0).toUpperCase() + category.slice(1)
++  return ts(category.charAt(0).toUpperCase() + category.slice(1))
++}
++
++function materialFallbackColor(id: string, previewColor?: string | null) {
++  if (previewColor) return previewColor
++  let h = 0
++  for (const ch of id) h = (h * 31 + ch.charCodeAt(0)) % 360
++  return `hsl(${h}, 55%, 65%)`
++}
++
++function MaterialSwatch({
++  id,
++  label,
++  previewThumbnailUrl,
++  previewColor,
++}: {
++  id: string
++  label: string
++  previewThumbnailUrl?: string | null
++  previewColor?: string | null
++}) {
++  const [failed, setFailed] = useState(false)
++  if (previewThumbnailUrl && !failed) {
++    return (
++      <img
++        alt={label}
++        className="h-full w-full object-cover"
++        src={previewThumbnailUrl}
++        onError={() => setFailed(true)}
++      />
++    )
++  }
++  return <div className="h-full w-full" style={{ backgroundColor: materialFallbackColor(id, previewColor) }} />
+ }
+ 
+ /**
+@@ -102,18 +135,12 @@ export function MaterialPicker({
+               type="button"
+             >
+               <div className="relative aspect-square w-full overflow-hidden rounded-lg">
+-                {item.previewThumbnailUrl ? (
+-                  <img
+-                    alt={item.label}
+-                    className="h-full w-full object-cover"
+-                    src={item.previewThumbnailUrl}
+-                  />
+-                ) : (
+-                  <div
+-                    className="h-full w-full"
+-                    style={{ backgroundColor: item.previewColor ?? '#f3f4f6' }}
+-                  />
+-                )}
++                <MaterialSwatch
++                  id={item.id}
++                  label={item.label}
++                  previewThumbnailUrl={item.previewThumbnailUrl}
++                  previewColor={item.previewColor}
++                />
+               </div>
+               <span className="truncate px-0.5 text-left font-medium text-[11px] text-muted-foreground group-hover:text-foreground">
+                 {item.label}
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/controls/material-properties-editor.tsx b/node_modules/@pascal-app/editor/src/components/ui/controls/material-properties-editor.tsx
+index 5334000..4ce47bb 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/controls/material-properties-editor.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/controls/material-properties-editor.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import type { MaterialProperties, MaterialSchema } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { Input } from '../primitives/input'
+ import { SliderControl } from './slider-control'
+ 
+@@ -40,9 +41,7 @@ export function MaterialPropertiesEditor({
+   return (
+     <div className="space-y-3">
+       <div className="space-y-2">
+-        <label className="block font-medium text-muted-foreground text-xs uppercase tracking-[0.12em]">
+-          Color
+-        </label>
++        <label className="block font-medium text-muted-foreground text-xs uppercase tracking-[0.12em]">{ts("Color")}</label>
+         <div className="flex items-center gap-2">
+           <input
+             className="h-9 w-9 shrink-0 cursor-pointer rounded-md border border-input bg-transparent p-0 [&::-moz-color-swatch]:rounded-[5px] [&::-moz-color-swatch]:border-none [&::-webkit-color-swatch-wrapper]:p-0 [&::-webkit-color-swatch]:rounded-[5px] [&::-webkit-color-swatch]:border-none"
+@@ -58,7 +57,7 @@ export function MaterialPropertiesEditor({
+       </div>
+ 
+       <SliderControl
+-        label="Roughness"
++        label={ts("Roughness")}
+         max={1}
+         min={0}
+         onChange={(value) => updateMaterial({ roughness: value })}
+@@ -68,7 +67,7 @@ export function MaterialPropertiesEditor({
+       />
+ 
+       <SliderControl
+-        label="Metalness"
++        label={ts("Metalness")}
+         max={1}
+         min={0}
+         onChange={(value) => updateMaterial({ metalness: value })}
+@@ -78,7 +77,7 @@ export function MaterialPropertiesEditor({
+       />
+ 
+       <SliderControl
+-        label="Opacity"
++        label={ts("Opacity")}
+         max={1}
+         min={0}
+         onChange={(value) => updateMaterial({ opacity: value }, value < 1 || currentProps.transparent)}
+@@ -88,9 +87,7 @@ export function MaterialPropertiesEditor({
+       />
+ 
+       <div className="space-y-2">
+-        <label className="block font-medium text-muted-foreground text-xs uppercase tracking-[0.12em]">
+-          Side
+-        </label>
++        <label className="block font-medium text-muted-foreground text-xs uppercase tracking-[0.12em]">{ts("Side")}</label>
+         <select
+           className="h-9 w-full rounded-md border border-input bg-transparent px-3 text-sm shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 dark:bg-input/30"
+           onChange={(e) =>
+@@ -98,9 +95,9 @@ export function MaterialPropertiesEditor({
+           }
+           value={currentProps.side}
+         >
+-          <option value="front">Front</option>
+-          <option value="back">Back</option>
+-          <option value="double">Double</option>
++          <option value="front">{ts("Front")}</option>
++          <option value="back">{ts("Back")}</option>
++          <option value="double">{ts("Double")}</option>
+         </select>
+       </div>
+     </div>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/controls/scene-material-list.tsx b/node_modules/@pascal-app/editor/src/components/ui/controls/scene-material-list.tsx
+index a95ccb4..1558f72 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/controls/scene-material-list.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/controls/scene-material-list.tsx
+@@ -8,6 +8,7 @@ import {
+   toSceneMaterialRef,
+   useScene,
+ } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { Copy, Paintbrush, Pencil, Trash2 } from 'lucide-react'
+ import { useEffect, useMemo, useState } from 'react'
+ import useEditor from '../../../store/use-editor'
+@@ -166,13 +167,13 @@ function SceneMaterialRow({
+ 
+       <div className="mt-2 flex items-center justify-between gap-2">
+         <span className="text-muted-foreground text-xs">
+-          Used by {usageCount} {usageCount === 1 ? 'part' : 'parts'}
++          Used by {usageCount} {usageCount === 1 ? ts('part') : ts('parts')}
+         </span>
+         <div className="flex items-center gap-1">
+           <Tooltip>
+             <TooltipTrigger asChild>
+               <Button
+-                aria-label="Paint with"
++                aria-label={ts("Paint with")}
+                 onClick={() =>
+                   setActivePaintMaterial({
+                     materialPreset: toSceneMaterialRef(id),
+@@ -186,12 +187,12 @@ function SceneMaterialRow({
+                 <Paintbrush />
+               </Button>
+             </TooltipTrigger>
+-            <TooltipContent>Paint with</TooltipContent>
++            <TooltipContent>{ts("Paint with")}</TooltipContent>
+           </Tooltip>
+           <Tooltip>
+             <TooltipTrigger asChild>
+               <Button
+-                aria-label="Edit"
++                aria-label={ts("Edit")}
+                 aria-pressed={isEditingMaterial}
+                 onClick={() => setIsEditingMaterial((value) => !value)}
+                 size="icon-sm"
+@@ -201,12 +202,12 @@ function SceneMaterialRow({
+                 <Pencil />
+               </Button>
+             </TooltipTrigger>
+-            <TooltipContent>Edit</TooltipContent>
++            <TooltipContent>{ts("Edit")}</TooltipContent>
+           </Tooltip>
+           <Tooltip>
+             <TooltipTrigger asChild>
+               <Button
+-                aria-label="Duplicate"
++                aria-label={ts("Duplicate")}
+                 onClick={duplicateMaterial}
+                 size="icon-sm"
+                 type="button"
+@@ -215,12 +216,12 @@ function SceneMaterialRow({
+                 <Copy />
+               </Button>
+             </TooltipTrigger>
+-            <TooltipContent>Duplicate</TooltipContent>
++            <TooltipContent>{ts("Duplicate")}</TooltipContent>
+           </Tooltip>
+           <Tooltip>
+             <TooltipTrigger asChild>
+               <Button
+-                aria-label="Delete"
++                aria-label={ts("Delete")}
+                 onClick={() => removeSceneMaterial(id)}
+                 size="icon-sm"
+                 type="button"
+@@ -229,7 +230,7 @@ function SceneMaterialRow({
+                 <Trash2 />
+               </Button>
+             </TooltipTrigger>
+-            <TooltipContent>Delete</TooltipContent>
++            <TooltipContent>{ts("Delete")}</TooltipContent>
+           </Tooltip>
+         </div>
+       </div>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/floating-level-selector.tsx b/node_modules/@pascal-app/editor/src/components/ui/floating-level-selector.tsx
+index ef922df..5664cc1 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/floating-level-selector.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/floating-level-selector.tsx
+@@ -10,6 +10,7 @@ import {
+   useSensor,
+   useSensors,
+ } from '@dnd-kit/core'
++import { ts } from '@/i18n'
+ import {
+   arrayMove,
+   SortableContext,
+@@ -176,7 +177,7 @@ function LevelRow({
+               dragHandleProps?.onClick?.(e)
+             }}
+             ref={dragHandleRef}
+-            title="Drag to reorder"
++            title={ts("Drag to reorder")}
+             type="button"
+           >
+             <GripVertical className="h-3.5 w-3.5" />
+@@ -215,9 +216,7 @@ function LevelRow({
+                 }}
+                 type="button"
+               >
+-                <Copy className="h-3 w-3" />
+-                Duplicate level
+-              </button>
++                <Copy className="h-3 w-3" />{ts("Duplicate level")}</button>
+               <button
+                 className="flex w-full items-center gap-2 rounded-md px-2.5 py-1.5 text-left text-muted-foreground text-xs transition-colors hover:bg-white/10 hover:text-foreground"
+                 onClick={(e) => {
+@@ -226,9 +225,7 @@ function LevelRow({
+                 }}
+                 type="button"
+               >
+-                <Copy className="h-3 w-3" />
+-                Duplicate with options...
+-              </button>
++                <Copy className="h-3 w-3" />{ts("Duplicate with options...")}</button>
+               {onPaste && (
+                 <button
+                   className="flex w-full items-center gap-2 rounded-md px-2.5 py-1.5 text-left text-muted-foreground text-xs transition-colors hover:bg-white/10 hover:text-foreground"
+@@ -238,9 +235,7 @@ function LevelRow({
+                   }}
+                   type="button"
+                 >
+-                  <ClipboardPaste className="h-3 w-3" />
+-                  Paste copied selection
+-                </button>
++                  <ClipboardPaste className="h-3 w-3" />{ts("Paste copied selection")}</button>
+               )}
+               <button
+                 className="flex w-full items-center gap-2 rounded-md px-2.5 py-1.5 text-left text-muted-foreground text-xs transition-colors hover:bg-white/10 hover:text-red-400"
+@@ -250,9 +245,7 @@ function LevelRow({
+                 }}
+                 type="button"
+               >
+-                <Trash2 className="h-3 w-3" />
+-                Delete level
+-              </button>
++                <Trash2 className="h-3 w-3" />{ts("Delete level")}</button>
+             </PopoverContent>
+           </Popover>
+         </div>
+@@ -517,7 +510,7 @@ export function FloatingLevelSelector() {
+             <button
+               className={cn(addButtonClass, 'top-0 -translate-y-1/2')}
+               onClick={handleAddAbove}
+-              title="Add level above"
++              title={ts("Add level above")}
+               type="button"
+             >
+               <Plus className="h-2.5 w-2.5" />
+@@ -529,7 +522,7 @@ export function FloatingLevelSelector() {
+             <button
+               className={cn(addButtonClass, 'bottom-0 translate-y-1/2')}
+               onClick={handleAddBelow}
+-              title="Add level below"
++              title={ts("Add level below")}
+               type="button"
+             >
+               <Plus className="h-2.5 w-2.5" />
+@@ -574,7 +567,7 @@ export function FloatingLevelSelector() {
+                         <button
+                           className={cn(addButtonClass, 'bottom-0 translate-y-1/2')}
+                           onClick={() => handleInsertBetween(sortedIndex - 1)}
+-                          title="Insert level here"
++                          title={ts("Insert level here")}
+                           type="button"
+                         >
+                           <Plus className="h-2.5 w-2.5" />
+@@ -593,7 +586,7 @@ export function FloatingLevelSelector() {
+       <Dialog onOpenChange={(open) => !open && setDeletingLevel(null)} open={!!deletingLevel}>
+         <DialogContent showCloseButton={false}>
+           <DialogHeader>
+-            <DialogTitle>Delete level</DialogTitle>
++            <DialogTitle>{ts("Delete level")}</DialogTitle>
+             <DialogDescription>
+               Are you sure you want to delete{' '}
+               <strong>{deletingLevel ? getLevelDisplayName(deletingLevel) : ''}</strong>? All
+@@ -605,16 +598,12 @@ export function FloatingLevelSelector() {
+               className="rounded-full border border-border px-4 py-2 text-sm transition-colors hover:bg-accent"
+               onClick={() => setDeletingLevel(null)}
+               type="button"
+-            >
+-              Cancel
+-            </button>
++            >{ts("Cancel")}</button>
+             <button
+               className="rounded-full bg-red-600 px-4 py-2 text-sm text-white transition-colors hover:bg-red-700"
+               onClick={handleConfirmDelete}
+               type="button"
+-            >
+-              Delete
+-            </button>
++            >{ts("Delete")}</button>
+           </DialogFooter>
+         </DialogContent>
+       </Dialog>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/helpers/building-helper.tsx b/node_modules/@pascal-app/editor/src/components/ui/helpers/building-helper.tsx
+index 3f4a24d..ac09f88 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/helpers/building-helper.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/helpers/building-helper.tsx
+@@ -1,4 +1,5 @@
+ import { ContextualHelperPanel } from './contextual-helper-panel'
++import { ts } from '@/i18n'
+ 
+ interface BuildingHelperProps {
+   showRotate?: boolean
+@@ -10,9 +11,9 @@ export function BuildingHelper({ showRotate }: BuildingHelperProps) {
+   return (
+     <ContextualHelperPanel
+       hints={[
+-        { keys: ['Left click'], label: 'Place building' },
+-        ...(showRotate ? [{ keys: ['R', 'T'], label: 'Rotate' }] : []),
+-        { keys: ['Esc'], label: 'Cancel' },
++        { keys: ['Left click'], label: ts('Place building') },
++        ...(showRotate ? [{ keys: ['R', 'T'], label: ts('Rotate') }] : []),
++        { keys: ['Esc'], label: ts('Cancel') },
+       ]}
+     />
+   )
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/helpers/contextual-helper-panel.tsx b/node_modules/@pascal-app/editor/src/components/ui/helpers/contextual-helper-panel.tsx
+index 2167a30..15ece42 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/helpers/contextual-helper-panel.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/helpers/contextual-helper-panel.tsx
+@@ -1,4 +1,5 @@
+ import { Icon } from '@iconify/react'
++import { ts } from '@/i18n'
+ import type { ToolHint } from '@pascal-app/core'
+ import { Fragment, useSyncExternalStore } from 'react'
+ import {
+@@ -290,7 +291,7 @@ function FenceContinuationChips() {
+       {isCurved && curveStarted ? (
+         <ChipRow
+           icon="lucide:circle-check"
+-          label="Finish curve (or double-click)"
++          label={ts("Finish curve (or double-click)")}
+           shortcut="Enter"
+         />
+       ) : null}
+@@ -320,13 +321,13 @@ function PaintScopeChip() {
+   // Nothing to paint with yet (no material picked, not erasing) → the first step
+   // is choosing a material, so say that before anything about scope or hovering.
+   if (!(paintEraser || hasActivePaintMaterial(activePaintMaterial))) {
+-    return <ChipRow icon="lucide:palette" label="Select a material to paint" />
++    return <ChipRow icon="lucide:palette" label={ts("Select a material to paint")} />
+   }
+ 
+   // Not over anything paintable → guide the user to hover, still teaching Shift.
+   if (!paintHover) {
+     return (
+-      <ChipRow icon="lucide:mouse-pointer-click" label="Hover a surface to paint" shortcut="Shift" />
++      <ChipRow icon="lucide:mouse-pointer-click" label={ts("Hover a surface to paint")} shortcut="Shift" />
+     )
+   }
+ 
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/helpers/helper-manager.tsx b/node_modules/@pascal-app/editor/src/components/ui/helpers/helper-manager.tsx
+index 4ea8f6f..1c393ad 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/helpers/helper-manager.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/helpers/helper-manager.tsx
+@@ -6,6 +6,7 @@ import {
+   nodeRegistry,
+   useScene,
+ } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import { useEffect, useMemo, useState } from 'react'
+ import { useShallow } from 'zustand/react/shallow'
+@@ -49,7 +50,7 @@ function reshapingHints(reshape: ReshapeKind): ContextualShortcutHint[] {
+         : 'Move corner'
+   return [
+     { keys: ['Drag'], label: action },
+-    { keys: ['Esc'], label: 'Cancel' },
++    { keys: ['Esc'], label: ts('Cancel') },
+   ]
+ }
+ 
+@@ -169,7 +170,7 @@ export function HelperManager() {
+   if (activeHandleDrag?.label === GROUP_MOVE_DRAG_LABEL) {
+     return (
+       <ContextualHelperPanel
+-        hints={[{ keys: ['R / T'], label: 'Rotate the selection ±45°' }]}
++        hints={[{ keys: ['R / T'], label: ts('Rotate the selection ±45°') }]}
+         snapContext={snapContext}
+       />
+     )
+@@ -219,9 +220,9 @@ export function HelperManager() {
+     return (
+       <ContextualHelperPanel
+         hints={[
+-          { keys: ['Hover'], label: 'Inspect surface dimensions' },
+-          { keys: ['Click'], label: 'Pin measurement lens' },
+-          { keys: ['Esc'], label: 'Exit smart measure' },
++          { keys: ['Hover'], label: ts('Inspect surface dimensions') },
++          { keys: ['Click'], label: ts('Pin measurement lens') },
++          { keys: ['Esc'], label: ts('Exit smart measure') },
+         ]}
+       />
+     )
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/helpers/item-helper.tsx b/node_modules/@pascal-app/editor/src/components/ui/helpers/item-helper.tsx
+index e20947b..5d87083 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/helpers/item-helper.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/helpers/item-helper.tsx
+@@ -1,4 +1,5 @@
+ import type { ContinuationContext } from '../../../lib/continuation'
++import { ts } from '@/i18n'
+ import type { SnapContext } from '../../../lib/snapping-mode'
+ import { ContextualHelperPanel } from './contextual-helper-panel'
+ 
+@@ -25,10 +26,10 @@ export function ItemHelper({
+     <ContextualHelperPanel
+       continuationContext={continuationContext}
+       hints={[
+-        { keys: ['Left click'], label: 'Place' },
+-        { keys: ['R', 'T'], label: 'Rotate' },
+-        ...(showForce ? [{ keys: ['Alt'], label: 'Force place' }] : []),
+-        { keys: [showEsc ? 'Esc' : 'Right click'], label: 'Cancel' },
++        { keys: ['Left click'], label: ts('Place') },
++        { keys: ['R', 'T'], label: ts('Rotate') },
++        ...(showForce ? [{ keys: ['Alt'], label: ts('Force place') }] : []),
++        { keys: [showEsc ? 'Esc' : 'Right click'], label: ts('Cancel') },
+       ]}
+       snapContext={snapContext}
+     />
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/helpers/roof-helper.tsx b/node_modules/@pascal-app/editor/src/components/ui/helpers/roof-helper.tsx
+index 3056f5f..b35e234 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/helpers/roof-helper.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/helpers/roof-helper.tsx
+@@ -1,12 +1,13 @@
+ import type { SnapContext } from '../../../lib/snapping-mode'
++import { ts } from '@/i18n'
+ import { ContextualHelperPanel } from './contextual-helper-panel'
+ 
+ export function RoofHelper({ snapContext }: { snapContext?: SnapContext | null }) {
+   return (
+     <ContextualHelperPanel
+       hints={[
+-        { keys: ['Left click'], label: 'Set corner' },
+-        { keys: ['Esc'], label: 'Cancel' },
++        { keys: ['Left click'], label: ts('Set corner') },
++        { keys: ['Esc'], label: ts('Cancel') },
+       ]}
+       snapContext={snapContext}
+     />
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/item-catalog/catalog-items.tsx b/node_modules/@pascal-app/editor/src/components/ui/item-catalog/catalog-items.tsx
+index 5328e6f..9244063 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/item-catalog/catalog-items.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/item-catalog/catalog-items.tsx
+@@ -1,4 +1,5 @@
+ import type { AssetInput } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ 
+ /**
+  * A catalog tile: the asset plus optional editor placement metadata.
+@@ -672,7 +673,7 @@ export const CATALOG_ITEMS: CatalogItem[] = [
+         { kind: 'toggle' },
+         {
+           kind: 'slider',
+-          label: 'Intensity',
++          label: ts('Intensity'),
+           min: 0,
+           max: 100,
+           unit: '%',
+@@ -764,7 +765,7 @@ export const CATALOG_ITEMS: CatalogItem[] = [
+         { kind: 'toggle' },
+         {
+           kind: 'slider',
+-          label: 'Intensity',
++          label: ts('Intensity'),
+           min: 0,
+           max: 100,
+           unit: '%',
+@@ -1044,7 +1045,7 @@ export const CATALOG_ITEMS: CatalogItem[] = [
+         { kind: 'toggle' },
+         {
+           kind: 'slider',
+-          label: 'Intensity',
++          label: ts('Intensity'),
+           min: 0,
+           max: 100,
+           unit: '%',
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/level-duplicate-dialog.tsx b/node_modules/@pascal-app/editor/src/components/ui/level-duplicate-dialog.tsx
+index 413f60b..11c4922 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/level-duplicate-dialog.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/level-duplicate-dialog.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import type { LevelNode } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useEffect, useState } from 'react'
+ import type { LevelDuplicatePreset } from '../../lib/level-duplication'
+ import { getLevelDisplayName } from '@pascal-app/core'
+@@ -21,22 +22,22 @@ const DUPLICATE_PRESETS: Array<{
+ }> = [
+   {
+     id: 'everything',
+-    label: 'Everything',
++    label: ts('Everything'),
+     description: 'Structure, materials, furniture, and references.',
+   },
+   {
+     id: 'structure',
+-    label: 'Structure only',
++    label: ts('Structure only'),
+     description: 'Walls, slabs, roofs, stairs, windows, and doors without finishes.',
+   },
+   {
+     id: 'structure-materials',
+-    label: 'Structure + materials',
++    label: ts('Structure + materials'),
+     description: 'Structure with the current material and finish assignments.',
+   },
+   {
+     id: 'structure-furniture',
+-    label: 'Structure + furniture',
++    label: ts('Structure + furniture'),
+     description: 'Structure, finishes, and placed items, without guide references.',
+   },
+ ]
+@@ -69,7 +70,7 @@ export function LevelDuplicateDialog({
+     <Dialog onOpenChange={onOpenChange} open={open}>
+       <DialogContent className="sm:max-w-md" showCloseButton={false}>
+         <DialogHeader>
+-          <DialogTitle>Duplicate Level</DialogTitle>
++          <DialogTitle>{ts("Duplicate Level")}</DialogTitle>
+           <DialogDescription>Choose what to copy from {getLevelLabel(level)}.</DialogDescription>
+         </DialogHeader>
+ 
+@@ -97,16 +98,12 @@ export function LevelDuplicateDialog({
+             className="cursor-pointer rounded-md px-4 py-2 text-muted-foreground text-sm transition-colors hover:bg-accent"
+             onClick={() => onOpenChange(false)}
+             type="button"
+-          >
+-            Cancel
+-          </button>
++          >{ts("Cancel")}</button>
+           <button
+             className="cursor-pointer rounded-md bg-primary px-4 py-2 text-primary-foreground text-sm transition-opacity hover:opacity-90"
+             onClick={() => onConfirm(preset)}
+             type="button"
+-          >
+-            Duplicate
+-          </button>
++          >{ts("Duplicate")}</button>
+         </DialogFooter>
+       </DialogContent>
+     </Dialog>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/panels/collections/collections-popover.tsx b/node_modules/@pascal-app/editor/src/components/ui/panels/collections/collections-popover.tsx
+index 04b66de..cf97b7b 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/panels/collections/collections-popover.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/panels/collections/collections-popover.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import type { AnyNodeId, Collection, CollectionId } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useScene } from '@pascal-app/core'
+ import {
+   Check,
+@@ -100,9 +101,7 @@ export function CollectionsPopover({ nodeId, collectionIds, children }: Collecti
+         <div className="flex items-center justify-between border-border/50 border-b px-3 py-2.5">
+           <div className="flex items-center gap-1.5">
+             <Layers className="h-3.5 w-3.5 text-muted-foreground" />
+-            <span className="font-semibold text-foreground text-xs tracking-tight">
+-              Collections
+-            </span>
++            <span className="font-semibold text-foreground text-xs tracking-tight">{ts("Collections")}</span>
+           </div>
+           <button
+             className="flex items-center gap-1 rounded-md px-2 py-1 font-medium text-[11px] text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground"
+@@ -112,9 +111,7 @@ export function CollectionsPopover({ nodeId, collectionIds, children }: Collecti
+             }}
+             type="button"
+           >
+-            <Plus className="h-3 w-3" />
+-            New
+-          </button>
++            <Plus className="h-3 w-3" />{ts("New")}</button>
+         </div>
+ 
+         {/* Create input */}
+@@ -131,7 +128,7 @@ export function CollectionsPopover({ nodeId, collectionIds, children }: Collecti
+                   setCreateName('')
+                 }
+               }}
+-              placeholder="Collection name…"
++              placeholder={ts("Collection name…")}
+               value={createName}
+             />
+             <button
+@@ -160,9 +157,7 @@ export function CollectionsPopover({ nodeId, collectionIds, children }: Collecti
+           {allCollections.length === 0 ? (
+             <div className="flex flex-col items-center justify-center gap-2 px-4 py-8 text-center">
+               <Layers className="h-6 w-6 text-muted-foreground/40" />
+-              <p className="text-muted-foreground text-xs">
+-                No collections yet. Create one to group items together.
+-              </p>
++              <p className="text-muted-foreground text-xs">{ts("No collections yet. Create one to group items together.")}</p>
+             </div>
+           ) : (
+             <ul className="divide-y divide-border/30">
+@@ -189,16 +184,12 @@ export function CollectionsPopover({ nodeId, collectionIds, children }: Collecti
+                             setDeletingId(null)
+                           }}
+                           type="button"
+-                        >
+-                          Delete
+-                        </button>
++                        >{ts("Delete")}</button>
+                         <button
+                           className="rounded-md px-2 py-0.5 font-medium text-[11px] text-muted-foreground transition-colors hover:bg-white/10"
+                           onClick={() => setDeletingId(null)}
+                           type="button"
+-                        >
+-                          Cancel
+-                        </button>
++                        >{ts("Cancel")}</button>
+                       </div>
+                     </li>
+                   )
+@@ -307,16 +298,12 @@ export function CollectionsPopover({ nodeId, collectionIds, children }: Collecti
+                               setRenameColor(collection.color ?? '')
+                             }}
+                           >
+-                            <Pencil className="h-3.5 w-3.5" />
+-                            Rename
+-                          </DropdownMenuItem>
++                            <Pencil className="h-3.5 w-3.5" />{ts("Rename")}</DropdownMenuItem>
+                           <DropdownMenuItem
+                             onClick={() => setDeletingId(collection.id)}
+                             variant="destructive"
+                           >
+-                            <Trash2 className="h-3.5 w-3.5" />
+-                            Delete
+-                          </DropdownMenuItem>
++                            <Trash2 className="h-3.5 w-3.5" />{ts("Delete")}</DropdownMenuItem>
+                         </DropdownMenuContent>
+                       </DropdownMenu>
+                     </div>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/panels/mobile-panel-sheet.tsx b/node_modules/@pascal-app/editor/src/components/ui/panels/mobile-panel-sheet.tsx
+index 8239ea4..69a5dce 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/panels/mobile-panel-sheet.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/panels/mobile-panel-sheet.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { X } from 'lucide-react'
++import { ts } from '@/i18n'
+ import { AnimatePresence, motion } from 'motion/react'
+ import Image from 'next/image'
+ import { type ReactNode, useEffect, useState } from 'react'
+@@ -88,7 +89,7 @@ export function MobilePanelSheet({ open, onClose, icon, title, children }: Mobil
+               </h2>
+             </div>
+             <button
+-              aria-label="Close"
++              aria-label={ts("Close")}
+               className="flex h-8 w-8 items-center justify-center rounded-md bg-[#2C2C2E] text-muted-foreground transition-colors hover:bg-[#3e3e3e] hover:text-foreground"
+               onClick={onClose}
+               type="button"
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/panels/mobile-selection-bar.tsx b/node_modules/@pascal-app/editor/src/components/ui/panels/mobile-selection-bar.tsx
+index a9d49ff..62d8eac 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/panels/mobile-selection-bar.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/panels/mobile-selection-bar.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import type { AnyNode } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { Copy, Move, SlidersHorizontal, Trash2 } from 'lucide-react'
+ import Image from 'next/image'
+ import type { MouseEventHandler } from 'react'
+@@ -51,7 +52,7 @@ export function MobileSelectionBar({
+ 
+       <div className="flex items-center gap-0.5 border-border/40 border-l pl-1">
+         <button
+-          aria-label="Move"
++          aria-label={ts("Move")}
+           className={ACTION_BTN}
+           onClick={(e) => {
+             stop(e)
+@@ -62,7 +63,7 @@ export function MobileSelectionBar({
+           <Move className="h-4 w-4" />
+         </button>
+         <button
+-          aria-label="Duplicate"
++          aria-label={ts("Duplicate")}
+           className={ACTION_BTN}
+           onClick={(e) => {
+             stop(e)
+@@ -73,7 +74,7 @@ export function MobileSelectionBar({
+           <Copy className="h-4 w-4" />
+         </button>
+         <button
+-          aria-label="Delete"
++          aria-label={ts("Delete")}
+           className={cn(ACTION_BTN, 'hover:bg-red-500/15 hover:text-red-400')}
+           onClick={(e) => {
+             stop(e)
+@@ -84,7 +85,7 @@ export function MobileSelectionBar({
+           <Trash2 className="h-4 w-4" />
+         </button>
+         <button
+-          aria-label="Edit properties"
++          aria-label={ts("Edit properties")}
+           className={ACTION_BTN}
+           onClick={(e) => {
+             stop(e)
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/panels/node-display.ts b/node_modules/@pascal-app/editor/src/components/ui/panels/node-display.ts
+index 65a57e6..2aa143b 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/panels/node-display.ts
++++ b/node_modules/@pascal-app/editor/src/components/ui/panels/node-display.ts
+@@ -1,4 +1,5 @@
+ import type { AnyNode } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ 
+ export type NodeDisplay = {
+   icon: string
+@@ -6,25 +7,25 @@ export type NodeDisplay = {
+ }
+ 
+ const TYPE_DEFAULTS: Record<string, NodeDisplay> = {
+-  item: { icon: '/icons/item.webp', label: 'Item' },
+-  wall: { icon: '/icons/wall.webp', label: 'Wall' },
+-  door: { icon: '/icons/door.webp', label: 'Door' },
+-  window: { icon: '/icons/window.webp', label: 'Window' },
+-  slab: { icon: '/icons/floor.webp', label: 'Slab' },
+-  ceiling: { icon: '/icons/ceiling.webp', label: 'Ceiling' },
+-  column: { icon: '/icons/column.webp', label: 'Column' },
+-  elevator: { icon: '/icons/elevator.webp', label: 'Elevator' },
+-  fence: { icon: '/icons/fence.webp', label: 'Fence' },
+-  roof: { icon: '/icons/roof.webp', label: 'Roof' },
+-  'roof-segment': { icon: '/icons/roof.webp', label: 'Roof segment' },
+-  stair: { icon: '/icons/stairs.webp', label: 'Stair' },
+-  'stair-segment': { icon: '/icons/stairs.webp', label: 'Stair segment' },
++  item: { icon: '/icons/item.webp', label: ts('Item') },
++  wall: { icon: '/icons/wall.webp', label: ts('Wall') },
++  door: { icon: '/icons/door.webp', label: ts('Door') },
++  window: { icon: '/icons/window.webp', label: ts('Window') },
++  slab: { icon: '/icons/floor.webp', label: ts('Slab') },
++  ceiling: { icon: '/icons/ceiling.webp', label: ts('Ceiling') },
++  column: { icon: '/icons/column.webp', label: ts('Column') },
++  elevator: { icon: '/icons/elevator.webp', label: ts('Elevator') },
++  fence: { icon: '/icons/fence.webp', label: ts('Fence') },
++  roof: { icon: '/icons/roof.webp', label: ts('Roof') },
++  'roof-segment': { icon: '/icons/roof.webp', label: ts('Roof segment') },
++  stair: { icon: '/icons/stairs.webp', label: ts('Stair') },
++  'stair-segment': { icon: '/icons/stairs.webp', label: ts('Stair segment') },
+   scan: { icon: '/icons/mesh.webp', label: '3D Scan' },
+-  guide: { icon: '/icons/floorplan.webp', label: 'Guide image' },
++  guide: { icon: '/icons/floorplan.webp', label: ts('Guide image') },
+ }
+ 
+ export function getNodeDisplay(node: AnyNode | null | undefined): NodeDisplay {
+-  if (!node) return { icon: '/icons/select.webp', label: 'Selection' }
++  if (!node) return { icon: '/icons/select.webp', label: ts('Selection') }
+   const fallback = TYPE_DEFAULTS[node.type] ?? { icon: '/icons/select.webp', label: node.type }
+   // Item nodes carry an asset with its own thumbnail/name
+   if (node.type === 'item') {
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/panels/parametric-inspector.tsx b/node_modules/@pascal-app/editor/src/components/ui/panels/parametric-inspector.tsx
+index a5076dd..9e954bc 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/panels/parametric-inspector.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/panels/parametric-inspector.tsx
+@@ -10,6 +10,7 @@ import {
+   useScene,
+   type ZoneNode,
+ } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import { Icon } from '@iconify/react'
+ import { Move, Trash2 } from 'lucide-react'
+@@ -138,7 +139,7 @@ export function ParametricInspector({
+   }
+ 
+   const presentation = def.presentation
+-  const title = presentation?.label ?? nodeType ?? ''
++  const title = ts(presentation?.label ?? nodeType ?? '')
+   const iconNode = renderIcon(presentation?.icon)
+   const canMove = !!def.capabilities.movable
+   const canDelete = def.capabilities.deletable !== false
+@@ -157,7 +158,7 @@ export function ParametricInspector({
+       width={320}
+     >
+       {parametrics.groups.map((group, gi) => (
+-        <PanelSection key={`group-${gi}`} title={group.label}>
++        <PanelSection key={`group-${gi}`} title={ts(group.label)}>
+           {group.fields.map((field, fi) => (
+             <FieldRenderer
+               key={`field-${gi}-${fi}-${String(field.key)}`}
+@@ -174,10 +175,10 @@ export function ParametricInspector({
+         </Suspense>
+       )}
+       {(canMove || canDelete || (parametrics.actions && parametrics.actions.length > 0)) && (
+-        <PanelSection title="Actions">
++        <PanelSection title={ts("Actions")}>
+           <ActionGroup className={isZone ? 'flex-col' : undefined}>
+             {canMove && (
+-              <ActionButton icon={<Move className="h-4 w-4" />} label="Move" onClick={handleMove} />
++              <ActionButton icon={<Move className="h-4 w-4" />} label={ts("Move")} onClick={handleMove} />
+             )}
+             {parametrics.actions?.map((action, i) => (
+               <ParamActionButton action={action} key={`paramaction-${i}`} nodeId={selectedId} />
+@@ -188,13 +189,13 @@ export function ParametricInspector({
+                   <ActionButton
+                     className="w-full flex-none"
+                     icon={<Trash2 className="h-4 w-4 text-red-400" />}
+-                    label="Delete"
++                    label={ts("Delete")}
+                     onClick={() => handleDelete(false)}
+                   />
+                   <ActionButton
+                     className="w-full flex-none"
+                     icon={<Trash2 className="h-4 w-4 text-red-400" />}
+-                    label="Delete with contents"
++                    label={ts("Delete with contents")}
+                     onClick={() => handleDelete(true)}
+                   />
+                 </>
+@@ -202,7 +203,7 @@ export function ParametricInspector({
+                 <ActionButton
+                   className="border-red-500/40 text-red-200 hover:bg-red-500/15"
+                   icon={<Trash2 className="h-4 w-4" />}
+-                  label="Delete"
++                  label={ts("Delete")}
+                   onClick={() => handleDelete()}
+                 />
+               ))}
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/panels/reference-panel.tsx b/node_modules/@pascal-app/editor/src/components/ui/panels/reference-panel.tsx
+index 069a512..57ee665 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/panels/reference-panel.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/panels/reference-panel.tsx
+@@ -8,6 +8,7 @@ import {
+   saveAsset,
+   useScene,
+ } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import {
+   Eye,
+   EyeOff,
+@@ -177,7 +178,7 @@ export function ReferencePanel() {
+     >
+       {!isScan && (
+         <>
+-          <PanelSection title="Image">
++          <PanelSection title={ts("Image")}>
+             <input
+               accept="image/*"
+               className="hidden"
+@@ -202,7 +203,7 @@ export function ReferencePanel() {
+               <ActionButton
+                 className="text-destructive hover:bg-destructive/10"
+                 icon={<Trash2 className="h-3.5 w-3.5" />}
+-                label="Delete"
++                label={ts("Delete")}
+                 onClick={handleDeleteGuide}
+               />
+             </ActionGroup>
+@@ -239,13 +240,11 @@ export function ReferencePanel() {
+             )}
+ 
+             {isAssetMissing && (
+-              <div className="rounded-md border border-amber-500/35 bg-amber-500/10 px-2 py-1.5 text-amber-700 text-xs dark:text-amber-300">
+-                Overlay image unavailable. Replace the image to restore it.
+-              </div>
++              <div className="rounded-md border border-amber-500/35 bg-amber-500/10 px-2 py-1.5 text-amber-700 text-xs dark:text-amber-300">{ts("Overlay image unavailable. Replace the image to restore it.")}</div>
+             )}
+           </PanelSection>
+ 
+-          <PanelSection title="Reference Scale">
++          <PanelSection title={ts("Reference Scale")}>
+             <div className="flex items-center gap-2 rounded-md border border-border/50 bg-background/40 px-2.5 py-2 text-sm">
+               <Ruler
+                 className={cn(
+@@ -285,7 +284,7 @@ export function ReferencePanel() {
+                   onClick={() => setGuideScaleReferenceVisible(node.id, !scaleReferenceVisible)}
+                 />
+                 <ActionButton
+-                  label="Clear Scale"
++                  label={ts("Clear Scale")}
+                   onClick={() => {
+                     handleUpdate({ scaleReference: null } as Partial<GuideNode>)
+                     // Calibrating auto-locked the guide; clearing the scale
+@@ -297,11 +296,11 @@ export function ReferencePanel() {
+             )}
+           </PanelSection>
+ 
+-          <PanelSection title="Quick Actions">
++          <PanelSection title={ts("Quick Actions")}>
+             <ActionGroup>
+               <ActionButton
+                 icon={<LocateFixed className="h-3.5 w-3.5" />}
+-                label="Center"
++                label={ts("Center")}
+                 onClick={() =>
+                   handleUpdate({
+                     position: [0, node.position[1], 0],
+@@ -310,7 +309,7 @@ export function ReferencePanel() {
+               />
+               <ActionButton
+                 icon={<RotateCcw className="h-3.5 w-3.5" />}
+-                label="Reset Rotation"
++                label={ts("Reset Rotation")}
+                 onClick={() =>
+                   handleUpdate({
+                     rotation: [node.rotation[0], 0, node.rotation[2]],
+@@ -321,7 +320,7 @@ export function ReferencePanel() {
+             <ActionGroup>
+               <ActionButton
+                 icon={<Ruler className="h-3.5 w-3.5" />}
+-                label="Reset Image Scale"
++                label={ts("Reset Image Scale")}
+                 onClick={() => handleUpdate({ scale: 1 } as Partial<GuideNode>)}
+               />
+             </ActionGroup>
+@@ -329,7 +328,7 @@ export function ReferencePanel() {
+         </>
+       )}
+ 
+-      <PanelSection title="Position">
++      <PanelSection title={ts("Position")}>
+         <SliderControl
+           label={
+             <>
+@@ -386,7 +385,7 @@ export function ReferencePanel() {
+         />
+       </PanelSection>
+ 
+-      <PanelSection title="Rotation">
++      <PanelSection title={ts("Rotation")}>
+         <SliderControl
+           label={
+             <>
+@@ -426,11 +425,10 @@ export function ReferencePanel() {
+         </div>
+       </PanelSection>
+ 
+-      <PanelSection title="Scale & Opacity">
++      <PanelSection title={ts("Scale & Opacity")}>
+         <SliderControl
+           label={
+-            <>
+-              XYZ<sub className="ml-[1px] text-[11px] opacity-70">scale</sub>
++            <>{ts("XYZ")}<sub className="ml-[1px] text-[11px] opacity-70">scale</sub>
+             </>
+           }
+           max={10}
+@@ -446,7 +444,7 @@ export function ReferencePanel() {
+         />
+ 
+         <SliderControl
+-          label="Opacity"
++          label={ts("Opacity")}
+           max={100}
+           min={0}
+           onChange={(v) => handleUpdate({ opacity: v })}
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/primitives/dialog.tsx b/node_modules/@pascal-app/editor/src/components/ui/primitives/dialog.tsx
+index e88503f..d88b5a6 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/primitives/dialog.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/primitives/dialog.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import * as DialogPrimitive from '@radix-ui/react-dialog'
++import { ts } from '@/i18n'
+ import { XIcon } from 'lucide-react'
+ import type * as React from 'react'
+ 
+@@ -64,7 +65,7 @@ function DialogContent({
+             data-slot="dialog-close"
+           >
+             <XIcon />
+-            <span className="sr-only">Close</span>
++            <span className="sr-only">{ts("Close")}</span>
+           </DialogPrimitive.Close>
+         )}
+       </DialogPrimitive.Content>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/primitives/error-boundary.tsx b/node_modules/@pascal-app/editor/src/components/ui/primitives/error-boundary.tsx
+index 047ab75..9b9ea44 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/primitives/error-boundary.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/primitives/error-boundary.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import React, { Component, type ErrorInfo, type ReactNode } from 'react'
++import { ts } from '@/i18n'
+ 
+ interface Props {
+   children?: ReactNode
+@@ -33,16 +34,14 @@ export class ErrorBoundary extends Component<Props, State> {
+       }
+       return (
+         <div className="flex h-screen w-screen flex-col items-center justify-center bg-[#1b1c1f] p-4 text-white">
+-          <h2 className="mb-4 font-bold text-red-400 text-xl">Something went wrong</h2>
++          <h2 className="mb-4 font-bold text-red-400 text-xl">{ts("Something went wrong")}</h2>
+           <pre className="max-w-full overflow-auto rounded bg-black/30 p-4 text-gray-300 text-sm">
+             {this.state.error?.message}
+           </pre>
+           <button
+             className="mt-4 rounded bg-blue-600 px-4 py-2 hover:bg-blue-700"
+             onClick={() => this.setState({ hasError: false, error: null })}
+-          >
+-            Try again
+-          </button>
++          >{ts("Try again")}</button>
+         </div>
+       )
+     }
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/primitives/opacity-control.tsx b/node_modules/@pascal-app/editor/src/components/ui/primitives/opacity-control.tsx
+index b022e35..8479453 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/primitives/opacity-control.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/primitives/opacity-control.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { Eye, EyeOff } from 'lucide-react'
++import { ts } from '@/i18n'
+ import { useState } from 'react'
+ import { Button } from '../../../components/ui/primitives/button'
+ import { Popover, PopoverContent, PopoverTrigger } from '../../../components/ui/primitives/popover'
+@@ -59,7 +60,7 @@ export function OpacityControl({
+         >
+           <div className="space-y-2">
+             <div className="flex items-center justify-between">
+-              <span className="font-medium text-sm">Opacity</span>
++              <span className="font-medium text-sm">{ts("Opacity")}</span>
+               <span className="text-muted-foreground text-xs">{actualOpacity}%</span>
+             </div>
+             <Slider
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/primitives/sheet.tsx b/node_modules/@pascal-app/editor/src/components/ui/primitives/sheet.tsx
+index 0d367ea..46973e0 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/primitives/sheet.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/primitives/sheet.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import * as SheetPrimitive from '@radix-ui/react-dialog'
++import { ts } from '@/i18n'
+ import { XIcon } from 'lucide-react'
+ import type * as React from 'react'
+ 
+@@ -68,7 +69,7 @@ function SheetContent({
+         {children}
+         <SheetPrimitive.Close className="absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+           <XIcon className="size-4" />
+-          <span className="sr-only">Close</span>
++          <span className="sr-only">{ts("Close")}</span>
+         </SheetPrimitive.Close>
+       </SheetPrimitive.Content>
+     </SheetPortal>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/primitives/shortcut-token.tsx b/node_modules/@pascal-app/editor/src/components/ui/primitives/shortcut-token.tsx
+index b02d608..de931ff 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/primitives/shortcut-token.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/primitives/shortcut-token.tsx
+@@ -1,4 +1,5 @@
+ import { Icon } from '@iconify/react'
++import { ts } from '@/i18n'
+ import type * as React from 'react'
+ 
+ import { cn } from '../../../lib/utils'
+@@ -6,19 +7,19 @@ import { cn } from '../../../lib/utils'
+ const MOUSE_SHORTCUTS = {
+   Click: {
+     icon: 'ph:mouse-left-click-fill',
+-    label: 'Left click',
++    label: ts('Left click'),
+   },
+   'Left click': {
+     icon: 'ph:mouse-left-click-fill',
+-    label: 'Left click',
++    label: ts('Left click'),
+   },
+   'Middle click': {
+     icon: 'qlementine-icons:mouse-middle-button-16',
+-    label: 'Middle click',
++    label: ts('Middle click'),
+   },
+   'Right click': {
+     icon: 'ph:mouse-right-click-fill',
+-    label: 'Right click',
++    label: ts('Right click'),
+   },
+ } as const
+ 
+@@ -84,7 +85,7 @@ function ShortcutToken({ className, displayValue, value, ...props }: ShortcutTok
+             icon="ph:arrow-fat-up"
+             width={13}
+           />
+-          <span className="sr-only">Shift</span>
++          <span className="sr-only">{ts("Shift")}</span>
+         </>
+       ) : isCommand ? (
+         // The ⌘ glyph reads small next to letters at the same font size, so bump
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/primitives/sidebar.tsx b/node_modules/@pascal-app/editor/src/components/ui/primitives/sidebar.tsx
+index 0231fd2..89b6b91 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/primitives/sidebar.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/primitives/sidebar.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { Slot } from '@radix-ui/react-slot'
++import { ts } from '@/i18n'
+ import { cva, type VariantProps } from 'class-variance-authority'
+ import { PanelLeftIcon } from 'lucide-react'
+ import * as React from 'react'
+@@ -279,8 +280,8 @@ function Sidebar({
+           }
+         >
+           <SheetHeader className="sr-only">
+-            <SheetTitle>Sidebar</SheetTitle>
+-            <SheetDescription>Displays the mobile sidebar.</SheetDescription>
++            <SheetTitle>{ts("Sidebar")}</SheetTitle>
++            <SheetDescription>{ts("Displays the mobile sidebar.")}</SheetDescription>
+           </SheetHeader>
+           <div className="flex h-full w-full flex-col">{children}</div>
+         </SheetContent>
+@@ -356,7 +357,7 @@ function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<t
+       {...props}
+     >
+       <PanelLeftIcon />
+-      <span className="sr-only">Toggle Sidebar</span>
++      <span className="sr-only">{ts("Toggle Sidebar")}</span>
+     </Button>
+   )
+ }
+@@ -366,7 +367,7 @@ function SidebarRail({ className, ...props }: React.ComponentProps<'button'>) {
+ 
+   return (
+     <button
+-      aria-label="Toggle Sidebar"
++      aria-label={ts("Toggle Sidebar")}
+       className={cn(
+         'absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] hover:after:bg-sidebar-border group-data-[side=left]:-right-4 group-data-[side=right]:left-0 sm:flex',
+         'in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize',
+@@ -380,7 +381,7 @@ function SidebarRail({ className, ...props }: React.ComponentProps<'button'>) {
+       data-slot="sidebar-rail"
+       onClick={toggleSidebar}
+       tabIndex={-1}
+-      title="Toggle Sidebar"
++      title={ts("Toggle Sidebar")}
+       {...props}
+     />
+   )
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/icon-rail.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/icon-rail.tsx
+index 88f1d1d..747436e 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/icon-rail.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/icon-rail.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { Plus } from 'lucide-react'
++import { ts } from '@/i18n'
+ import type { ComponentType, ReactNode } from 'react'
+ import {
+   Tooltip,
+@@ -30,13 +31,13 @@ interface IconRailProps {
+ const sitePanel: { id: PanelId; iconSrc: string; label: string } = {
+   id: 'site',
+   iconSrc: '/icons/level.webp',
+-  label: 'Site',
++  label: ts('Site'),
+ }
+ 
+ const settingsPanel: { id: PanelId; iconSrc: string; label: string } = {
+   id: 'settings',
+   iconSrc: '/icons/settings.webp',
+-  label: 'Settings',
++  label: ts('Settings'),
+ }
+ 
+ const panels: { id: PanelId; iconSrc: string; label: string }[] = [sitePanel, settingsPanel]
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/items-panel/function-tree-panel.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/items-panel/function-tree-panel.tsx
+index 54b0002..da839b7 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/items-panel/function-tree-panel.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/items-panel/function-tree-panel.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import type { AssetInput } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { Root as TooltipRoot } from '@radix-ui/react-tooltip'
+ import NextImage from 'next/image'
+ import { useMemo, useState } from 'react'
+@@ -22,9 +23,9 @@ export type FunctionTreeNode = {
+ }
+ 
+ const SOURCE_CHIPS: Array<{ id: NonNullable<AssetInput['source']>; label: string }> = [
+-  { id: 'library', label: 'Library' },
+-  { id: 'community', label: 'Community' },
+-  { id: 'mine', label: 'Mine' },
++  { id: 'library', label: ts('Library') },
++  { id: 'community', label: ts('Community') },
++  { id: 'mine', label: ts('Mine') },
+ ]
+ 
+ /** Every slug at or below `node`, so a non-leaf selection matches descendants. */
+@@ -173,7 +174,7 @@ export function FunctionTreePanel({
+               setSearch(e.target.value)
+               onSearchChange?.(e.target.value)
+             }}
+-            placeholder="Search..."
++            placeholder={ts("Search...")}
+             type="text"
+             value={search}
+           />
+@@ -211,9 +212,7 @@ export function FunctionTreePanel({
+               )}
+               onClick={() => setActiveChildSlug(null)}
+               type="button"
+-            >
+-              All
+-            </button>
++            >{ts("All")}</button>
+             {activeRoot.children.map((child) => {
+               const isActive = activeChildSlug === child.slug
+               return (
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/items-panel/index.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/items-panel/index.tsx
+index df81988..b16baef 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/items-panel/index.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/items-panel/index.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import type { AssetInput } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import NextImage from 'next/image'
+ import { useEffect, useState } from 'react'
+ import { triggerSFX } from '../../../../../lib/sfx-bus'
+@@ -167,9 +168,9 @@ function LegacyItemsPanel({
+   // filter even before they own any items. Selecting "Mine" with no
+   // matching items falls through to the empty/no-results state.
+   const sourceChips: Array<{ id: AssetInput['source']; label: string }> = [
+-    { id: 'library', label: 'Library' },
+-    { id: 'community', label: 'Community' },
+-    { id: 'mine', label: 'Mine' },
++    { id: 'library', label: ts('Library') },
++    { id: 'community', label: ts('Community') },
++    { id: 'mine', label: ts('Mine') },
+   ]
+   const allTags = Array.from(new Set(categoryItems.flatMap((item) => item.tags ?? [])))
+   const placementTags = allTags.filter((t) => PLACEMENT_TAGS.has(t))
+@@ -242,7 +243,7 @@ function LegacyItemsPanel({
+               setSearch(e.target.value)
+               onSearchChange?.(e.target.value)
+             }}
+-            placeholder="Search..."
++            placeholder={ts("Search...")}
+             type="text"
+             value={search}
+           />
+@@ -283,9 +284,7 @@ function LegacyItemsPanel({
+                   )}
+                   onClick={() => setActivePlacementTag(null)}
+                   type="button"
+-                >
+-                  All
+-                </button>
++                >{ts("All")}</button>
+                 {placementTags.map((tag) => {
+                   const count = placementCount(tag)
+                   const isActive = activePlacementTag === tag
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/plugins-panel.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/plugins-panel.tsx
+index 6dd265c..9ddd0e4 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/plugins-panel.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/plugins-panel.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { Icon } from '@iconify/react'
++import { ts } from '@/i18n'
+ import { type IconRef, useScene } from '@pascal-app/core'
+ import { ChevronLeft, ChevronRight, ExternalLink, Puzzle } from 'lucide-react'
+ import { lazy, type ReactNode, Suspense, useState, useSyncExternalStore } from 'react'
+@@ -66,9 +67,7 @@ export function PluginsPanel() {
+             size="sm"
+             variant="ghost"
+           >
+-            <ChevronLeft className="h-4 w-4" />
+-            All plugins
+-          </Button>
++            <ChevronLeft className="h-4 w-4" />{ts("All plugins")}</Button>
+ 
+           <div className="mt-5 flex items-start gap-4">
+             <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-background/60">
+@@ -88,12 +87,12 @@ export function PluginsPanel() {
+ 
+           <dl className="mt-6 divide-y divide-border/50 rounded-xl border border-border/60">
+             <div className="p-3">
+-              <dt className="text-sidebar-foreground/50 text-xs">Plugin ID</dt>
++              <dt className="text-sidebar-foreground/50 text-xs">{ts("Plugin ID")}</dt>
+               <dd className="mt-1 break-all text-sidebar-foreground text-sm">{pluginId}</dd>
+             </div>
+             {panel.creator && (
+               <div className="p-3">
+-                <dt className="text-sidebar-foreground/50 text-xs">Creator</dt>
++                <dt className="text-sidebar-foreground/50 text-xs">{ts("Creator")}</dt>
+                 <dd className="mt-1 text-sm">
+                   {panel.creator.url ? (
+                     <a
+@@ -113,16 +112,14 @@ export function PluginsPanel() {
+             )}
+             {panel.pluginUrl && (
+               <div className="p-3">
+-                <dt className="text-sidebar-foreground/50 text-xs">Plugin</dt>
++                <dt className="text-sidebar-foreground/50 text-xs">{ts("Plugin")}</dt>
+                 <dd className="mt-1 text-sm">
+                   <a
+                     className="inline-flex items-center gap-1 text-sidebar-foreground underline-offset-4 hover:underline"
+                     href={panel.pluginUrl}
+                     rel="noreferrer"
+                     target="_blank"
+-                  >
+-                    View plugin
+-                    <ExternalLink className="h-3 w-3" />
++                  >{ts("View plugin")}<ExternalLink className="h-3 w-3" />
+                   </a>
+                 </dd>
+               </div>
+@@ -150,9 +147,7 @@ export function PluginsPanel() {
+             href={PLUGIN_AUTHORING_URL}
+             rel="noreferrer"
+             target="_blank"
+-          >
+-            Create a Pascal plugin
+-            <ExternalLink className="h-3.5 w-3.5" />
++          >{ts("Create a Pascal plugin")}<ExternalLink className="h-3.5 w-3.5" />
+           </a>
+         </div>
+       </div>
+@@ -162,10 +157,8 @@ export function PluginsPanel() {
+   return (
+     <div className="flex h-full flex-col overflow-y-auto p-4">
+       <div className="mb-5">
+-        <h2 className="font-semibold text-lg text-sidebar-foreground">Plugins</h2>
+-        <p className="mt-1 text-sidebar-foreground/60 text-sm">
+-          Add focused tools and content to this project.
+-        </p>
++        <h2 className="font-semibold text-lg text-sidebar-foreground">{ts("Plugins")}</h2>
++        <p className="mt-1 text-sidebar-foreground/60 text-sm">{ts("Add focused tools and content to this project.")}</p>
+       </div>
+ 
+       <div className="flex flex-col gap-3">
+@@ -208,9 +201,7 @@ export function PluginsPanel() {
+           href={PLUGIN_AUTHORING_URL}
+           rel="noreferrer"
+           target="_blank"
+-        >
+-          Create a Pascal plugin
+-          <ExternalLink className="h-3.5 w-3.5" />
++        >{ts("Create a Pascal plugin")}<ExternalLink className="h-3.5 w-3.5" />
+         </a>
+       </div>
+     </div>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/audio-settings-dialog.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/audio-settings-dialog.tsx
+index dbe1446..0ab781e 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/audio-settings-dialog.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/audio-settings-dialog.tsx
+@@ -1,4 +1,5 @@
+ import { Volume2, VolumeX } from 'lucide-react'
++import { ts } from '@/i18n'
+ import { Button } from '../../../../../components/ui/primitives/button'
+ import {
+   Dialog,
+@@ -33,14 +34,14 @@ export function AudioSettingsDialog() {
+       </DialogTrigger>
+       <DialogContent className="sm:max-w-[425px]">
+         <DialogHeader>
+-          <DialogTitle>Audio Settings</DialogTitle>
+-          <DialogDescription>Adjust volume levels and mute settings</DialogDescription>
++          <DialogTitle>{ts("Audio Settings")}</DialogTitle>
++          <DialogDescription>{ts("Adjust volume levels and mute settings")}</DialogDescription>
+         </DialogHeader>
+         <div className="space-y-6 py-4">
+           {/* Master Volume */}
+           <div className="space-y-2">
+             <div className="flex items-center justify-between">
+-              <label className="font-medium text-sm">Master Volume</label>
++              <label className="font-medium text-sm">{ts("Master Volume")}</label>
+               <span className="text-muted-foreground text-sm">{masterVolume}%</span>
+             </div>
+             <Slider
+@@ -55,7 +56,7 @@ export function AudioSettingsDialog() {
+           {/* Radio Volume */}
+           <div className="space-y-2">
+             <div className="flex items-center justify-between">
+-              <label className="font-medium text-sm">Radio Volume</label>
++              <label className="font-medium text-sm">{ts("Radio Volume")}</label>
+               <span className="text-muted-foreground text-sm">{radioVolume}%</span>
+             </div>
+             <Slider
+@@ -70,7 +71,7 @@ export function AudioSettingsDialog() {
+           {/* SFX Volume */}
+           <div className="space-y-2">
+             <div className="flex items-center justify-between">
+-              <label className="font-medium text-sm">Sound Effects</label>
++              <label className="font-medium text-sm">{ts("Sound Effects")}</label>
+               <span className="text-muted-foreground text-sm">{sfxVolume}%</span>
+             </div>
+             <Slider
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/index.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/index.tsx
+index 8c54a73..df18089 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/index.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/index.tsx
+@@ -1,4 +1,5 @@
+ import { clearSceneHistory, emitter, useScene, validateBuildJson } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import { TreeView, VisualJson } from '@visual-json/react'
+ import { Camera, Download, Map as MapIcon, Save, Trash2, Upload } from 'lucide-react'
+@@ -315,10 +316,10 @@ export function SettingsPanel({
+       {/* Visibility Section (only for cloud projects) */}
+       {projectId && !isLocalProject && (
+         <div className="space-y-3">
+-          <label className="font-medium text-muted-foreground text-xs uppercase">Visibility</label>
++          <label className="font-medium text-muted-foreground text-xs uppercase">{ts("Visibility")}</label>
+           <div className="flex items-center justify-between">
+             <div>
+-              <div className="font-medium text-sm">Public</div>
++              <div className="font-medium text-sm">{ts("Public")}</div>
+               <div className="text-muted-foreground text-xs">
+                 {projectVisibility?.isPrivate ? 'Only you' : 'Anyone'} can view
+               </div>
+@@ -330,8 +331,8 @@ export function SettingsPanel({
+           </div>
+           <div className="flex items-center justify-between">
+             <div>
+-              <div className="font-medium text-sm">Show 3D Scans</div>
+-              <div className="text-muted-foreground text-xs">Visible to public viewers</div>
++              <div className="font-medium text-sm">{ts("Show 3D Scans")}</div>
++              <div className="text-muted-foreground text-xs">{ts("Visible to public viewers")}</div>
+             </div>
+             <Switch
+               checked={projectVisibility?.showScansPublic ?? true}
+@@ -340,8 +341,8 @@ export function SettingsPanel({
+           </div>
+           <div className="flex items-center justify-between">
+             <div>
+-              <div className="font-medium text-sm">Show Floorplans</div>
+-              <div className="text-muted-foreground text-xs">Visible to public viewers</div>
++              <div className="font-medium text-sm">{ts("Show Floorplans")}</div>
++              <div className="text-muted-foreground text-xs">{ts("Visible to public viewers")}</div>
+             </div>
+             <Switch
+               checked={projectVisibility?.showGuidesPublic ?? true}
+@@ -350,8 +351,8 @@ export function SettingsPanel({
+           </div>
+           <div className="flex items-center justify-between">
+             <div>
+-              <div className="font-medium text-sm">Shadows</div>
+-              <div className="text-muted-foreground text-xs">Cast shadows from lights</div>
++              <div className="font-medium text-sm">{ts("Shadows")}</div>
++              <div className="text-muted-foreground text-xs">{ts("Cast shadows from lights")}</div>
+             </div>
+             <Switch
+               checked={shadows}
+@@ -363,7 +364,7 @@ export function SettingsPanel({
+ 
+       {/* Export Section */}
+       <div className="space-y-4">
+-        <label className="font-medium text-muted-foreground text-xs uppercase">Export</label>
++        <label className="font-medium text-muted-foreground text-xs uppercase">{ts("Export")}</label>
+ 
+         <div className="space-y-2">
+           <div className="font-medium text-muted-foreground text-xs">3D model</div>
+@@ -372,52 +373,42 @@ export function SettingsPanel({
+             onClick={() => exportScene?.('glb')}
+             variant="outline"
+           >
+-            <Download className="size-4" />
+-            Export GLB
+-          </Button>
++            <Download className="size-4" />{ts("Export GLB")}</Button>
+           <Button
+             className="w-full justify-start gap-2"
+             onClick={() => exportScene?.('stl')}
+             variant="outline"
+           >
+-            <Download className="size-4" />
+-            Export STL
+-          </Button>
++            <Download className="size-4" />{ts("Export STL")}</Button>
+           <Button
+             className="w-full justify-start gap-2"
+             onClick={() => exportScene?.('obj')}
+             variant="outline"
+           >
+-            <Download className="size-4" />
+-            Export OBJ
+-          </Button>
++            <Download className="size-4" />{ts("Export OBJ")}</Button>
+         </div>
+ 
+         <div className="space-y-2">
+-          <div className="font-medium text-muted-foreground text-xs">Floorplan</div>
++          <div className="font-medium text-muted-foreground text-xs">{ts("Floorplan")}</div>
+           <Button
+             className="w-full justify-start gap-2"
+             onClick={() => exportFloorplanPdf('full')}
+             variant="outline"
+           >
+-            <MapIcon className="size-4" />
+-            Full floorplan
+-          </Button>
++            <MapIcon className="size-4" />{ts("Full floorplan")}</Button>
+           <Button
+             className="w-full justify-start gap-2"
+             onClick={() => exportFloorplanPdf('structure')}
+             variant="outline"
+           >
+-            <MapIcon className="size-4" />
+-            Structure only
+-          </Button>
++            <MapIcon className="size-4" />{ts("Structure only")}</Button>
+         </div>
+       </div>
+ 
+       {/* Thumbnail Section (only for cloud projects) */}
+       {projectId && !isLocalProject && (
+         <div className="space-y-2">
+-          <label className="font-medium text-muted-foreground text-xs uppercase">Thumbnail</label>
++          <label className="font-medium text-muted-foreground text-xs uppercase">{ts("Thumbnail")}</label>
+           <Button
+             className="w-full justify-start gap-2"
+             disabled={isGeneratingThumbnail}
+@@ -432,21 +423,17 @@ export function SettingsPanel({
+ 
+       {/* Save/Load Section */}
+       <div className="space-y-2">
+-        <label className="font-medium text-muted-foreground text-xs uppercase">Save & Load</label>
++        <label className="font-medium text-muted-foreground text-xs uppercase">{ts("Save & Load")}</label>
+ 
+         <Button className="w-full justify-start gap-2" onClick={handleSaveBuild} variant="outline">
+-          <Save className="size-4" />
+-          Save Build
+-        </Button>
++          <Save className="size-4" />{ts("Save Build")}</Button>
+ 
+         <Button
+           className="w-full justify-start gap-2"
+           onClick={() => fileInputRef.current?.click()}
+           variant="outline"
+         >
+-          <Upload className="size-4" />
+-          Load Build
+-        </Button>
++          <Upload className="size-4" />{ts("Load Build")}</Button>
+ 
+         <input
+           accept="application/json"
+@@ -465,27 +452,25 @@ export function SettingsPanel({
+ 
+       {/* Audio Section */}
+       <div className="space-y-2">
+-        <label className="font-medium text-muted-foreground text-xs uppercase">Audio</label>
++        <label className="font-medium text-muted-foreground text-xs uppercase">{ts("Audio")}</label>
+         <AudioSettingsDialog />
+       </div>
+ 
+       {/* Keyboard Section */}
+       <div className="space-y-2">
+-        <label className="font-medium text-muted-foreground text-xs uppercase">Keyboard</label>
++        <label className="font-medium text-muted-foreground text-xs uppercase">{ts("Keyboard")}</label>
+         <KeyboardShortcutsDialog />
+       </div>
+ 
+       {/* Scene Graph */}
+       <div className="space-y-1">
+-        <label className="font-medium text-muted-foreground text-xs uppercase">Scene Graph</label>
++        <label className="font-medium text-muted-foreground text-xs uppercase">{ts("Scene Graph")}</label>
+         <Dialog>
+           <DialogTrigger asChild>
+-            <Button className="h-auto justify-start p-0 text-sm" variant="link">
+-              Explore scene graph
+-            </Button>
++            <Button className="h-auto justify-start p-0 text-sm" variant="link">{ts("Explore scene graph")}</Button>
+           </DialogTrigger>
+           <DialogContent className="h-[80vh] max-w-[95vw] gap-0 overflow-hidden border-0 bg-[#1e1e1e] p-0 shadow-none sm:max-w-5xl">
+-            <DialogTitle className="sr-only">Scene Graph</DialogTitle>
++            <DialogTitle className="sr-only">{ts("Scene Graph")}</DialogTitle>
+             <div
+               className="flex h-full min-h-0 w-full min-w-0 *:h-full *:w-full *:overflow-y-auto"
+               onContextMenuCapture={blockSceneGraphMutations}
+@@ -503,16 +488,14 @@ export function SettingsPanel({
+ 
+       {/* Danger Zone */}
+       <div className="space-y-2">
+-        <label className="font-medium text-destructive text-xs uppercase">Danger Zone</label>
++        <label className="font-medium text-destructive text-xs uppercase">{ts("Danger Zone")}</label>
+ 
+         <Button
+           className="w-full justify-start gap-2"
+           onClick={handleResetToDefault}
+           variant="destructive"
+         >
+-          <Trash2 className="size-4" />
+-          Clear & Start New
+-        </Button>
++          <Trash2 className="size-4" />{ts("Clear & Start New")}</Button>
+       </div>
+     </div>
+   )
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/keyboard-shortcuts-dialog.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/keyboard-shortcuts-dialog.tsx
+index 94da653..07dd988 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/keyboard-shortcuts-dialog.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/keyboard-shortcuts-dialog.tsx
+@@ -1,4 +1,5 @@
+ import { Keyboard } from 'lucide-react'
++import { ts } from '@/i18n'
+ import { useEffect, useState } from 'react'
+ import { Button } from './../../../../../components/ui/primitives/button'
+ import {
+@@ -32,7 +33,7 @@ const KEY_DISPLAY_MAP: Record<string, string> = {
+ 
+ const SHORTCUT_CATEGORIES: ShortcutCategory[] = [
+   {
+-    title: 'Editor Navigation',
++    title: ts('Editor Navigation'),
+     shortcuts: [
+       { keys: ['1'], action: 'Switch to Site phase' },
+       { keys: ['2'], action: 'Switch to Structure phase' },
+@@ -51,7 +52,7 @@ const SHORTCUT_CATEGORIES: ShortcutCategory[] = [
+     ],
+   },
+   {
+-    title: 'Modes & History',
++    title: ts('Modes & History'),
+     shortcuts: [
+       { keys: ['V'], action: 'Switch to Select mode' },
+       { keys: ['B'], action: 'Switch to Build mode' },
+@@ -67,7 +68,7 @@ const SHORTCUT_CATEGORIES: ShortcutCategory[] = [
+     ],
+   },
+   {
+-    title: 'Selection',
++    title: ts('Selection'),
+     shortcuts: [
+       {
+         keys: ['Cmd/Ctrl', 'Left click'],
+@@ -98,7 +99,7 @@ const SHORTCUT_CATEGORIES: ShortcutCategory[] = [
+     ],
+   },
+   {
+-    title: 'Direct Manipulation',
++    title: ts('Direct Manipulation'),
+     shortcuts: [
+       {
+         keys: ['Cmd/Ctrl', 'Left click'],
+@@ -118,7 +119,7 @@ const SHORTCUT_CATEGORIES: ShortcutCategory[] = [
+     ],
+   },
+   {
+-    title: 'Drawing Tools',
++    title: ts('Drawing Tools'),
+     shortcuts: [
+       {
+         keys: ['Shift'],
+@@ -133,7 +134,7 @@ const SHORTCUT_CATEGORIES: ShortcutCategory[] = [
+     ],
+   },
+   {
+-    title: 'Item Placement',
++    title: ts('Item Placement'),
+     shortcuts: [
+       {
+         keys: ['R', 'T'],
+@@ -151,7 +152,7 @@ const SHORTCUT_CATEGORIES: ShortcutCategory[] = [
+     ],
+   },
+   {
+-    title: 'Camera',
++    title: ts('Camera'),
+     shortcuts: [
+       {
+         keys: ['W', 'A', 'S', 'D'],
+@@ -202,13 +203,11 @@ export function KeyboardShortcutsDialog() {
+     <Dialog>
+       <DialogTrigger asChild>
+         <Button className="w-full justify-start gap-2" variant="outline">
+-          <Keyboard className="size-4" />
+-          Keyboard Shortcuts
+-        </Button>
++          <Keyboard className="size-4" />{ts("Keyboard Shortcuts")}</Button>
+       </DialogTrigger>
+       <DialogContent className="flex max-h-[85vh] flex-col overflow-hidden p-0 sm:max-w-3xl">
+         <DialogHeader className="shrink-0 border-b px-6 py-4">
+-          <DialogTitle>Keyboard Shortcuts</DialogTitle>
++          <DialogTitle>{ts("Keyboard Shortcuts")}</DialogTitle>
+           <DialogDescription>
+             Shortcuts are context-aware. Guided constraints are enabled by default; hold Shift
+             during an active gesture to build freely.
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/load-build-dialog.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/load-build-dialog.tsx
+index 1b5f717..952af3d 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/load-build-dialog.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/settings-panel/load-build-dialog.tsx
+@@ -1,4 +1,5 @@
+ import type { BuildStats, SchemaIssue, ValidateBuildJsonResult } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import {
+   AlertTriangle,
+@@ -50,17 +51,17 @@ type StatRow = {
+ function statsRows(stats: BuildStats): StatRow[] {
+   return (
+     [
+-      { icon: MapPin, label: 'Sites', count: stats.byType.site ?? 0 },
+-      { icon: Building2, label: 'Buildings', count: stats.byType.building ?? 0 },
+-      { icon: Layers, label: 'Levels', count: stats.byType.level ?? 0 },
+-      { icon: Square, label: 'Walls', count: stats.byType.wall ?? 0 },
+-      { icon: DoorOpen, label: 'Doors', count: stats.byType.door ?? 0 },
+-      { icon: AppWindow, label: 'Windows', count: stats.byType.window ?? 0 },
+-      { icon: Box, label: 'Items', count: stats.byType.item ?? 0 },
+-      { icon: Square, label: 'Slabs', count: stats.byType.slab ?? 0 },
+-      { icon: Square, label: 'Ceilings', count: stats.byType.ceiling ?? 0 },
+-      { icon: Square, label: 'Zones', count: stats.byType.zone ?? 0 },
+-      { icon: Scan, label: 'Scans', count: stats.byType.scan ?? 0 },
++      { icon: MapPin, label: ts('Sites'), count: stats.byType.site ?? 0 },
++      { icon: Building2, label: ts('Buildings'), count: stats.byType.building ?? 0 },
++      { icon: Layers, label: ts('Levels'), count: stats.byType.level ?? 0 },
++      { icon: Square, label: ts('Walls'), count: stats.byType.wall ?? 0 },
++      { icon: DoorOpen, label: ts('Doors'), count: stats.byType.door ?? 0 },
++      { icon: AppWindow, label: ts('Windows'), count: stats.byType.window ?? 0 },
++      { icon: Box, label: ts('Items'), count: stats.byType.item ?? 0 },
++      { icon: Square, label: ts('Slabs'), count: stats.byType.slab ?? 0 },
++      { icon: Square, label: ts('Ceilings'), count: stats.byType.ceiling ?? 0 },
++      { icon: Square, label: ts('Zones'), count: stats.byType.zone ?? 0 },
++      { icon: Scan, label: ts('Scans'), count: stats.byType.scan ?? 0 },
+     ] satisfies StatRow[]
+   ).filter((row) => row.count > 0)
+ }
+@@ -147,9 +148,7 @@ export function LoadBuildDialog({ pending, onCancel, onConfirm }: Props) {
+ 
+           {stats.total > 0 && (
+             <div className="rounded-md border bg-card">
+-              <div className="border-b px-3 py-2 font-medium text-muted-foreground text-xs uppercase">
+-                Structure
+-              </div>
++              <div className="border-b px-3 py-2 font-medium text-muted-foreground text-xs uppercase">{ts("Structure")}</div>
+               {rows.length > 0 ? (
+                 <div>
+                   {rows.map((row, i) => {
+@@ -171,7 +170,7 @@ export function LoadBuildDialog({ pending, onCancel, onConfirm }: Props) {
+                   })}
+                   {stats.floorAreaM2 > 0 && (
+                     <div className="flex items-center justify-between border-t px-3 py-2">
+-                      <span className="text-muted-foreground text-sm">Floor area</span>
++                      <span className="text-muted-foreground text-sm">{ts("Floor area")}</span>
+                       <span className="font-medium text-sm">
+                         {formatFloorArea(stats.floorAreaM2, unit)}
+                       </span>
+@@ -179,9 +178,7 @@ export function LoadBuildDialog({ pending, onCancel, onConfirm }: Props) {
+                   )}
+                 </div>
+               ) : (
+-                <div className="px-3 py-4 text-center text-muted-foreground text-xs">
+-                  The file contains no recognised nodes.
+-                </div>
++                <div className="px-3 py-4 text-center text-muted-foreground text-xs">{ts("The file contains no recognised nodes.")}</div>
+               )}
+             </div>
+           )}
+@@ -249,17 +246,13 @@ export function LoadBuildDialog({ pending, onCancel, onConfirm }: Props) {
+         </div>
+ 
+         <DialogFooter>
+-          <Button onClick={onCancel} variant="outline">
+-            Cancel
+-          </Button>
++          <Button onClick={onCancel} variant="outline">{ts("Cancel")}</Button>
+           <Button
+             disabled={!ok || !parsed}
+             onClick={() => {
+               if (parsed) onConfirm(parsed)
+             }}
+-          >
+-            Replace current scene
+-          </Button>
++          >{ts("Replace current scene")}</Button>
+         </DialogFooter>
+       </DialogContent>
+     </Dialog>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/site-panel/building-tree-node.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/site-panel/building-tree-node.tsx
+index 5407b92..1c1731a 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/site-panel/building-tree-node.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/site-panel/building-tree-node.tsx
+@@ -1,4 +1,5 @@
+ import { type BuildingNode, LevelNode, useScene } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import { Building2, Plus } from 'lucide-react'
+ import { memo, useState } from 'react'
+@@ -63,7 +64,7 @@ export const BuildingTreeNode = memo(function BuildingTreeNode({
+                 <Plus className="h-3 w-3" />
+               </button>
+             </TooltipTrigger>
+-            <TooltipContent side="right">Add new level</TooltipContent>
++            <TooltipContent side="right">{ts("Add new level")}</TooltipContent>
+           </Tooltip>
+         </div>
+       }
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/site-panel/index.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/site-panel/index.tsx
+index af7fe82..1cc95a9 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/site-panel/index.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/site-panel/index.tsx
+@@ -10,6 +10,7 @@ import {
+   useScene,
+   type ZoneNode,
+ } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import {
+   Camera,
+@@ -165,7 +166,7 @@ const PropertyLineSection = memo(function PropertyLineSection() {
+ 
+         <div className="flex items-center gap-2">
+           <Pentagon className="h-4 w-4 text-muted-foreground" />
+-          <span className="font-medium text-sm">Property Line</span>
++          <span className="font-medium text-sm">{ts("Property Line")}</span>
+         </div>
+         <button
+           className={cn(
+@@ -242,9 +243,7 @@ const PropertyLineSection = memo(function PropertyLineSection() {
+             className="mt-1.5 flex cursor-pointer items-center gap-1 rounded px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-accent/50 hover:text-foreground"
+             onClick={handleAddPoint}
+           >
+-            <Plus className="h-3 w-3" />
+-            Add point
+-          </button>
++            <Plus className="h-3 w-3" />{ts("Add point")}</button>
+         </div>
+       )}
+     </div>
+@@ -278,7 +277,7 @@ const CameraPopover = memo(function CameraPopover({
+             buttonClassName,
+           )}
+           onClick={(e) => e.stopPropagation()}
+-          title="Camera snapshot"
++          title={ts("Camera snapshot")}
+         >
+           <Camera className="h-3.5 w-3.5" />
+           {hasCamera && (
+@@ -302,9 +301,7 @@ const CameraPopover = memo(function CameraPopover({
+                 onOpenChange(false)
+               }}
+             >
+-              <Camera className="h-3.5 w-3.5" />
+-              View snapshot
+-            </button>
++              <Camera className="h-3.5 w-3.5" />{ts("View snapshot")}</button>
+           )}
+           <button
+             className="flex w-full cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-left text-popover-foreground text-sm hover:bg-accent"
+@@ -326,9 +323,7 @@ const CameraPopover = memo(function CameraPopover({
+                 onOpenChange(false)
+               }}
+             >
+-              <Trash2 className="h-3.5 w-3.5" />
+-              Clear snapshot
+-            </button>
++              <Trash2 className="h-3.5 w-3.5" />{ts("Clear snapshot")}</button>
+           )}
+         </div>
+       </PopoverContent>
+@@ -377,13 +372,13 @@ const ReferenceItem = memo(function ReferenceItem({
+       <div className="flex h-8 min-w-0 flex-1 cursor-pointer items-center gap-2 py-0 pl-[60px] text-muted-foreground group-hover/ref:text-foreground">
+         {refNode.type === 'scan' ? (
+           <img
+-            alt="Scan"
++            alt={ts("Scan")}
+             className="h-3.5 w-3.5 shrink-0 object-contain opacity-70 transition-opacity group-hover/ref:opacity-100"
+             src="/icons/mesh.webp"
+           />
+         ) : (
+           <img
+-            alt="Guide"
++            alt={ts("Guide")}
+             className="h-3.5 w-3.5 shrink-0 object-contain opacity-70 transition-opacity group-hover/ref:opacity-100"
+             src="/icons/floorplan.webp"
+           />
+@@ -400,7 +395,7 @@ const ReferenceItem = memo(function ReferenceItem({
+       <button
+         className="z-20 flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground opacity-0 transition-colors hover:bg-black/5 hover:text-foreground group-hover/ref:opacity-100 dark:hover:bg-white/10"
+         onClick={(e) => handleDelete(refNode.id, e)}
+-        title="Delete"
++        title={ts("Delete")}
+       >
+         <Trash2 className="h-3 w-3" />
+       </button>
+@@ -739,7 +734,7 @@ const LevelItem = memo(function LevelItem({
+ 
+         <div className="flex h-8 min-w-0 flex-1 cursor-pointer items-center gap-2 py-0 pl-0.5 text-sm">
+           <img
+-            alt="Level"
++            alt={ts("Level")}
+             className={cn(
+               'h-4 w-4 shrink-0 object-contain transition-all duration-200',
+               !isSelected && 'opacity-60 grayscale',
+@@ -765,7 +760,7 @@ const LevelItem = memo(function LevelItem({
+                   : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+               )}
+               onClick={(e) => e.stopPropagation()}
+-              title="Camera snapshot"
++              title={ts("Camera snapshot")}
+             >
+               <Camera className="h-3.5 w-3.5" />
+               {level.camera && (
+@@ -789,9 +784,7 @@ const LevelItem = memo(function LevelItem({
+                     setCameraPopoverOpen(false)
+                   }}
+                 >
+-                  <Camera className="h-3.5 w-3.5" />
+-                  View snapshot
+-                </button>
++                  <Camera className="h-3.5 w-3.5" />{ts("View snapshot")}</button>
+               )}
+               <button
+                 className="flex w-full cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-left text-popover-foreground text-sm hover:bg-accent"
+@@ -813,9 +806,7 @@ const LevelItem = memo(function LevelItem({
+                     setCameraPopoverOpen(false)
+                   }}
+                 >
+-                  <Trash2 className="h-3.5 w-3.5" />
+-                  Clear snapshot
+-                </button>
++                  <Trash2 className="h-3.5 w-3.5" />{ts("Clear snapshot")}</button>
+               )}
+             </div>
+           </PopoverContent>
+@@ -838,28 +829,22 @@ const LevelItem = memo(function LevelItem({
+             <button
+               className="flex w-full cursor-pointer items-center gap-2 rounded px-3 py-1.5 text-left text-sm transition-colors hover:bg-accent"
+               onClick={() => handleDuplicateLevel()}
+-              title="Duplicate level"
++              title={ts("Duplicate level")}
+             >
+-              <Copy className="h-3.5 w-3.5" />
+-              Duplicate
+-            </button>
++              <Copy className="h-3.5 w-3.5" />{ts("Duplicate")}</button>
+             <button
+               className="flex w-full cursor-pointer items-center gap-2 rounded px-3 py-1.5 text-left text-sm transition-colors hover:bg-accent"
+               onClick={() => setDuplicateDialogOpen(true)}
+-              title="Duplicate level with options"
++              title={ts("Duplicate level with options")}
+             >
+-              <Copy className="h-3.5 w-3.5" />
+-              Duplicate with options...
+-            </button>
++              <Copy className="h-3.5 w-3.5" />{ts("Duplicate with options...")}</button>
+             <button
+               className="flex w-full items-center gap-2 rounded px-3 py-1.5 text-left text-sm transition-colors enabled:cursor-pointer enabled:hover:bg-accent enabled:hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-50"
+               disabled={!canDeleteLevel}
+               onClick={() => deleteLevelWithFallbackSelection(level.id)}
+               title={canDeleteLevel ? 'Delete level' : 'The ground level cannot be deleted'}
+             >
+-              <Trash2 className="h-3.5 w-3.5" />
+-              Delete
+-            </button>
++              <Trash2 className="h-3.5 w-3.5" />{ts("Delete")}</button>
+           </PopoverContent>
+         </Popover>
+       </div>
+@@ -949,16 +934,14 @@ const LevelsSection = memo(function LevelsSection({
+           <div className="relative z-10 flex items-center pr-1 pl-[38px]">
+             <Plus className="h-3.5 w-3.5" />
+           </div>
+-          <span className="truncate">Add level</span>
++          <span className="truncate">{ts("Add level")}</span>
+         </button>
+         {levels.length === 0 && (
+           <div className="relative flex h-8 select-none items-center border-border/50 border-b py-0 pr-2 pl-[38px] text-muted-foreground text-xs">
+             {/* Vertical tree line */}
+             <div className="pointer-events-none absolute top-0 bottom-1/2 left-[21px] w-px bg-border/50" />
+             {/* Horizontal branch line */}
+-            <div className="pointer-events-none absolute top-1/2 left-[21px] h-px w-[11px] bg-border/50" />
+-            No levels yet
+-          </div>
++            <div className="pointer-events-none absolute top-1/2 left-[21px] h-px w-[11px] bg-border/50" />{ts("No levels yet")}</div>
+         )}
+         {[...levels].reverse().map((level, index) => (
+           <LevelItem
+@@ -1017,15 +1000,13 @@ const LayerToggle = memo(function LayerToggle() {
+         )}
+         <div className="relative z-10 flex flex-col items-center">
+           <img
+-            alt="Structure"
++            alt={ts("Structure")}
+             className={cn(
+               'mb-1 h-6 w-6 transition-all',
+               activeTab !== 'structure' && 'opacity-50 grayscale',
+             )}
+             src="/icons/room.webp"
+-          />
+-          Structure
+-        </div>
++          />{ts("Structure")}</div>
+         <div className="absolute right-1.5 bottom-1 z-10 rounded border border-border/40 bg-background/40 px-1 py-[2px] backdrop-blur-md">
+           <span className="block font-medium font-mono text-[9px] text-muted-foreground/70 leading-none">
+             B
+@@ -1053,15 +1034,13 @@ const LayerToggle = memo(function LayerToggle() {
+         )}
+         <div className="relative z-10 flex flex-col items-center">
+           <img
+-            alt="Furnish"
++            alt={ts("Furnish")}
+             className={cn(
+               'mb-1 h-6 w-6 transition-all',
+               activeTab !== 'furnish' && 'opacity-50 grayscale',
+             )}
+             src="/icons/couch.webp"
+-          />
+-          Furnish
+-        </div>
++          />{ts("Furnish")}</div>
+         <div className="absolute right-1.5 bottom-1 z-10 rounded border border-border/40 bg-background/40 px-1 py-[2px] backdrop-blur-md">
+           <span className="block font-medium font-mono text-[9px] text-muted-foreground/70 leading-none">
+             F
+@@ -1090,15 +1069,13 @@ const LayerToggle = memo(function LayerToggle() {
+         )}
+         <div className="relative z-10 flex flex-col items-center">
+           <img
+-            alt="Zones"
++            alt={ts("Zones")}
+             className={cn(
+               'mb-1 h-6 w-6 transition-all',
+               activeTab !== 'zones' && 'opacity-50 grayscale',
+             )}
+             src="/icons/kitchen.webp"
+-          />
+-          Zones
+-        </div>
++          />{ts("Zones")}</div>
+         <div className="absolute right-1.5 bottom-1 z-10 rounded border border-border/40 bg-background/40 px-1 py-[2px] backdrop-blur-md">
+           <span className="block font-medium font-mono text-[9px] text-muted-foreground/70 leading-none">
+             Z
+@@ -1206,7 +1183,7 @@ const ZoneItem = memo(function ZoneItem({ zone, isLast }: { zone: ZoneNode; isLa
+             <button
+               className="relative flex h-6 w-6 cursor-pointer items-center justify-center rounded-md text-muted-foreground opacity-0 transition-colors hover:bg-black/5 hover:text-foreground group-hover/row:opacity-100 dark:hover:bg-white/10"
+               onClick={(e) => e.stopPropagation()}
+-              title="Camera snapshot"
++              title={ts("Camera snapshot")}
+             >
+               <Camera className="h-3 w-3" />
+               {zone.camera && (
+@@ -1230,9 +1207,7 @@ const ZoneItem = memo(function ZoneItem({ zone, isLast }: { zone: ZoneNode; isLa
+                     setCameraPopoverOpen(false)
+                   }}
+                 >
+-                  <Camera className="h-3.5 w-3.5" />
+-                  View snapshot
+-                </button>
++                  <Camera className="h-3.5 w-3.5" />{ts("View snapshot")}</button>
+               )}
+               <button
+                 className="flex w-full cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-left text-popover-foreground text-sm hover:bg-accent"
+@@ -1254,9 +1229,7 @@ const ZoneItem = memo(function ZoneItem({ zone, isLast }: { zone: ZoneNode; isLa
+                     setCameraPopoverOpen(false)
+                   }}
+                 >
+-                  <Trash2 className="h-3.5 w-3.5" />
+-                  Clear snapshot
+-                </button>
++                  <Trash2 className="h-3.5 w-3.5" />{ts("Clear snapshot")}</button>
+               )}
+             </div>
+           </PopoverContent>
+@@ -1285,7 +1258,7 @@ const MultiSelectionBadge = memo(function MultiSelectionBadge() {
+         <button
+           className="cursor-pointer rounded-full p-1.5 transition-colors hover:bg-primary-foreground/20"
+           onClick={() => setSelection({ selectedIds: [] })}
+-          title="Clear selection"
++          title={ts("Clear selection")}
+         >
+           <X className="h-4 w-4" />
+         </button>
+@@ -1324,7 +1297,7 @@ const ContentSection = memo(function ContentSection() {
+ 
+   if (!level) {
+     return (
+-      <div className="px-3 py-4 text-muted-foreground text-sm">Select a level to view content</div>
++      <div className="px-3 py-4 text-muted-foreground text-sm">{ts("Select a level to view content")}</div>
+     )
+   }
+ 
+@@ -1339,9 +1312,7 @@ const ContentSection = memo(function ContentSection() {
+       return (
+         <div className="px-3 py-4 text-muted-foreground text-sm">
+           No zones on this level.{' '}
+-          <button className="cursor-pointer text-primary hover:underline" onClick={handleAddZone}>
+-            Add one
+-          </button>
++          <button className="cursor-pointer text-primary hover:underline" onClick={handleAddZone}>{ts("Add one")}</button>
+         </div>
+       )
+     }
+@@ -1356,7 +1327,7 @@ const ContentSection = memo(function ContentSection() {
+   }
+ 
+   if (elementChildren.length === 0) {
+-    return <div className="px-3 py-4 text-muted-foreground text-sm">No elements on this level</div>
++    return <div className="px-3 py-4 text-muted-foreground text-sm">{ts("No elements on this level")}</div>
+   }
+   return (
+     <TreeNodeDragProvider>
+@@ -1431,7 +1402,7 @@ const BuildingItem = memo(function BuildingItem({
+       >
+         <div className="flex h-full min-w-0 flex-1 cursor-pointer items-center gap-2 py-2 pl-3">
+           <img
+-            alt="Building"
++            alt={ts("Building")}
+             className={cn(
+               'h-5 w-5 object-contain transition-all',
+               !isBuildingActive && 'opacity-60 grayscale',
+@@ -1453,7 +1424,7 @@ const BuildingItem = memo(function BuildingItem({
+                   : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+               )}
+               onClick={(e) => e.stopPropagation()}
+-              title="Camera snapshot"
++              title={ts("Camera snapshot")}
+             >
+               <Camera className="h-4 w-4" />
+               {building.camera && (
+@@ -1477,9 +1448,7 @@ const BuildingItem = memo(function BuildingItem({
+                     setBuildingCameraOpen(null)
+                   }}
+                 >
+-                  <Camera className="h-3.5 w-3.5" />
+-                  View snapshot
+-                </button>
++                  <Camera className="h-3.5 w-3.5" />{ts("View snapshot")}</button>
+               )}
+               <button
+                 className="flex w-full cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-left text-popover-foreground text-sm hover:bg-accent"
+@@ -1501,9 +1470,7 @@ const BuildingItem = memo(function BuildingItem({
+                     setBuildingCameraOpen(null)
+                   }}
+                 >
+-                  <Trash2 className="h-3.5 w-3.5" />
+-                  Clear snapshot
+-                </button>
++                  <Trash2 className="h-3.5 w-3.5" />{ts("Clear snapshot")}</button>
+               )}
+             </div>
+           </PopoverContent>
+@@ -1587,7 +1554,7 @@ export function SitePanel({ projectId, onUploadAsset, onDeleteAsset }: SitePanel
+           >
+             <div className="flex items-center gap-2">
+               <img
+-                alt="Site"
++                alt={ts("Site")}
+                 className={cn(
+                   'h-5 w-5 object-contain transition-all',
+                   phase !== 'site' && 'opacity-60 grayscale',
+@@ -1631,9 +1598,7 @@ export function SitePanel({ projectId, onUploadAsset, onDeleteAsset }: SitePanel
+ 
+           {/* Buildings List */}
+           {buildings.length === 0 ? (
+-            <motion.div className="px-3 py-4 text-muted-foreground text-sm" layout="position">
+-              No buildings yet
+-            </motion.div>
++            <motion.div className="px-3 py-4 text-muted-foreground text-sm" layout="position">{ts("No buildings yet")}</motion.div>
+           ) : (
+             <div className="flex min-h-0 flex-1 flex-col">
+               {buildings.map((building) => {
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/site-panel/tree-node-actions.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/site-panel/tree-node-actions.tsx
+index 6fccf60..ad91b1a 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/site-panel/tree-node-actions.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/site-panel/tree-node-actions.tsx
+@@ -1,4 +1,5 @@
+ import { type AnyNodeId, emitter, useScene } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import { Camera, Eye, EyeOff, Trash2 } from 'lucide-react'
+ import { memo, useState } from 'react'
+@@ -67,7 +68,7 @@ export const TreeNodeActions = memo(function TreeNodeActions({ nodeId }: TreeNod
+           <button
+             className="relative flex h-6 w-6 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-black/5 hover:text-foreground dark:hover:bg-white/10"
+             onClick={(e) => e.stopPropagation()}
+-            title="Camera snapshot"
++            title={ts("Camera snapshot")}
+           >
+             <Camera className="h-3 w-3" />
+             {hasCamera && (
+@@ -87,9 +88,7 @@ export const TreeNodeActions = memo(function TreeNodeActions({ nodeId }: TreeNod
+                 className="flex w-full cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-left text-popover-foreground text-sm hover:bg-accent"
+                 onClick={handleViewCamera}
+               >
+-                <Camera className="h-3.5 w-3.5" />
+-                View snapshot
+-              </button>
++                <Camera className="h-3.5 w-3.5" />{ts("View snapshot")}</button>
+             )}
+             <button
+               className="flex w-full cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-left text-popover-foreground text-sm hover:bg-accent"
+@@ -103,9 +102,7 @@ export const TreeNodeActions = memo(function TreeNodeActions({ nodeId }: TreeNod
+                 className="flex w-full cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-left text-popover-foreground text-sm hover:bg-destructive hover:text-destructive-foreground"
+                 onClick={handleClearCamera}
+               >
+-                <Trash2 className="h-3.5 w-3.5" />
+-                Clear snapshot
+-              </button>
++                <Trash2 className="h-3.5 w-3.5" />{ts("Clear snapshot")}</button>
+             )}
+           </div>
+         </PopoverContent>
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/zone-panel/index.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/zone-panel/index.tsx
+index a61bf14..240104f 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/zone-panel/index.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/panels/zone-panel/index.tsx
+@@ -4,6 +4,7 @@ import {
+   useScene,
+   type ZoneNode,
+ } from '@pascal-app/core'
++import { ts } from '@/i18n'
+ import { useViewer } from '@pascal-app/viewer'
+ import { Camera, Hexagon, Save, Trash2 } from 'lucide-react'
+ import { useState } from 'react'
+@@ -67,7 +68,7 @@ function ZoneItem({ zone }: { zone: ZoneNode }) {
+           <button
+             className="relative flex h-6 w-6 cursor-pointer items-center justify-center rounded-md text-muted-foreground opacity-0 transition-colors hover:bg-black/5 hover:text-foreground group-hover/row:opacity-100 dark:hover:bg-white/10"
+             onClick={(e) => e.stopPropagation()}
+-            title="Camera snapshot"
++            title={ts("Camera snapshot")}
+           >
+             <Camera className="h-3 w-3" />
+             {zone.camera && (
+@@ -91,9 +92,7 @@ function ZoneItem({ zone }: { zone: ZoneNode }) {
+                   setCameraPopoverOpen(false)
+                 }}
+               >
+-                <Camera className="h-3.5 w-3.5" />
+-                View snapshot
+-              </button>
++                <Camera className="h-3.5 w-3.5" />{ts("View snapshot")}</button>
+             )}
+             <button
+               className="flex w-full cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-left text-popover-foreground text-sm hover:bg-accent"
+@@ -115,9 +114,7 @@ function ZoneItem({ zone }: { zone: ZoneNode }) {
+                   setCameraPopoverOpen(false)
+                 }}
+               >
+-                <Trash2 className="h-3.5 w-3.5" />
+-                Clear snapshot
+-              </button>
++                <Trash2 className="h-3.5 w-3.5" />{ts("Clear snapshot")}</button>
+             )}
+           </div>
+         </PopoverContent>
+@@ -168,9 +165,7 @@ export function ZonePanel() {
+ 
+   if (!currentLevelId) {
+     return (
+-      <div className="px-3 py-4 text-muted-foreground text-sm">
+-        Select a level to view and create zones
+-      </div>
++      <div className="px-3 py-4 text-muted-foreground text-sm">{ts("Select a level to view and create zones")}</div>
+     )
+   }
+ 
+@@ -179,33 +174,31 @@ export function ZonePanel() {
+       {levelZones.length === 0 ? (
+         <div className="px-3 py-4 text-muted-foreground text-sm">
+           No zones on this level.{' '}
+-          <button className="cursor-pointer text-primary hover:underline" onClick={handleAddZone}>
+-            Add one
+-          </button>
++          <button className="cursor-pointer text-primary hover:underline" onClick={handleAddZone}>{ts("Add one")}</button>
+         </div>
+       ) : (
+         levelZones.map((zone) => <ZoneItem key={zone.id} zone={zone} />)
+       )}
+       {selectedZone ? (
+-        <PanelSection className="mt-2 border-t" title="Actions">
++        <PanelSection className="mt-2 border-t" title={ts("Actions")}>
+           <ActionButton
+             className="w-full flex-none"
+             icon={<Save className="h-4 w-4" />}
+-            label="Save to catalog"
++            label={ts("Save to catalog")}
+             onClick={() => emitter.emit('room-preset:create', { zoneId: selectedZone.id })}
+             type="button"
+           />
+           <ActionButton
+             className="w-full flex-none"
+             icon={<Trash2 className="h-4 w-4 text-red-400" />}
+-            label="Delete"
++            label={ts("Delete")}
+             onClick={() => deleteSelectedZone(false)}
+             type="button"
+           />
+           <ActionButton
+             className="w-full flex-none"
+             icon={<Trash2 className="h-4 w-4 text-red-400" />}
+-            label="Delete with contents"
++            label={ts("Delete with contents")}
+             onClick={() => deleteSelectedZone(true)}
+             type="button"
+           />
+diff --git a/node_modules/@pascal-app/editor/src/components/ui/sidebar/use-plugin-panels.tsx b/node_modules/@pascal-app/editor/src/components/ui/sidebar/use-plugin-panels.tsx
+index d9ccfd0..06bc8f8 100644
+--- a/node_modules/@pascal-app/editor/src/components/ui/sidebar/use-plugin-panels.tsx
++++ b/node_modules/@pascal-app/editor/src/components/ui/sidebar/use-plugin-panels.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { Icon } from '@iconify/react'
++import { ts } from '@/i18n'
+ import { type IconRef, useScene } from '@pascal-app/core'
+ import { Plus } from 'lucide-react'
+ import {
+@@ -19,7 +20,7 @@ import { PluginsPanel } from './panels/plugins-panel'
+ 
+ const pluginsManagerPanel: ExtraPanel = {
+   id: 'plugins',
+-  label: 'Plugins',
++  label: ts('Plugins'),
+   icon: <Plus className="h-5 w-5" />,
+   component: PluginsPanel,
+ }
+@@ -126,7 +127,8 @@ export function useHostPanels(hostPanels?: ExtraPanel[]): ExtraPanel[] {
+         pluginId: p.pluginId,
+       }),
+     )
+-  const manager =
+-    workspaceMode === 'edit' && !hostIds.has(pluginsManagerPanel.id) ? [pluginsManagerPanel] : []
++  // PROTO: se oculta el panel "+" de Plugins del sidebar.
++  void pluginsManagerPanel
++  const manager: ExtraPanel[] = []
+   return [...(hostPanels ?? []), ...fromRegistry, ...manager]
+ }
+diff --git a/node_modules/@pascal-app/editor/src/components/viewer-overlay.tsx b/node_modules/@pascal-app/editor/src/components/viewer-overlay.tsx
+index e60c5d6..91ff34a 100644
+--- a/node_modules/@pascal-app/editor/src/components/viewer-overlay.tsx
++++ b/node_modules/@pascal-app/editor/src/components/viewer-overlay.tsx
+@@ -1,6 +1,7 @@
+ 'use client'
+ 
+ import { Icon } from '@iconify/react'
++import { ts } from '@/i18n'
+ import {
+   type AnyNode,
+   type AnyNodeId,
+@@ -88,38 +89,38 @@ const levelModeBadgeLabels: Record<'manual' | 'stacked' | 'exploded' | 'solo', s
+ const wallModeConfig = {
+   up: {
+     icon: (props: any) => (
+-      <img alt="Full Height" height={28} src="/icons/room.webp" width={28} {...props} />
++      <img alt={ts("Full Height")} height={28} src="/icons/room.webp" width={28} {...props} />
+     ),
+-    label: 'Full Height',
++    label: ts('Full Height'),
+   },
+   cutaway: {
+     icon: (props: any) => (
+-      <img alt="Cutaway" height={28} src="/icons/wallcut.webp" width={28} {...props} />
++      <img alt={ts("Cutaway")} height={28} src="/icons/wallcut.webp" width={28} {...props} />
+     ),
+-    label: 'Cutaway',
++    label: ts('Cutaway'),
+   },
+   down: {
+     icon: (props: any) => (
+-      <img alt="Low" height={28} src="/icons/walllow.webp" width={28} {...props} />
++      <img alt={ts("Low")} height={28} src="/icons/walllow.webp" width={28} {...props} />
+     ),
+-    label: 'Low',
++    label: ts('Low'),
+   },
+   translucent: {
+     icon: (props: any) => (
+-      <img alt="Translucent" height={28} src="/icons/wall.png" width={28} {...props} />
++      <img alt={ts("Translucent")} height={28} src="/icons/wall.png" width={28} {...props} />
+     ),
+-    label: 'Translucent',
++    label: ts('Translucent'),
+   },
+ }
+ 
+ const SHADING_OPTIONS = [
+-  { id: 'solid', name: 'Solid', detail: 'Flat and fast — no ambient occlusion', icon: Box },
+-  { id: 'rendered', name: 'Rendered', detail: 'Full ambient occlusion', icon: Sparkles },
++  { id: 'solid', name: 'Solid', detail: ts('Flat and fast — no ambient occlusion'), icon: Box },
++  { id: 'rendered', name: 'Rendered', detail: ts('Full ambient occlusion'), icon: Sparkles },
+ ] as const
+ 
+ const TEXTURE_OPTIONS = [
+-  { id: true, name: 'Colored', detail: 'Show materials, textures & colors', icon: Palette },
+-  { id: false, name: 'Monochrome', detail: 'Flat clay surfaces by role', icon: Square },
++  { id: true, name: 'Colored', detail: ts('Show materials, textures & colors'), icon: Palette },
++  { id: false, name: 'Monochrome', detail: ts('Flat clay surfaces by role'), icon: Square },
+ ] as const
+ 
+ function RenderModeMenu() {
+@@ -187,7 +188,7 @@ function SceneThemeMenu() {
+       <DropdownMenuTrigger asChild>
+         <ActionButton
+           className="text-muted-foreground/80 hover:bg-white/5 hover:text-foreground"
+-          label={`Theme: ${active.name}`}
++          label={`${ts("Theme:")} ${active.name}`}
+           size="icon"
+           tooltipSide="top"
+           variant="ghost"
+@@ -229,9 +230,9 @@ function SceneThemeMenu() {
+ }
+ 
+ const EDGE_OPTIONS = [
+-  { id: 'off', name: 'Off', detail: 'No edge lines' },
+-  { id: 'soft', name: 'Soft', detail: 'Faint outline of major creases' },
+-  { id: 'strong', name: 'Strong', detail: 'Crisp, opaque edge lines' },
++  { id: 'off', name: 'Off', detail: ts('No edge lines') },
++  { id: 'soft', name: 'Soft', detail: ts('Faint outline of major creases') },
++  { id: 'strong', name: 'Strong', detail: ts('Crisp, opaque edge lines') },
+ ] as const satisfies readonly { id: EdgeMode; name: string; detail: string }[]
+ 
+ function EdgesMenu() {
+@@ -374,7 +375,7 @@ export const ViewerOverlay = ({
+             )}
+             <div className="min-w-0">
+               <div className="truncate font-medium text-foreground text-sm">
+-                {projectName || 'Untitled'}
++                {projectName || ts('Untitled')}
+               </div>
+               {owner?.username && (
+                 <Link
+@@ -394,9 +395,7 @@ export const ViewerOverlay = ({
+                 <button
+                   className="text-muted-foreground transition-colors hover:text-foreground"
+                   onClick={() => handleBreadcrumbClick('root')}
+-                >
+-                  Site
+-                </button>
++                >{ts("Site")}</button>
+ 
+                 {building && (
+                   <>
+@@ -405,7 +404,7 @@ export const ViewerOverlay = ({
+                       className={`truncate transition-colors ${level ? 'text-muted-foreground hover:text-foreground' : 'font-medium text-foreground'}`}
+                       onClick={() => handleBreadcrumbClick('building')}
+                     >
+-                      {building.name || 'Building'}
++                      {building.name || ts('Building')}
+                     </button>
+                   </>
+                 )}
+@@ -449,9 +448,7 @@ export const ViewerOverlay = ({
+         {/* Level List (only when building is selected) */}
+         {building && levels.length > 0 && (
+           <div className="pointer-events-auto flex w-48 flex-col overflow-hidden rounded-2xl border border-border/40 bg-background/95 py-1 shadow-lg backdrop-blur-xl transition-colors duration-200 ease-out">
+-            <span className="px-3 py-2 font-medium text-[10px] text-muted-foreground uppercase tracking-wider">
+-              Levels
+-            </span>
++            <span className="px-3 py-2 font-medium text-[10px] text-muted-foreground uppercase tracking-wider">{ts("Levels")}</span>
+             <div className="flex flex-col">
+               {levels.map((lvl) => {
+                 const isSelected = lvl.id === selection.levelId
+@@ -476,7 +473,7 @@ export const ViewerOverlay = ({
+                         <Layers className="h-3.5 w-3.5" />
+                       </span>
+                       <div className="min-w-0 flex-1 truncate text-left">
+-                        {lvl.name || `Level ${lvl.level}`}
++                        {lvl.name || `${ts('Floor')} ${lvl.level}`}
+                       </div>
+                     </div>
+                   </button>
+@@ -499,14 +496,14 @@ export const ViewerOverlay = ({
+                     ? 'bg-white/10'
+                     : 'opacity-60 grayscale hover:bg-white/5 hover:opacity-100 hover:grayscale-0'
+                 }
+-                label={`Scans: ${showScans ? 'Visible' : 'Hidden'}`}
++                label={`${ts("Scans:")} ${showScans ? ts("Visible") : ts("Hidden")}`}
+                 onClick={() => useViewer.getState().setShowScans(!showScans)}
+                 size="icon"
+                 tooltipSide="top"
+                 variant="ghost"
+               >
+                 <img
+-                  alt="Scans"
++                  alt={ts("Scans")}
+                   className="h-[28px] w-[28px] object-contain"
+                   src="/icons/mesh.webp"
+                 />
+@@ -520,14 +517,14 @@ export const ViewerOverlay = ({
+                     ? 'bg-white/10'
+                     : 'opacity-60 grayscale hover:bg-white/5 hover:opacity-100 hover:grayscale-0'
+                 }
+-                label={`Guides: ${showGuides ? 'Visible' : 'Hidden'}`}
++                label={`${ts("Guides:")} ${showGuides ? ts("Visible") : ts("Hidden")}`}
+                 onClick={() => useViewer.getState().setShowGuides(!showGuides)}
+                 size="icon"
+                 tooltipSide="top"
+                 variant="ghost"
+               >
+                 <img
+-                  alt="Guides"
++                  alt={ts("Guides")}
+                   className="h-[28px] w-[28px] object-contain"
+                   src="/icons/floorplan.webp"
+                 />
+@@ -631,14 +628,14 @@ export const ViewerOverlay = ({
+             {/* Camera Actions */}
+             <ActionButton
+               className="group hidden hover:bg-white/5 sm:inline-flex"
+-              label="Orbit Left"
++              label={ts("Orbit Left")}
+               onClick={() => emitter.emit('camera-controls:orbit-ccw')}
+               size="icon"
+               tooltipSide="top"
+               variant="ghost"
+             >
+               <img
+-                alt="Orbit Left"
++                alt={ts("Orbit Left")}
+                 className="h-[28px] w-[28px] -scale-x-100 object-contain opacity-70 transition-opacity group-hover:opacity-100"
+                 src="/icons/rotate.webp"
+               />
+@@ -646,14 +643,14 @@ export const ViewerOverlay = ({
+ 
+             <ActionButton
+               className="group hidden hover:bg-white/5 sm:inline-flex"
+-              label="Orbit Right"
++              label={ts("Orbit Right")}
+               onClick={() => emitter.emit('camera-controls:orbit-cw')}
+               size="icon"
+               tooltipSide="top"
+               variant="ghost"
+             >
+               <img
+-                alt="Orbit Right"
++                alt={ts("Orbit Right")}
+                 className="h-[28px] w-[28px] object-contain opacity-70 transition-opacity group-hover:opacity-100"
+                 src="/icons/rotate.webp"
+               />
+@@ -661,14 +658,14 @@ export const ViewerOverlay = ({
+ 
+             <ActionButton
+               className="group hover:bg-white/5"
+-              label="Top View"
++              label={ts("Top View")}
+               onClick={() => emitter.emit('camera-controls:top-view')}
+               size="icon"
+               tooltipSide="top"
+               variant="ghost"
+             >
+               <img
+-                alt="Top View"
++                alt={ts("Top View")}
+                 className="h-[28px] w-[28px] object-contain opacity-70 transition-opacity group-hover:opacity-100"
+                 src="/icons/topview.webp"
+               />
+@@ -679,7 +676,7 @@ export const ViewerOverlay = ({
+             {/* First-person walkthrough */}
+             <ActionButton
+               className="hover:bg-white/5 hover:text-emerald-400"
+-              label="Walkthrough"
++              label={ts("Walkthrough")}
+               onClick={() => {
+                 flushSync(() => useEditor.getState().setFirstPersonMode(true))
+                 requestWalkthroughPointerLock()
+diff --git a/node_modules/@pascal-app/editor/src/lib/contextual-help.ts b/node_modules/@pascal-app/editor/src/lib/contextual-help.ts
+index 098bc38..1791bbb 100644
+--- a/node_modules/@pascal-app/editor/src/lib/contextual-help.ts
++++ b/node_modules/@pascal-app/editor/src/lib/contextual-help.ts
+@@ -1,3 +1,4 @@
++import { ts } from '@/i18n'
+ export type ContextualShortcutHint = {
+   // A combo of keys pressed together (rendered joined by "+"). An entry may
+   // itself be an array of alternatives (rendered joined by "/"), e.g.
+@@ -78,7 +79,7 @@ export function resolveSelectModeHelpHints({
+ 
+     hints.push({
+       keys: [[COMMAND_KEY, SHIFT_KEY], LEFT_CLICK],
+-      label: 'Add or remove objects from the selection',
++      label: ts('Add or remove objects from the selection'),
+       active: true,
+     })
+     return hints
+@@ -90,15 +91,15 @@ export function resolveSelectModeHelpHints({
+   if (selectedCount > 1) {
+     hints.push({
+       keys: [LEFT_CLICK],
+-      label: 'Click or drag the selection to move it as one',
++      label: ts('Click or drag the selection to move it as one'),
+     })
+-    hints.push({ keys: [ROTATE_KEYS], label: 'Rotate the selection ±45°' })
++    hints.push({ keys: [ROTATE_KEYS], label: ts('Rotate the selection ±45°') })
+     hints.push({
+       keys: [[COMMAND_KEY, SHIFT_KEY], LEFT_CLICK],
+-      label: 'Add or remove objects from the selection',
++      label: ts('Add or remove objects from the selection'),
+       active: commandPressed || shiftPressed,
+     })
+-    hints.push({ keys: [ESC_KEY], label: 'Clear the selection (or click outside)' })
++    hints.push({ keys: [ESC_KEY], label: ts('Clear the selection (or click outside)') })
+     return hints
+   }
+ 
+@@ -108,12 +109,12 @@ export function resolveSelectModeHelpHints({
+   // detaches the joint mid-drag; a fitting's cluster adds rotate arcs, with
+   // R / T (and Alt to switch axis) for keyboard rotation.
+   if (mepSelection === 'run') {
+-    hints.push({ keys: [CLICK], label: 'Click a handle dot to show move arrows' })
+-    hints.push({ keys: [ALT_KEY], label: 'Detach the joint while dragging an arrow' })
++    hints.push({ keys: [CLICK], label: ts('Click a handle dot to show move arrows') })
++    hints.push({ keys: [ALT_KEY], label: ts('Detach the joint while dragging an arrow') })
+   } else if (mepSelection === 'fitting') {
+-    hints.push({ keys: [CLICK], label: 'Click the handle dot to show move + rotate handles' })
+-    hints.push({ keys: [ROTATE_KEYS], label: 'Rotate ±45°' })
+-    hints.push({ keys: [ALT_KEY], label: 'Switch the rotation axis (Y → X → Z)' })
++    hints.push({ keys: [CLICK], label: ts('Click the handle dot to show move + rotate handles') })
++    hints.push({ keys: [ROTATE_KEYS], label: ts('Rotate ±45°') })
++    hints.push({ keys: [ALT_KEY], label: ts('Switch the rotation axis (Y → X → Z)') })
+   }
+ 
+   // The rows are the same whatever modifier is held — guides/snapping are
+@@ -123,20 +124,20 @@ export function resolveSelectModeHelpHints({
+   if (hasMovableSelection) {
+     hints.push({
+       keys: [LEFT_CLICK],
+-      label: 'Drag selected movable object',
++      label: ts('Drag selected movable object'),
+     })
+   }
+ 
+   if (hasRotatableSelection) {
+     hints.push({
+       keys: [COMMAND_KEY, RIGHT_CLICK],
+-      label: 'Drag left or right to rotate selected object',
++      label: ts('Drag left or right to rotate selected object'),
+     })
+   }
+ 
+   hints.push({
+     keys: [[COMMAND_KEY, SHIFT_KEY], LEFT_CLICK],
+-    label: 'Add or remove objects from the selection',
++    label: ts('Add or remove objects from the selection'),
+     active: commandPressed || shiftPressed,
+   })
+ 
+diff --git a/node_modules/@pascal-app/editor/src/lib/paint-scope.ts b/node_modules/@pascal-app/editor/src/lib/paint-scope.ts
+index 7feacf0..51e6269 100644
+--- a/node_modules/@pascal-app/editor/src/lib/paint-scope.ts
++++ b/node_modules/@pascal-app/editor/src/lib/paint-scope.ts
+@@ -1,3 +1,4 @@
++import { ts } from '@/i18n'
+ import {
+   type AnyNode,
+   type AnyNodeId,
+@@ -97,7 +98,7 @@ export function slotDisplayLabel(node: AnyNode, role: string): string {
+     .get(node.type)
+     ?.capabilities?.slots?.(node)
+     ?.find((slot) => slot.slotId === role)
+-  return declared?.label ?? slotLabelFromId(role)
++  return ts(declared?.label ?? slotLabelFromId(role))
+ }
+ 
+ // ── Fan-out resolution ──────────────────────────────────────────────────────
