@@ -1,10 +1,18 @@
 "use client"
 
+import Image from "next/image"
 import { loadPlugin } from "@pascal-app/core"
 import { builtinPlugin } from "@pascal-app/nodes"
 import { Editor, type SceneGraph, useEditor } from "@pascal-app/editor"
 import { useCallback, useEffect, useState } from "react"
 import { BuildTab } from "@/components/build-tab"
+import { EditorNavbar } from "@/components/editor-navbar"
+import { EstructuraTab } from "@/components/estructura-tab"
+import { LevelBootstrap } from "@/components/level-bootstrap"
+import { MaterialesTab } from "@/components/materiales-tab"
+import { MueblesTab } from "@/components/muebles-tab"
+import { PropertiesPanel } from "@/components/properties-panel"
+import { ViewerHud } from "@/components/viewer-hud"
 
 const registryReady = loadPlugin(builtinPlugin)
 
@@ -71,12 +79,10 @@ export default function EditorPage() {
   const [editorLoading, setEditorLoading] = useState(true)
 
   useEffect(() => {
-    document.documentElement.classList.add("dark")
     void registryReady.then(() => {
       setRegistryLoaded(true)
     })
   }, [])
-
   const handleLoaderChange = useCallback((loading: boolean) => {
     setEditorLoading(loading)
     if (!loading) {
@@ -90,28 +96,58 @@ export default function EditorPage() {
   const showLoading = !registryLoaded || editorLoading
 
   return (
-    <div style={{ position: "fixed", inset: 0, overflow: "hidden" }}>
+    <div className="pascal-shell" style={{ position: "fixed", inset: 0, overflow: "hidden" }}>
       {registryLoaded && (
         <Editor
           layoutVersion="v2"
           projectId="mi-prototipo"
           onLoad={async () => loadSceneWithFallback()}
           onLoaderChange={handleLoaderChange}
+          navbarSlot={<EditorNavbar projectName="Casa" />}
+          viewerToolbarLeft={<ViewerHud />}
           sidebarTabs={[
             {
               id: "build",
               label: "Construir",
-              icon: <span className="text-lg">🔨</span>,
+              icon: (
+                <Image alt="" height={24} src="/icons/wall.webp" width={24} />
+              ),
               component: BuildTab,
+            },
+            {
+              id: "items",
+              label: "Muebles",
+              icon: (
+                <Image alt="" height={24} src="/icons/couch.webp" width={24} />
+              ),
+              component: MueblesTab,
+            },
+            {
+              id: "materials",
+              label: "Materiales",
+              icon: (
+                <Image alt="" height={24} src="/icons/paint.webp" width={24} />
+              ),
+              component: MaterialesTab,
+            },
+            {
+              id: "structure",
+              label: "Estructura",
+              icon: (
+                <Image alt="" height={24} src="/icons/mesh.webp" width={24} />
+              ),
+              component: EstructuraTab,
             },
           ]}
         />
       )}
+      <LevelBootstrap />
+      <PropertiesPanel />
       {showLoading && (
         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-background text-foreground">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-muted border-t-blue-500" />
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-muted border-t-primary" />
           <p className="text-sm text-muted-foreground">
-            {!registryLoaded ? "Cargando módulos..." : "Cargando escena..."}
+            {!registryLoaded ? "Cargando módulos…" : "Cargando escena…"}
           </p>
         </div>
       )}

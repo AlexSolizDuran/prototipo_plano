@@ -40,79 +40,87 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 3px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 2px);
 }
 
-:root {
-  --radius: 0.625rem;
-  --background: oklch(0.998 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(0.998 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(0.998 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+/* ── Claro: hueso técnico + lima profunda ───────────────────────────────
+   El editor monta su propio <div class="dark"> interno, así que la rama
+   clara se re-declara con más especificidad para que el toggle del navbar
+   realmente cambie el tema del editor. */
+:root,
+html:not(.dark) .pascal-shell .dark {
+  --radius: 0.125rem;
+  --background: oklch(0.965 0.004 120);
+  --foreground: oklch(0.19 0.012 120);
+  --card: oklch(0.99 0.002 120);
+  --card-foreground: oklch(0.19 0.012 120);
+  --popover: oklch(0.99 0.002 120);
+  --popover-foreground: oklch(0.19 0.012 120);
+  --primary: oklch(0.62 0.19 128);
+  --primary-foreground: oklch(0.14 0.02 128);
+  --secondary: oklch(0.9 0.008 120);
+  --secondary-foreground: oklch(0.24 0.014 120);
+  --muted: oklch(0.9 0.008 120);
+  --muted-foreground: oklch(0.47 0.014 120);
+  --accent: oklch(0.88 0.06 128);
+  --accent-foreground: oklch(0.24 0.05 128);
+  --destructive: oklch(0.55 0.2 26);
+  --border: oklch(0.19 0.012 120 / 16%);
+  --input: oklch(0.19 0.012 120 / 20%);
+  --ring: oklch(0.62 0.19 128);
+  --chart-1: oklch(0.68 0.2 128);
+  --chart-2: oklch(0.6 0.13 190);
+  --chart-3: oklch(0.5 0.13 265);
+  --chart-4: oklch(0.62 0.16 45);
+  --chart-5: oklch(0.55 0.15 320);
+  --sidebar: oklch(0.935 0.005 120);
+  --sidebar-foreground: oklch(0.19 0.012 120);
+  --sidebar-primary: oklch(0.62 0.19 128);
+  --sidebar-primary-foreground: oklch(0.14 0.02 128);
+  --sidebar-accent: oklch(0.86 0.07 128);
+  --sidebar-accent-foreground: oklch(0.24 0.05 128);
+  --sidebar-border: oklch(0.19 0.012 120 / 16%);
+  --sidebar-ring: oklch(0.62 0.19 128);
 }
 
-.dark {
-  --background: oklch(0.205 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.235 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.235 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+/* ── Oscuro: grafito + lima ácido ─────────────────────────────────────── */
+html.dark,
+html.dark .pascal-shell .dark {
+  --radius: 0.125rem;
+  --background: oklch(0.155 0.008 140);
+  --foreground: oklch(0.93 0.01 120);
+  --card: oklch(0.19 0.009 140);
+  --card-foreground: oklch(0.93 0.01 120);
+  --popover: oklch(0.2 0.009 140);
+  --popover-foreground: oklch(0.93 0.01 120);
+  --primary: oklch(0.85 0.23 128);
+  --primary-foreground: oklch(0.16 0.03 128);
+  --secondary: oklch(0.245 0.01 140);
+  --secondary-foreground: oklch(0.93 0.01 120);
+  --muted: oklch(0.235 0.01 140);
+  --muted-foreground: oklch(0.66 0.014 130);
+  --accent: oklch(0.3 0.05 130);
+  --accent-foreground: oklch(0.93 0.06 128);
+  --destructive: oklch(0.63 0.19 25);
+  --border: oklch(0.95 0.02 120 / 12%);
+  --input: oklch(0.95 0.02 120 / 18%);
+  --ring: oklch(0.85 0.23 128);
+  --chart-1: oklch(0.85 0.23 128);
+  --chart-2: oklch(0.72 0.14 190);
+  --chart-3: oklch(0.66 0.16 265);
+  --chart-4: oklch(0.75 0.17 55);
+  --chart-5: oklch(0.68 0.18 320);
+  --sidebar: oklch(0.175 0.008 140);
+  --sidebar-foreground: oklch(0.93 0.01 120);
+  --sidebar-primary: oklch(0.85 0.23 128);
+  --sidebar-primary-foreground: oklch(0.16 0.03 128);
+  --sidebar-accent: oklch(0.3 0.05 130);
+  --sidebar-accent-foreground: oklch(0.93 0.06 128);
+  --sidebar-border: oklch(0.95 0.02 120 / 12%);
+  --sidebar-ring: oklch(0.85 0.23 128);
 }
 
 @layer base {
@@ -129,6 +137,589 @@
   }
 }
 
+/* ── Cáscara del editor: sin radios + etiquetas técnicas ─────────────── */
+.pascal-shell {
+  --radius: 0.125rem;
+}
+
+/* Se oculta el inspector flotante oficial (PanelWrapper, panel-wrapper.tsx:215)
+   y queda en su lugar el cuadro de propiedades propio. */
+.pascal-shell div.fixed.top-20.right-4.z-50 {
+  display: none !important;
+}
+
+/* El visor usa un clipPath inline con redondeo: se anula. */
+.pascal-shell div[style*="clip-path"] {
+  clip-path: none !important;
+  border-top-left-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Instrumento de la barra: fondo sólido, borde marcado, sin sombra. */
+.pascal-shell [class*="bg-background"] {
+  backdrop-filter: none;
+}
+
+.pascal-shell .rail-item {
+  border-radius: var(--radius);
+}
+
+.pascal-shell :where(button, [role="button"]) {
+  border-radius: var(--radius);
+}
+
+.pascal-shell :where(input, select, textarea) {
+  border-radius: var(--radius);
+}
+
+.pascal-shell :where([data-slot="tooltip-content"]) {
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pascal-shell :where([role="separator"]) {
+  background-color: var(--border);
+}
+
+/* Etiquetas de sección en el panel lateral. */
+.pascal-shell .tech-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.pascal-shell .tech-divider {
+  height: 1px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--border) 0 4px,
+    transparent 4px 8px
+  );
+}
+
+/* Área de herramientas del build-tab: rejilla compacta y viva. */
+.pascal-shell .tool-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.pascal-shell .tool-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  aspect-ratio: 1;
+  border: 1px solid var(--border);
+  background-color: transparent;
+  padding: 4px;
+  transition: none;
+}
+
+.pascal-shell .tool-btn:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.pascal-shell .tool-btn[data-active="true"] {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.pascal-shell .tool-btn[data-active="true"] img {
+  filter: none;
+  opacity: 1;
+}
+
+.pascal-shell .tool-btn img {
+  filter: grayscale(1);
+  opacity: 0.55;
+  transition: none;
+}
+
+.pascal-shell .tool-btn:hover img {
+  filter: grayscale(0.2);
+  opacity: 0.9;
+}
+
+.pascal-shell .tool-key {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+}
+
+/* Barra superior propia. */
+.pascal-shell .topbar {
+  display: flex;
+  height: 44px;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--sidebar);
+  padding: 0 12px;
+}
+
+.pascal-shell .brand-mark {
+  display: flex;
+  height: 24px;
+  width: 24px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.pascal-shell .brand-name {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.pascal-shell .seg {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+}
+
+.pascal-shell .seg > button {
+  display: flex;
+  height: 26px;
+  align-items: center;
+  gap: 5px;
+  border-right: 1px solid var(--border);
+  padding: 0 9px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.pascal-shell .seg > button:last-child {
+  border-right: 0;
+}
+
+.pascal-shell .seg > button:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.pascal-shell .seg > button[data-active="true"] {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.pascal-shell .icon-btn {
+  display: flex;
+  height: 26px;
+  width: 26px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
+}
+
+.pascal-shell .icon-btn:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.pascal-shell .icon-btn[data-active="true"] {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.pascal-shell .hud {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  background-color: var(--popover);
+  padding: 4px 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.pascal-shell .hud strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.pascal-shell .stat {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+}
+
+/* ── Cuadro de propiedades propio (tabla densa) ──────────────────────── */
+.props {
+  position: fixed;
+  top: 56px;
+  right: 12px;
+  z-index: 40;
+  display: flex;
+  width: 348px;
+  max-height: calc(100dvh - 84px);
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background-color: color-mix(in oklch, var(--sidebar) 92%, transparent);
+  backdrop-filter: blur(20px);
+  color: var(--sidebar-foreground);
+}
+
+.props-head {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 8px 8px 10px;
+}
+
+.props-kind-icon {
+  height: 26px;
+  width: 26px;
+  flex-shrink: 0;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.85;
+}
+
+.props-kind {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.props-subid {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.props-x {
+  display: flex;
+  height: 22px;
+  width: 22px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+}
+
+.props-x:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.props-search {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid var(--border);
+  padding: 6px 10px;
+}
+
+.props-search input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--foreground);
+  outline: none;
+}
+
+.props-search input::placeholder {
+  color: var(--muted-foreground);
+}
+
+.props-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 4px;
+}
+
+.props-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 14px;
+}
+
+.props-cols {
+  display: grid;
+  grid-template-columns: 1fr 96px 26px;
+  gap: 6px;
+  border-bottom: 1px solid var(--border);
+  padding: 5px 10px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.props-cols span:nth-child(2),
+.props-cols span:nth-child(3) {
+  text-align: right;
+}
+
+.props-group {
+  border-bottom: 1px solid var(--border);
+}
+
+.props-fold {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.props-fold:hover {
+  background-color: color-mix(in oklch, var(--accent) 55%, transparent);
+}
+
+.props-fold .stat {
+  order: 3;
+  margin-left: auto;
+}
+
+/* Fila: label | valor | unidad  + slider opcional debajo */
+.props-row {
+  display: grid;
+  grid-template-columns: 1fr 96px 26px;
+  align-items: center;
+  gap: 6px;
+  padding: 1px 10px;
+  min-height: 24px;
+}
+
+.props-row-num {
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.props-row:hover {
+  background-color: color-mix(in oklch, var(--accent) 35%, transparent);
+}
+
+.props-label {
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--foreground);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.props-row[data-read="true"] .props-label {
+  color: var(--muted-foreground);
+}
+
+.props-input,
+.props-select,
+.props-metric {
+  display: block;
+  width: 100%;
+  border: 1px solid transparent;
+  background-color: color-mix(in oklch, var(--input) 55%, transparent);
+  padding: 2px 5px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--foreground);
+  outline: none;
+}
+
+.props-input:focus,
+.props-select:focus {
+  border-color: var(--primary);
+  background-color: var(--background);
+}
+
+.props-input-idle:hover {
+  border-color: var(--border);
+  background-color: color-mix(in oklch, var(--accent) 60%, transparent);
+}
+
+.props-metric {
+  color: var(--muted-foreground);
+}
+
+.props-select {
+  appearance: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.props-unit {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: var(--muted-foreground);
+}
+
+.props-range {
+  position: absolute;
+  right: 10px;
+  bottom: 2px;
+  left: 10px;
+  height: 3px;
+  appearance: none;
+  background-color: var(--border);
+  cursor: ew-resize;
+  outline: none;
+}
+
+.props-range::-webkit-slider-thumb {
+  appearance: none;
+  height: 9px;
+  width: 9px;
+  background-color: var(--primary);
+  border: 0;
+  cursor: ew-resize;
+}
+
+.props-range::-moz-range-thumb {
+  height: 9px;
+  width: 9px;
+  background-color: var(--primary);
+  border: 0;
+  border-radius: 0;
+  cursor: ew-resize;
+}
+
+.props-check {
+  display: flex;
+  height: 16px;
+  width: 16px;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  border: 1px solid var(--border);
+  background-color: transparent;
+}
+
+.props-check span {
+  height: 8px;
+  width: 8px;
+  background-color: transparent;
+}
+
+.props-check[data-on="true"] {
+  border-color: var(--primary);
+}
+
+.props-check[data-on="true"] span {
+  background-color: var(--primary);
+}
+
+.props-colorwrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  border: 1px solid transparent;
+  background-color: color-mix(in oklch, var(--input) 55%, transparent);
+  padding: 1px 4px;
+}
+
+.props-color {
+  height: 14px;
+  width: 14px;
+  flex-shrink: 0;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.props-colortxt {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: var(--foreground);
+}
+
+.props-foot {
+  display: flex;
+  flex-shrink: 0;
+  gap: 4px;
+  border-top: 1px solid var(--border);
+  padding: 7px 8px;
+}
+
+.props-act {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid var(--border);
+  padding: 5px 4px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.props-act:hover {
+  border-color: var(--accent);
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.props-act-danger:hover {
+  border-color: var(--destructive);
+  background-color: var(--destructive);
+  color: var(--destructive-foreground);
+}
+
+@media (max-width: 900px) {
+  .props {
+    display: none;
+  }
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -137,7 +728,394 @@
   scrollbar-width: none;
 }
 
+/* ── Pestaña Muebles: catálogo curado en español ──────────────────────── */
 
+.cat-panel {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  padding: 12px;
+}
+
+.cat-search {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  background-color: var(--muted);
+  padding: 0 8px;
+}
+
+.cat-search input {
+  width: 100%;
+  background: none;
+  padding: 6px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--foreground);
+  outline: none;
+}
+
+.cat-search input::placeholder {
+  color: var(--muted-foreground);
+}
+
+.cat-search:focus-within {
+  border-color: var(--primary);
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.cat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid transparent;
+  padding: 3px;
+  text-align: left;
+  transition: none;
+}
+
+.cat-tile:hover {
+  border-color: var(--border);
+  background-color: color-mix(in oklch, var(--primary) 6%, transparent);
+}
+
+.cat-tile[data-active="true"] {
+  border-color: var(--primary);
+  background-color: color-mix(in oklch, var(--primary) 10%, transparent);
+}
+
+.cat-thumb {
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background-color: var(--muted);
+}
+
+.cat-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cat-name {
+  overflow: hidden;
+  padding: 0 1px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.2;
+  color: var(--muted-foreground);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cat-tile:hover .cat-name,
+.cat-tile[data-active="true"] .cat-name {
+  color: var(--foreground);
+}
+
+.cat-empty {
+  padding: 12px 4px;
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+
+/* ── Pestaña Estructura: grafo del editor + manifiesto para IA ─────────── */
+
+.struct {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  padding: 12px;
+}
+
+.struct-bar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.struct-bar .tool-key {
+  margin-right: auto;
+}
+
+.struct-copy {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--border);
+  padding: 3px 7px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  transition: none;
+}
+
+.struct-copy:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* `pre` conserva los saltos del serializador y `pre` + scroll horizontal
+   evita que una línea larga se parta en varias. */
+.struct-pre {
+  min-height: 0;
+  flex: 1;
+  margin: 0;
+  overflow: auto;
+  border: 1px solid var(--border);
+  background-color: var(--muted);
+  padding: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.55;
+  color: var(--foreground);
+  tab-size: 2;
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.struct-pre::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.struct-pre::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+}
+
+/* ── Pestaña Materiales: biblioteca de pinturas y texturas ────────────── */
+
+.mat-panel {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  padding: 12px;
+}
+
+.mat-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 4px;
+}
+
+.mat-btn {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  padding: 6px 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  transition: none;
+}
+
+.mat-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.mat-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.mat-btn[data-active="true"] {
+  border-color: var(--primary);
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* Categorías en columna: son pocas (12) y los nombres son largos. */
+.mat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.mat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid transparent;
+  padding: 3px;
+  text-align: left;
+  transition: none;
+}
+
+.mat-tile:hover {
+  border-color: var(--border);
+  background-color: color-mix(in oklch, var(--primary) 6%, transparent);
+}
+
+.mat-tile[data-active="true"] {
+  border-color: var(--primary);
+  background-color: color-mix(in oklch, var(--primary) 10%, transparent);
+}
+
+.mat-thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background-color: var(--muted);
+}
+
+.mat-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mat-swatch {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mat-name {
+  overflow: hidden;
+  padding: 0 1px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--muted-foreground);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mat-tile:hover .mat-name,
+.mat-tile[data-active="true"] .mat-name {
+  color: var(--foreground);
+}
+
+.mat-hint {
+  flex-shrink: 0;
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+
+/* ── Secciones plegables: cada grupo con sus objetos debajo ─────────────────
+   Antes el panel tenía una barra de grupos que filtraba y una grilla con
+   scroll propio: eso obligaba a un mini-scroll por tipo. Ahora hay un único
+   scroll por panel y los grupos empiezan cerrados, así el índice completo se
+   ve de una. El encabezado es sticky para saber siempre a qué sección
+   pertenece lo que se está viendo. */
+
+.panel-section + .panel-section {
+  margin-top: 6px;
+}
+
+.panel-section-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-bottom-color: var(--border);
+  /* El panel flotante del editor pinta con `bg-sidebar/95`; si el encabezado
+     sticky usara otra variable, el contenido se vería asomar por detrás. */
+  background-color: var(--sidebar);
+  padding: 4px 6px;
+  text-align: left;
+  transition: none;
+}
+
+.panel-section-head:hover {
+  background-color: color-mix(in oklch, var(--primary) 8%, var(--sidebar));
+}
+
+.panel-section-head img {
+  opacity: 0.6;
+  object-fit: contain;
+}
+
+.panel-section-head[data-open="true"] img {
+  opacity: 1;
+}
+
+.panel-section-chev {
+  color: var(--muted-foreground);
+  transform: rotate(0deg);
+}
+
+.panel-section-head[data-open="true"] .panel-section-chev {
+  color: var(--primary);
+  transform: rotate(90deg);
+}
+
+.panel-section-title {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.panel-section-head:hover .panel-section-title,
+.panel-section-head[data-open="true"] .panel-section-title {
+  color: var(--foreground);
+}
+
+.panel-section-n {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  opacity: 0.6;
+}
+
+/* Contenedor único de scroll de cada panel. */
+.panel-scroll {
+  min-height: 0;
+  flex: 1;
+  margin-right: -4px;
+  padding-right: 4px;
+  overflow-y: auto;
+}
+
+/* Relleno entre el encabezado y su grilla, solo cuando está desplegada. */
+.panel-section-head[data-open="true"] {
+  margin-bottom: 5px;
+}
+
+/* El rail lateral añade una pestaña "Plugins" en inglés al final; acá solo
+   queremos las tres nuestras. */
+.pascal-shell .w-14 > .border-t {
+  display: none !important;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *,
